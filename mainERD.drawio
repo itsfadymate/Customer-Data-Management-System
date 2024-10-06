@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36" version="24.7.17">
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Mobile Safari/537.36" version="24.7.17">
   <diagram id="R2lEEEUBdFMjLlhIrx00" name="Page-1">
-    <mxGraphModel dx="2374" dy="912" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0" extFonts="Permanent Marker^https://fonts.googleapis.com/css?family=Permanent+Marker">
+    <mxGraphModel dx="2016" dy="552" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0" extFonts="Permanent Marker^https://fonts.googleapis.com/css?family=Permanent+Marker">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -653,7 +653,7 @@
         <mxCell id="q8fLoaQlOaHjxgoT106--53" value="&lt;i style=&quot;font-size: 13px;&quot;&gt;U&lt;/i&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;rotation=-45;fontSize=13;fontFamily=Helvetica;textOpacity=60;spacing=2;" parent="1" vertex="1">
           <mxGeometry x="805.0003298342456" y="580.002451794556" width="30" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="q8fLoaQlOaHjxgoT106--58" value="provides" style="shape=rhombus;perimeter=rhombusPerimeter;whiteSpace=wrap;html=1;align=center;fontSize=13;" parent="1" vertex="1">
+        <mxCell id="q8fLoaQlOaHjxgoT106--58" value="Provided by" style="shape=rhombus;perimeter=rhombusPerimeter;whiteSpace=wrap;html=1;align=center;fontSize=13;" parent="1" vertex="1">
           <mxGeometry x="330" y="900" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="q8fLoaQlOaHjxgoT106--59" value="entitled" style="shape=rhombus;perimeter=rhombusPerimeter;whiteSpace=wrap;html=1;align=center;fontSize=13;" parent="1" vertex="1">
@@ -976,7 +976,7 @@
             <mxPoint x="-597.5" y="950" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="AnkbTf-jWht5Gsn1IVt5-1" value="" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1">
+        <mxCell id="AnkbTf-jWht5Gsn1IVt5-1" value="" style="endArrow=none;html=1;rounded=0;" parent="1" edge="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="-870" y="830" as="sourcePoint" />
             <mxPoint x="-840" y="830" as="targetPoint" />
