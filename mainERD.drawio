@@ -1,6 +1,6 @@
 <mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36" version="24.7.17">
   <diagram id="R2lEEEUBdFMjLlhIrx00" name="Page-1">
-    <mxGraphModel dx="2768" dy="546" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0" extFonts="Permanent Marker^https://fonts.googleapis.com/css?family=Permanent+Marker">
+    <mxGraphModel dx="2942" dy="1094" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0" extFonts="Permanent Marker^https://fonts.googleapis.com/css?family=Permanent+Marker">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -393,7 +393,7 @@
         <mxCell id="1tl5mqjxRXm8i3WzVXRc-25" value="Shop" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;align=center;fontSize=13;" parent="1" vertex="1">
           <mxGeometry x="-840" y="800" width="100" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="1tl5mqjxRXm8i3WzVXRc-26" value="Redeemed at" style="shape=rhombus;perimeter=rhombusPerimeter;whiteSpace=wrap;html=1;align=center;fontSize=13;" parent="1" vertex="1">
+        <mxCell id="1tl5mqjxRXm8i3WzVXRc-26" value="redeems" style="shape=rhombus;perimeter=rhombusPerimeter;whiteSpace=wrap;html=1;align=center;fontSize=13;" parent="1" vertex="1">
           <mxGeometry x="-650" y="700" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="1tl5mqjxRXm8i3WzVXRc-28" value="" style="edgeStyle=entityRelationEdgeStyle;fontSize=13;html=1;endArrow=ERmandOne;rounded=0;exitX=0.048;exitY=0.507;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;exitPerimeter=0;" parent="1" source="1tl5mqjxRXm8i3WzVXRc-26" target="1tl5mqjxRXm8i3WzVXRc-25" edge="1">
@@ -653,7 +653,7 @@
         <mxCell id="q8fLoaQlOaHjxgoT106--53" value="&lt;i style=&quot;font-size: 13px;&quot;&gt;U&lt;/i&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;rotation=-45;fontSize=13;fontFamily=Helvetica;textOpacity=60;spacing=2;" parent="1" vertex="1">
           <mxGeometry x="805.0003298342456" y="580.002451794556" width="30" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="q8fLoaQlOaHjxgoT106--58" value="Provided by" style="shape=rhombus;perimeter=rhombusPerimeter;whiteSpace=wrap;html=1;align=center;fontSize=13;" parent="1" vertex="1">
+        <mxCell id="q8fLoaQlOaHjxgoT106--58" value="provides" style="shape=rhombus;perimeter=rhombusPerimeter;whiteSpace=wrap;html=1;align=center;fontSize=13;" parent="1" vertex="1">
           <mxGeometry x="340" y="860" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="q8fLoaQlOaHjxgoT106--59" value="entitled" style="shape=rhombus;perimeter=rhombusPerimeter;whiteSpace=wrap;html=1;align=center;fontSize=13;" parent="1" vertex="1">
