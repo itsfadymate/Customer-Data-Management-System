@@ -1,6 +1,6 @@
 <mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36" version="24.7.17">
   <diagram id="R2lEEEUBdFMjLlhIrx00" name="Page-1">
-    <mxGraphModel dx="3987" dy="1256" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0" extFonts="Permanent Marker^https://fonts.googleapis.com/css?family=Permanent+Marker">
+    <mxGraphModel dx="3267" dy="706" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0" extFonts="Permanent Marker^https://fonts.googleapis.com/css?family=Permanent+Marker">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -965,23 +965,24 @@
             <mxPoint x="390" y="1370" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="9SsdXF2dQBR7oELUeVdp-1" value="credits" style="shape=rhombus;perimeter=rhombusPerimeter;whiteSpace=wrap;html=1;align=center;" vertex="1" parent="1">
+        <mxCell id="9SsdXF2dQBR7oELUeVdp-1" value="earns" style="shape=rhombus;perimeter=rhombusPerimeter;whiteSpace=wrap;html=1;align=center;" vertex="1" parent="1">
           <mxGeometry x="270" y="130" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="9SsdXF2dQBR7oELUeVdp-6" value="" style="edgeStyle=orthogonalEdgeStyle;fontSize=12;html=1;endArrow=ERzeroToMany;endFill=1;rounded=0;curved=1;entryX=0.1;entryY=0;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="9SsdXF2dQBR7oELUeVdp-1" target="F2KtdEp4NuPGQQRKZKPt-3">
+        <mxCell id="9SsdXF2dQBR7oELUeVdp-9" value="" style="edgeStyle=orthogonalEdgeStyle;fontSize=12;html=1;endArrow=ERzeroToMany;endFill=1;rounded=0;curved=1;entryX=0.9;entryY=0;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="9SsdXF2dQBR7oELUeVdp-1" target="F2KtdEp4NuPGQQRKZKPt-3">
           <mxGeometry width="100" height="100" relative="1" as="geometry">
-            <mxPoint x="-180" y="140" as="sourcePoint" />
-            <mxPoint x="-80" y="40" as="targetPoint" />
+            <mxPoint x="-210" y="110" as="sourcePoint" />
+            <mxPoint x="-480" y="240" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="9SsdXF2dQBR7oELUeVdp-7" value="" style="edgeStyle=orthogonalEdgeStyle;fontSize=12;html=1;endArrow=ERmandOne;rounded=0;curved=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="9SsdXF2dQBR7oELUeVdp-1" target="q8fLoaQlOaHjxgoT106--4">
+        <mxCell id="9SsdXF2dQBR7oELUeVdp-10" value="" style="edgeStyle=orthogonalEdgeStyle;fontSize=12;html=1;endArrow=ERzeroToMany;endFill=1;rounded=0;curved=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.75;entryDx=0;entryDy=0;" edge="1" parent="1" source="9SsdXF2dQBR7oELUeVdp-1" target="q8fLoaQlOaHjxgoT106--4">
           <mxGeometry width="100" height="100" relative="1" as="geometry">
-            <mxPoint x="570" y="150" as="sourcePoint" />
-            <mxPoint x="985" y="690" as="targetPoint" />
+            <mxPoint x="910" y="475" as="sourcePoint" />
+            <mxPoint x="970" y="680" as="targetPoint" />
             <Array as="points">
-              <mxPoint x="390" y="180" />
-              <mxPoint x="1040" y="180" />
-              <mxPoint x="1040" y="690" />
+              <mxPoint x="1150" y="160" />
+              <mxPoint x="1150" y="680" />
+              <mxPoint x="990" y="680" />
+              <mxPoint x="990" y="705" />
             </Array>
           </mxGeometry>
         </mxCell>
