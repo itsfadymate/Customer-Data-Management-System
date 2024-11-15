@@ -360,6 +360,49 @@ DROP TABLE Technical_Support_Ticket;
  END
  --end of 2.1 e
  GO
+ --start of 2.2 a
+ CREATE VIEW allCustomerAccounts AS
+    Select p.*,a.mobileNo,a.pass,a.balance,a.account_type,a.start_date,a.status,a.point,a.nationalID as account_national_id FROM
+    Customer_Profile p 
+    join Customer_Account a on a.nationalID = p.nationalID
+    where a.status='active';
+ --end of 2.2 a
+ GO
+ --start of 2.2 b
+ CREATE VIEW allServicePlans AS
+    Select * 
+    FROM Service_Plan
+
+ --end of 2.2 b
+ GO
+ --start of 2.2 c
+ CREATE VIEW allBenefits AS 
+    SELECT * 
+    FROM Benefits b
+    WHERE b.status = 'active'
+ --end of 2.2 c
+ GO
+ --start of 2.2 d
+ --end of 2.2 d
+ GO
+ --start of 2.2 e
+ --end of 2.2 e
+ GO
+ --start of 2.2 f
+ --end of 2.2 f
+ GO
+  --start of 2.2 g
+ --end of 2.2 g
+ GO
+  --start of 2.2 h
+ --end of 2.2 h
+ GO
+  --start of 2.2 i
+ --end of 2.2 i
+ GO
+  --start of 2.2 j
+ --end of 2.2 j
+ GO
  --start of 2.3 a
  CREATE PROCEDURE Account_Plan
  AS
