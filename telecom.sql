@@ -79,7 +79,7 @@ Customer_Account(mobileNo),
         constraint pay_acc FOREIGN KEY (mobileNo) REFERENCES Customer_Account(mobileNo)
     );
     
-    CREATE TABLE Process_Payment ( –this is false. suspected solution uses views??
+   /* CREATE TABLE Process_Payment ( –this is false. suspected solution uses views??
         paymentID INT PRIMARY KEY,
         planID INT,
         remaining_balance as 
@@ -96,7 +96,7 @@ Customer_Account(mobileNo),
                 0
               END
              )
-    );
+    );*/
     
     
     CREATE TABLE Wallet (
@@ -677,16 +677,16 @@ END
 
 --end of 2.4 n
 
-–start of 2.4 o
+--start of 2.4 o
 GO
 CREATE PROCEDURE Redeem_voucher_points
 @MobileNo char(11),
 @voucher_id int
 AS
 BEGIN
-DECLARE @addPoints int,
-DECLARE @oldPoints int,
-DECLARE @newPoints int
+DECLARE @addPoints int;
+DECLARE @oldPoints int;
+DECLARE @newPoints int;
 
 SELECT @addPoints = v.value FROM Voucher v WHERE v.voucherID = @voucher_id
 SELECT @oldPoints = point FROM Customer_Account WHERE mobileNo = @MobileNo
@@ -698,7 +698,7 @@ WHERE voucherID = @voucher_id
 
 
 END
-–end of 2.4 o
+--end of 2.4 o
 
 
 -- 2.4 Functions --
