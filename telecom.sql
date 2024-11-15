@@ -381,14 +381,21 @@ DROP TABLE Technical_Support_Ticket;
     FROM Benefits b
     WHERE b.status = 'active'
  --end of 2.2 c
- GO
  --start of 2.2 d
+ GO
+ CREATE VIEW AccountPayments AS 
+ SELECT * FROM Payments p, Customer_Account a
+ WHERE p.mobileNo = a.mobileNo
  --end of 2.2 d
- GO
  --start of 2.2 e
+ GO 
+ CREATE VIEW allShops AS
+ SELECT * FROM Shop
  --end of 2.2 e
- GO
  --start of 2.2 f
+ GO CREATE VIEW allResolvedTickets AS
+ SELECT * FROM Technical_Support_Ticket
+ WHERE status = 'resolved'
  --end of 2.2 f
  GO
   --start of 2.2 g
