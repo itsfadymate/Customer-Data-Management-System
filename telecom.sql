@@ -1,4 +1,4 @@
-﻿benefit--start of 2.1 a
+﻿--start of 2.1 a
 create database Telecom_Team_32;
 GO
 USE Telecom_Team_32;
