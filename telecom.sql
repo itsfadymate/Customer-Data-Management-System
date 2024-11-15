@@ -400,16 +400,39 @@ DROP TABLE Technical_Support_Ticket;
  GO
   --start of 2.2 g
  --end of 2.2 g
- GO
   --start of 2.2 h
+  GO
+ CREATE VIEW E_shopVouchers AS
+ SELECT s.name, v.voucherID,v.value
+ FROM E_shop e, Shop s, Voucher v 
+ where e.shopID=s.shopID and v.shopID=e.shopID and v.redeem_date is not null
+ GO
  --end of 2.2 h
- GO
+ --start of 2.2 f
+ GO CREATE VIEW allResolvedTickets AS
+ SELECT * FROM Technical_Support_Ticket
+ WHERE status = 'resolved'
+  GO
+ --end of 2.2 f
+
   --start of 2.2 i
+  GO
+ CREATE VIEW PhysicalStoreVouchers AS
+ SELECT s.name, v.voucherID,v.value
+ FROM Physical_Shop p, Shop s, Voucher v 
+ where p.shopID=s.shopID and v.shopID=p.shopID and v.redeem_date is not null
+  GO
  --end of 2.2 i
- GO
+ 
   --start of 2.2 j
+  GO
+ CREATE VIEW E_shopVouchers AS
+ SELECT w.mobileNo ,count(c.CashbackID) AS cashback_count
+ FROM Wallet w left outer join Cashback c on c.walletID=w.walletID
+ group by w.mobileNo
+  GO
  --end of 2.2 j
- GO
+ 
  --start of 2.3 a
  CREATE PROCEDURE Account_Plan
  AS
