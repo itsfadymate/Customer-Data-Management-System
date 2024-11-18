@@ -400,6 +400,14 @@ DROP TABLE Technical_Support_Ticket;
  --end of 2.2 f
  GO
   --start of 2.2 g
+  CREATE VIEW CustomerWallet AS
+SELECT w.walletID, w.mobileNo, w.current_balance AS wallet_balance, w.currency, w.last_modified_date, w.nationalID, p.first_name AS customer_first_name, p.last_name AS customer_last_name
+FROM 
+    Wallet w
+JOIN 
+    Customer_Account a ON w.mobileNo = a.mobileNo
+JOIN 
+    Customer_Profile p ON a.nationalID = p.nationalID;
  --end of 2.2 g
   --start of 2.2 h
   GO
