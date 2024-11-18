@@ -384,7 +384,7 @@ DROP TABLE Technical_Support_Ticket;
  --start of 2.2 d
  GO
  CREATE VIEW AccountPayments AS 
- SELECT * FROM Payments p, Customer_Account a
+ SELECT p.*, a.*, a.mobileNo AS 'AccountMobileNo' FROM Payments p, Customer_Account a
  WHERE p.mobileNo = a.mobileNo
  --end of 2.2 d
  --start of 2.2 e
@@ -393,7 +393,8 @@ DROP TABLE Technical_Support_Ticket;
  SELECT * FROM Shop
  --end of 2.2 e
  --start of 2.2 f
- GO CREATE VIEW allResolvedTickets AS
+ GO 
+ CREATE VIEW allResolvedTickets AS
  SELECT * FROM Technical_Support_Ticket
  WHERE status = 'resolved'
  --end of 2.2 f
