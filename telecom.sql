@@ -384,8 +384,8 @@ DROP TABLE Technical_Support_Ticket;
  --start of 2.2 d
  GO
  CREATE VIEW AccountPayments AS 
- SELECT p.*, a.*, a.mobileNo AS 'AccountMobileNo' FROM Payments p, Customer_Account a
- WHERE p.mobileNo = a.mobileNo
+ SELECT a.*, p.paymentID, p.amount, p.date_of_payment, p.payment_method, p.status as 'payment_status'
+ FROM Payment p INNER JOIN Customer_Account a ON p.mobileNo = a.mobileNo
  --end of 2.2 d
  --start of 2.2 e
  GO 
