@@ -435,7 +435,7 @@ JOIN
  
   --start of 2.2 j
   GO
- CREATE VIEW E_shopVouchers AS
+ CREATE VIEW Num_of_cashback AS
  SELECT w.mobileNo ,count(c.CashbackID) AS cashback_count
  FROM Wallet w left outer join Cashback c on c.walletID=w.walletID
  group by w.mobileNo
