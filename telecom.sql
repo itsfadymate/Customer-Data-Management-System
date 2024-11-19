@@ -313,6 +313,7 @@ DROP TABLE Technical_Support_Ticket;
  --start of 2.1 e
  CREATE PROCEDURE clearAllTables
  AS
+<<<<<<< HEAD
  BEGIN
     ALTER TABLE Customer_Account
    DROP CONSTRAINT belongs_to;
@@ -384,6 +385,10 @@ DROP TABLE Technical_Support_Ticket;
     TRUNCATE TABLE Voucher;
     TRUNCATE TABLE Technical_Support_Ticket;
  END
+=======
+ exec dropAllTables
+ exec createAllTables
+>>>>>>> f827456ca59cd151bfbee26b0878f20c4d138b59
  --end of 2.1 e
 
  GO
