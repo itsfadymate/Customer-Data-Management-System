@@ -315,8 +315,8 @@ DROP TABLE Technical_Support_Ticket;
  --start of 2.2 d
  GO
  CREATE VIEW AccountPayments AS 
- SELECT * FROM Payments p, Customer_Account a
- WHERE p.mobileNo = a.mobileNo
+ SELECT a.*, p.paymentID, p.amount, p.date_of_payment, p.payment_method, p.status as 'payment_status'
+ FROM Payment p INNER JOIN Customer_Account a ON p.mobileNo = a.mobileNo
  --end of 2.2 d
  --start of 2.2 e
  GO 
@@ -324,12 +324,21 @@ DROP TABLE Technical_Support_Ticket;
  SELECT * FROM Shop
  --end of 2.2 e
  --start of 2.2 f
- GO CREATE VIEW allResolvedTickets AS
+ GO 
+ CREATE VIEW allResolvedTickets AS
  SELECT * FROM Technical_Support_Ticket
  WHERE status = 'resolved'
  --end of 2.2 f
  GO
   --start of 2.2 g
+  CREATE VIEW CustomerWallet AS
+SELECT w.walletID, w.mobileNo, w.current_balance AS wallet_balance, w.currency, w.last_modified_date, w.nationalID, p.first_name AS customer_first_name, p.last_name AS customer_last_name
+FROM 
+    Wallet w
+JOIN 
+    Customer_Account a ON w.mobileNo = a.mobileNo
+JOIN 
+    Customer_Profile p ON a.nationalID = p.nationalID;
  --end of 2.2 g
   --start of 2.2 h
   GO
@@ -357,7 +366,7 @@ DROP TABLE Technical_Support_Ticket;
  
   --start of 2.2 j
   GO
- CREATE VIEW E_shopVouchers AS
+ CREATE VIEW Num_of_cashback AS
  SELECT w.mobileNo ,count(c.CashbackID) AS cashback_count
  FROM Wallet w left outer join Cashback c on c.walletID=w.walletID
  group by w.mobileNo
