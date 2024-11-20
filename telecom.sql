@@ -447,9 +447,15 @@ create function Account_Usage_Plan
 returns Table
 as
 return (
-select usage.planID, usage.data_consumption, usage.minutes_used, usage.SMS_sent
+SELECT 
+    usage.planID,
+    SUM(usage.data_consumption) AS total_data_consumed,
+    SUM(usage.minutes_used) AS total_minutes_comnsumed,
+    SUM(usage.SMS_sent) AS total_SMS_sent
 from Customer_Account acc inner join Plan_Usage usage
-on acc.mobileNo=@mobileNo and usage.start_date=@from_date and usage.mobileNo=acc.mobileNo
+on acc.mobileNo=@mobileNo and usage.start_date>=@from_date and usage.mobileNo=acc.mobileNo
+ GROUP BY 
+        usage.planID
 )
 -- end of 2.3c
 
