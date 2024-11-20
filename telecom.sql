@@ -478,6 +478,7 @@ DELETE FROM Benefits WHERE mobileNo = @mobileNo
         FROM Filtered_Plan_Provides_Benefit
         WHERE Filtered_Plan_Provides_Benefit.benefitID = Benefits.benefitID
     ); 
+select * from Benefits where mobileNo=@mobileNo
 END
  --end of 2.3 d
 
