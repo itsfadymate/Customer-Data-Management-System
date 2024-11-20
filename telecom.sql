@@ -1,4 +1,5 @@
-﻿--start of 2.1 a
+﻿--Daniel testing 
+--start of 2.1 a
 create database Telecom_Team_32;
 GO
 USE Telecom_Team_32;
