@@ -629,7 +629,7 @@ END;
 GO
 
 -- 2.4 b) [Start]
-CREATE FUNCTION [Consumption](
+CREATE FUNCTION Consumption(
     @Plan_name varchar(50),
     @start_date date,
     @end_date date
@@ -639,16 +639,16 @@ AS
 RETURN 
 (
     SELECT 
-        SUM(pu.data_consumption) AS [Data consumption],
-        SUM(pu.minutes_used) AS [Minutes Used],
-        SUM(pu.SMS_sent) AS [SMS sent]
+        SUM(pu.data_consumption) AS 'Data consumption',
+        SUM(pu.minutes_used) AS 'Minutes Used',
+        SUM(pu.SMS_sent) AS 'SMS sent'
     FROM 
         Plan_Usage pu JOIN Service_Plan sp ON pu.PlanID =sp.planID
     WHERE 
         sp.name = @Plan_name AND pu.start_date BETWEEN @start_date AND @end_date And pu.end_date <= @end_date
 );
+GO
 -- 2.4 b) END 
-
 GO
 
 --start of 2.4 c
@@ -666,7 +666,6 @@ BEGIN
     )
 END
 --end of 2.4 c
-
 GO
 
 -- 2.4 d) [START]
@@ -692,7 +691,6 @@ RETURN
         AND YEAR(pu.start_date) = YEAR(Getdate())
 );
 -- 2.4 d) END
-
 GO 
 
 -- 2.4 e) [Start]
