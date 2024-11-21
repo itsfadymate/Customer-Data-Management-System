@@ -469,7 +469,10 @@ JOIN
  CREATE PROCEDURE Account_Plan
  AS
  BEGIN                         --when listing an account is mobile number enough or all acc attributes need to be submitted?
-    Select mobileNo,planID FROM Subscription
+    Select acc.*,sp.* FROM Customer_Account acc
+    LEFT JOIN Subscription sub ON acc.mobileNo = sub.mobileNo
+    JOIN Service_Plan sp ON sub.planID = sp.planID;
+
  END
  --end of 2.3 a
 
