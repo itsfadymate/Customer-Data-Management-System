@@ -472,7 +472,6 @@ JOIN
     Select acc.*,sp.* FROM Customer_Account acc
     LEFT JOIN Subscription sub ON acc.mobileNo = sub.mobileNo
     JOIN Service_Plan sp ON sub.planID = sp.planID;
-
  END
  --end of 2.3 a
 
@@ -486,7 +485,7 @@ as
 return (
     SELECT sub.mobileNo,sub.planID,sp.name as service_plan_name
     FROM Subscription sub
-    JOIN Service_Plan sp on s.planID = sp.planID
+    JOIN Service_Plan sp on sub.planID = sp.planID
     WHERE sub.subscription_date = @Subscription_Date AND sub.planID = @Plan_id
 );
 -- endof 2.3b
