@@ -605,7 +605,7 @@ END
 GO
 
 -- 2.4 a) [Start]
-CREATE FUNCTION [AccountLoginValidation](
+CREATE FUNCTION AccountLoginValidation(
     @MobileNo CHAR(11),
     @password VARCHAR(50)
 )
@@ -625,6 +625,7 @@ BEGIN
 
     RETURN @Success;
 END;
+GO
 -- 2.4 a) [END]
 GO
 
@@ -669,7 +670,7 @@ END
 GO
 
 -- 2.4 d) [START]
-CREATE FUNCTION [Usage_Plan_CurrentMonth](
+CREATE FUNCTION Usage_Plan_CurrentMonth(
     @MobileNo char(11)
 )
 RETURNS TABLE 
@@ -690,11 +691,12 @@ RETURN
         AND MONTH(pu.start_date) = MONTH(Getdate())
         AND YEAR(pu.start_date) = YEAR(Getdate())
 );
+GO
 -- 2.4 d) END
 GO 
 
 -- 2.4 e) [Start]
-CREATE FUNCTION [Cashback_Wallet_Customer](
+CREATE FUNCTION Cashback_Wallet_Customer(
     @NationalID int
 )
 Returns TABLE 
@@ -703,16 +705,17 @@ RETURN
 (
     SELECT 
         c.CashbackID,
-        c.amount AS [Cashback Amount],
-        c.credit_date AS [Credit Date],
-        w.current_balance AS [Wallet Balance],
-        w.currency AS [Currency]
+        c.amount AS 'Cashback Amount',
+        c.credit_date AS 'Credit Date',
+        w.current_balance AS 'Wallet Balance',
+        w.currency AS 'Currency'
     FROM 
         Cashback c 
         JOIN Wallet w ON c.walletID = w.walletID
     WHERE 
         w.nationalID = @NationalID
 );
+GO
 -- 2.4 e) [END]
 
 GO
@@ -748,7 +751,7 @@ END
 GO
 
 --start of 2.4h
-CREATE FUNCTION [Remaining_plan_amount](
+CREATE FUNCTION Remaining_plan_amount(
     @MobileNo char(11),
     @plan_name varchar(50)
 )
@@ -772,6 +775,7 @@ BEGIN
 
     RETURN @remaining_amount;
 END;
+GO
 --end of 2.4h
 
 GO
