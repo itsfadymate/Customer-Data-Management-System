@@ -481,12 +481,11 @@ create function Account_Plan_date
 returns Table
 as
 return (
-select acc.mobileNo, sub.planID, serv_plan.name
-from Customer_Account acc inner join Subscription sub
-on sub.subscription_date=@Subscription_Date and acc.mobileNo=sub.mobileNo and sub.planID=@Plan_id 
-inner join Service_Plan serv_plan
-on serv_plan.planID=@Plan_id
-)
+    SELECT sub.mobileNo,sub.planID,sp.name as service_plan_name
+    FROM Subscription sub
+    JOIN Service_Plan sp on s.planID = sp.planID
+    WHERE sub.subscription_date = @Subscription_Date AND sub.planID = @Plan_id
+);
 -- endof 2.3b
 
 go
