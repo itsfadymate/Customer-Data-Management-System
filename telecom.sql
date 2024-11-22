@@ -561,18 +561,10 @@ go
  @total_amount_of_points int OUTPUT --could it be null?
  AS
  BEGIN
-  WITH account_payments as(
-    select *
-    FROM Payment
-    WHERE @mobileNo = Payment.mobileNo AND Payment.status = 'successful' AND  date_of_payment >= DATEADD(YEAR, -1, CURRENT_TIMESTAMP)
-  )
-
-  select @total_amount_of_points = sum(Points_Group.pointsAmount)
-  FROM account_payments
-  JOIN Points_Group on Points_Group.paymentID = account_payments.paymentID
-
- SELECT @total_number_of_transactions = count(*) FROM Payment
-    WHERE @mobileNo = Payment.mobileNo AND Payment.status = 'successful' AND  date_of_payment >= DATEADD(YEAR, -1, CURRENT_TIMESTAMP)
+   select @total_amount_of_points = sum(pg.pointsAmount),@total_number_of_transactions = count(*)
+   FROM Payment p
+   LEFT JOIN Points_Group pg on pg.paymentID = p.paymentID
+   WHERE p.mobileNo = @mobileNO AND p.status = 'successful' AND p.date_of_payment >= DATEADD(YEAR, -1, CURRENT_TIMESTAMP) ;
  END
  --end of 2.3 f
 
