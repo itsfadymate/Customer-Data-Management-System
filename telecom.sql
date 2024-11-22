@@ -213,7 +213,7 @@ Customer_Account(mobileNo),
         constraint electronic_shop FOREIGN KEY (shopID) REFERENCES Shop(shopID)
     );
     CREATE TABLE Voucher (
-        voucherID INT PRIMARY KEY,
+        voucherID INT PRIMARY KEY IDENTITY(1,1),
         value INT ,
         expiry_date DATE,
         points INT,
@@ -967,23 +967,33 @@ CREATE PROCEDURE Redeem_voucher_points
 @voucher_id int
 AS
 BEGIN
-if ((SELECT v.expiry_date FROM Voucher v WHERE v.voucherID = @voucher_id)<=GETDATE())
+   DECLARE @removePoints int;
+   DECLARE @oldPoints int;
+   DECLARE @expiry_date DATE;
+   DECLARE @v_mobileNo char(11);
+         
+   SELECT @removePoints = v.value FROM Voucher v WHERE v.voucherID = @voucher_id
+   SELECT @oldPoints = point FROM Customer_Account WHERE mobileNo = @MobileNo
+   SELECT @expiry_date = v.expiry_date FROM Voucher v WHERE v.voucherID = @voucher_id
+   SELECT @v_mobileNo = v.mobileNo FROM Voucher v WHERE v.voucherID = @voucher_id
+if (@v_mobileNo is NOT NULL)
     BEGIN
-        DECLARE @removePoints int;
-        DECLARE @oldPoints int;
-        
-        
-        SELECT @removePoints = v.value FROM Voucher v WHERE v.voucherID = @voucher_id
-        SELECT @oldPoints = point FROM Customer_Account WHERE mobileNo = @MobileNo
-        
-        
+        print 'voucher already redeemed';
+    END
+ELSE if (@removePoints > @oldPoints) 
+    BEGIN
+        print 'not enough points to redeem'
+    END
+ELSE if (@expiry_date>GETDATE())
+    BEGIN
         UPDATE Customer_Account SET point = @oldPoints - @removePoints WHERE mobileNo = @MobileNo
         UPDATE Voucher SET redeem_date = CONVERT(DATE,GETDATE()),mobileNo = @MobileNo
-        WHERE voucherID = @voucher_id
+        WHERE voucherID = @voucher_id;
+        print 'redeemed successfully';
     END
 ELSE
     BEGIN
-        PRINT 'voucher is expired'
+        PRINT 'voucher is expired';
     END
 END
 --end of 2.4 o

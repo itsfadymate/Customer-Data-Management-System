@@ -26,6 +26,7 @@ Insert INTO Customer_Profile VALUES (1234,'fady','bassem','fady@gmail.com','dokk
  select * from Service_Plan
  select * from plan_provides_benefits;
  EXEC clearAllTables;
+ --seems like we ned to delete from plan_provides_benefits and not from benefits
  --end 2.3 D 
 
  --start 2.3F
@@ -60,8 +61,31 @@ DECLARE @totalTransactions INT;
 exec Account_Payment_Points '01234567890',@totalTransactions OUTPUT,@totalPoints OUTPUT;
 print @totalTransactions;
 print @totalPoints;
+EXEC clearAllTables;
 
 
 
  --end 2.3 f
 
+ --start 2.4 o 
+ Insert INTO Customer_Profile VALUES (1234,'fady','bassem','fady@gmail.com','dokki','2005-2-8');
+ Insert INTO Customer_Account VALUES 
+ ('01234567890','pass',2000.0,'prepaid','2024-11-9','active',200,1234),
+ ('01234567891','pass',3000.0,'prepaid','2024-11-10','active',0,1234);
+ 
+ Insert INTO Voucher(value,expiry_date,points) VALUES 
+ (200,'2027-4-1',100),
+ (300,'2022-1-1',200),
+ (500,'2027-7-10',300)
+
+ select * from voucher;
+ select * from Customer_Account;
+
+ EXEC Redeem_voucher_points '01234567890',1;
+ EXEC Redeem_voucher_points '01234567890',2
+
+ EXEC clearAllTables;
+
+
+
+ --end 2.4 o
