@@ -932,7 +932,7 @@ BEGIN
     SET @newBalance = @oldBalance + @cashback
     
     UPDATE Wallet  
-    SET Wallet.current_balance = @newBalance 
+    SET Wallet.current_balance = @newBalance, last_modified_date=CONVERT(DATE,GETDATE())
     WHERE mobileNo = @MobileNo;
 
     Select @wallet_id = w.walletID From Wallet w WHERE @MobileNo = w.mobileNo;
@@ -953,8 +953,10 @@ BEGIN
     Insert Into payment values (@amount,CONVERT(DATE,GETDATE()),@payment_method,'successful',@MobileNo)
     
     UPDATE Wallet 
-    Set current_balance = current_balance + @amount
+    Set current_balance = current_balance + @amount,last_modified_date=CONVERT(DATE,GETDATE())
     WHERE Wallet.mobileNo  =@MobileNo
+
+
 
 END
 --end of 2.4 n
