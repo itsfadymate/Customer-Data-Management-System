@@ -922,6 +922,18 @@ CREATE PROCEDURE Payment_wallet_cashback
 @benefit_id int
 AS
 BEGIN
+    if ((Select  * FROM Customer_Account WHERE @MobileNo=mobileNo ) is NULL)BEGIN
+     print 'invalid mobileNo';  
+     return;
+    END
+    if ((Select  * FROM Payment p WHERE p.paymentID = @payment_id  ) is NULL)BEGIN
+     print 'invalid payment ID';  
+     return;
+    END
+    if ((Select  * FROM Benefits WHERE @benefit_id=benefitID ) is NULL)BEGIN
+     print 'invalid benefit_id';  
+     return;
+    END
     DECLARE @oldBalance decimal(10,2);
     DECLARE @cashback decimal(10,2);
     DECLARE @payment decimal(10,2);
@@ -959,7 +971,7 @@ BEGIN
      print 'invalid mobileNo';  
      return;
     END
-    ELSE if (@payment_method = 'credit') BEGIN
+    if (@payment_method = 'credit') BEGIN
         Declare @curr_wallet_balance DECIMAL(10,1);
         select @curr_wallet_balance = w.current_balance  FROM Wallet w WHERE w.mobileNo = @MobileNo;
         
