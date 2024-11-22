@@ -527,13 +527,13 @@ WITH Filtered_Plan_provides_benefit AS (
     FROM plan_provides_benefits
     WHERE plan_provides_benefits.planID = @plan_ID
 )
-DELETE FROM Benefits WHERE mobileNo = @mobileNo
+DELETE FROM Benefits WHERE mobileNo = @mobileNo --delete is likely from plan_provides_benefits
     AND EXISTS (
         SELECT 1
         FROM Filtered_Plan_Provides_Benefit
         WHERE Filtered_Plan_Provides_Benefit.benefitID = Benefits.benefitID
     ); 
-select * from Benefits where mobileNo=@mobileNo
+select * from Benefits
 END
  --end of 2.3 d
 
