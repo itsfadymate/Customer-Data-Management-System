@@ -172,7 +172,7 @@ Customer_Account(mobileNo),
         internet_offered INT,
         SMS_offered INT,
         minutes_offered INT,
-        constraint offer_benefit FOREIGN KEY (benefitID) REFERENCES Benefits(benefitID)
+        constraint offer_benefit FOREIGN KEY (benefitID) REFERENCES Benefits(benefitID) ON DELETE CASCADE
     );
     
     CREATE TABLE Cashback (--10% of payment 
@@ -181,7 +181,7 @@ Customer_Account(mobileNo),
         walletID INT,
         amount INT,
         credit_date DATE,
-        constraint cashback_benefit FOREIGN KEY (benefitID) REFERENCES Benefits(benefitID),
+        constraint cashback_benefit FOREIGN KEY (benefitID) REFERENCES Benefits(benefitID) ON DELETE CASCADE,
         constraint cashback_wallet FOREIGN KEY (walletID) REFERENCES Wallet(walletID)
     );
     
@@ -189,7 +189,7 @@ Customer_Account(mobileNo),
         benefitID INT,
         planID INT,
         PRIMARY KEY (benefitID, planID),
-        constraint plan_benefits FOREIGN KEY (benefitID) REFERENCES Benefits(benefitID),
+        constraint plan_benefits FOREIGN KEY (benefitID) REFERENCES Benefits(benefitID) ON DELETE CASCADE,
         constraint plan_serv_2 FOREIGN KEY (planID) REFERENCES Service_Plan(planID)
     );
     
