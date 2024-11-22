@@ -955,7 +955,11 @@ CREATE PROCEDURE Initiate_balance_payment
 @payment_method varchar(50)
 AS
 BEGIN 
-    if (@payment_method = 'credit') BEGIN
+    if ((Select  mobileNo FROM Customer_Account WHERE @MobileNo=mobileNo ) is NULL)BEGIN
+     print 'invalid mobileNo';  
+     return;
+    END
+    ELSE if (@payment_method = 'credit') BEGIN
         Declare @curr_wallet_balance DECIMAL(10,1);
         select @curr_wallet_balance = w.current_balance  FROM Wallet w WHERE w.mobileNo = @MobileNo;
         
