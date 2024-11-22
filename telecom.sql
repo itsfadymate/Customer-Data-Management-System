@@ -809,20 +809,29 @@ BEGIN
     DECLARE @payment_amount DECIMAL(10,1);
     DECLARE @remaining_amount Decimal(10,1);
 
+    IF NOT EXISTS (SELECT 1 FROM Customer_Account WHERE mobileNo = @MobileNo)
+    BEGIN
+        print 'mobile number is not valid';
+        RETURN NULL; 
+    END
+
     SELECT @plan_price = price 
     FROM Service_Plan
     WHERE name = @plan_name;
 
-    SET @payment_amount = 0;
-    SELECT @payment_amount = SUM (amount)
-    FROM Payment 
-    WHERE mobileNO = @MobileNO;
-    
-    SET @remaining_amount = @plan_price-@payment_amount;
+    SELECT @payment_amount = SUM(P.amount)
+    FROM Payment P
+    INNER JOIN Subscription S ON P.mobileNo = S.mobileNo
+    INNER JOIN Service_Plan SP ON S.planID = SP.planID
+    WHERE P.mobileNo =@MobileNo AND SP.name = @plan_name;
 
-    RETURN @remaining_amount;
+    IF @payment_amount IS NULL
+        SET @payment_amount = 0;
+
+    SET @remaining_amount = @plan_price - @payment_amount;
+
+    RETURN @remaining_amount; 
 END;
-GO
 --end of 2.4h
 
 GO
