@@ -561,7 +561,7 @@ go
  @total_amount_of_points int OUTPUT --could it be null?
  AS
  BEGIN
-   select @total_amount_of_points = ISNULL(sum(pg.pointsAmount,0)),@total_number_of_transactions = count(*)
+   select @total_amount_of_points = ISNULL(sum(pg.pointsAmount),0),@total_number_of_transactions = count(*)
    FROM Payment p
    LEFT JOIN Points_Group pg on pg.paymentID = p.paymentID
    WHERE p.mobileNo = @mobileNO AND p.status = 'successful' AND p.date_of_payment >= DATEADD(YEAR, -1, CURRENT_TIMESTAMP) ;
@@ -967,18 +967,23 @@ CREATE PROCEDURE Redeem_voucher_points
 @voucher_id int
 AS
 BEGIN
-DECLARE @addPoints int;
-DECLARE @oldPoints int;
-DECLARE @newPoints int;
-
-SELECT @addPoints = v.value FROM Voucher v WHERE v.voucherID = @voucher_id
-SELECT @oldPoints = point FROM Customer_Account WHERE mobileNo = @MobileNo
-SET @newPoints = @oldPoints + @addPoints
-
-UPDATE Customer_Account SET point = @newPoints WHERE mobileNo = @MobileNo
-UPDATE Voucher SET redeem_date = CONVERT(DATE,GETDATE()) 
-WHERE voucherID = @voucher_id
-
-
+if ((SELECT v.expiry_date FROM Voucher v WHERE v.voucherID = @voucher_id)<=GETDATE())
+    BEGIN
+        DECLARE @removePoints int;
+        DECLARE @oldPoints int;
+        
+        
+        SELECT @removePoints = v.value FROM Voucher v WHERE v.voucherID = @voucher_id
+        SELECT @oldPoints = point FROM Customer_Account WHERE mobileNo = @MobileNo
+        
+        
+        UPDATE Customer_Account SET point = @oldPoints - @removePoints WHERE mobileNo = @MobileNo
+        UPDATE Voucher SET redeem_date = CONVERT(DATE,GETDATE()),mobileNo = @MobileNo
+        WHERE voucherID = @voucher_id
+    END
+ELSE
+    BEGIN
+        PRINT 'voucher is expired'
+    END
 END
 --end of 2.4 o
