@@ -561,7 +561,7 @@ go
  @total_amount_of_points int OUTPUT --could it be null?
  AS
  BEGIN
-   select @total_amount_of_points = sum(pg.pointsAmount),@total_number_of_transactions = count(*)
+   select @total_amount_of_points = ISNULL(sum(pg.pointsAmount,0)),@total_number_of_transactions = count(*)
    FROM Payment p
    LEFT JOIN Points_Group pg on pg.paymentID = p.paymentID
    WHERE p.mobileNo = @mobileNO AND p.status = 'successful' AND p.date_of_payment >= DATEADD(YEAR, -1, CURRENT_TIMESTAMP) ;
