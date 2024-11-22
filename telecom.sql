@@ -896,10 +896,15 @@ BEGIN
             Update Subscription
             SET status = 'active'
             WHERE Subscription.mobileNo=@MobileNo and Subscription.planID=@planID
+            print 'payment complete';
        END
     ELSE
     BEGIN
        insert into Payment VALUES (@amount,@today,@payment_method,'rejected',@MobileNo)
+       Update Subscription
+            SET status = 'onhold'
+            WHERE Subscription.mobileNo=@MobileNo and Subscription.planID=@planID
+        print 'payment amount insuffecient';
     END    
     SELECT @paymentID = MAX(p.paymentID) 
     FROM Payment p;
@@ -950,11 +955,37 @@ CREATE PROCEDURE Initiate_balance_payment
 @payment_method varchar(50)
 AS
 BEGIN 
+    if (@payment_method = 'credit') BEGIN
+        Declare @curr_wallet_balance DECIMAL(10,1);
+        select @curr_wallet_balance = w.current_balance  FROM Wallet w WHERE w.mobileNo = @MobileNo;
+        
+        if (@curr_wallet_balance < @amount) BEGIN
+            print 'wallet balance not enough'
+            return;
+        END
+
+        UPDATE Wallet 
+        Set current_balance = current_balance - @amount,last_modified_date=CONVERT(DATE,GETDATE())
+        WHERE Wallet.mobileNo  =@MobileNo
+
+        UPDATE Customer_Account 
+        Set balance = balance + @amount
+        WHERE mobileNo =@MobileNo
+        print 'credit payment successful';
+    END
+    ELSE IF (@payment_method = 'cash') BEGIN
+        UPDATE Customer_Account 
+        Set balance = balance + @amount
+        WHERE mobileNo =@MobileNo
+        print 'cash payment successful';
+    END
+    ELSE BEGIN
+        print 'not a valid payment method'
+        return;
+    END
+
     Insert Into payment values (@amount,CONVERT(DATE,GETDATE()),@payment_method,'successful',@MobileNo)
     
-    UPDATE Wallet 
-    Set current_balance = current_balance + @amount,last_modified_date=CONVERT(DATE,GETDATE())
-    WHERE Wallet.mobileNo  =@MobileNo
 
 
 
