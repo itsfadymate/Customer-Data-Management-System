@@ -1,4 +1,8 @@
-﻿--Daniel testing 
+﻿/*
+NOTICE: Each time you pull a new version delete telecom_32 db
+        and rerun this file to apply latest changes
+*/
+
 --start of 2.1 a
 create database Telecom_Team_32;
 GO
@@ -158,7 +162,7 @@ Customer_Account(mobileNo),
         benefitID INT,
         pointsAmount INT,
         paymentID INT,
-        constraint points_benefits FOREIGN KEY (benefitID) REFERENCES Benefits(benefitID),
+        constraint points_benefits FOREIGN KEY (benefitID) REFERENCES Benefits(benefitID) ON DELETE CASCADE,
         constraint points_payment FOREIGN KEY (paymentID) REFERENCES Payment(paymentID)
     );
     
