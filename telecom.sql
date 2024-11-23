@@ -817,21 +817,25 @@ BEGIN
     FROM Service_Plan
     WHERE name = @plan_name;
 
-    SELECT @payment_amount = SUM(P.amount)
+    SELECT Top 1 @payment_amount = P.amount
     FROM Payment P
     INNER JOIN Subscription S ON P.mobileNo = S.mobileNo
     INNER JOIN Service_Plan SP ON S.planID = SP.planID
-    WHERE P.mobileNo =@MobileNo AND SP.name = @plan_name;
+    WHERE P.mobileNo =@MobileNo AND SP.name = @plan_name AND P.status = 'successful'
+    ORDER BY P.date_of_payment DESC;
 
     IF @payment_amount IS NULL
         SET @payment_amount = 0;
 
     SET @remaining_amount = @plan_price - @payment_amount;
+    if (@remaining_amount < 0 ) 
+    begin
+    set @remaining_amount = 0;
+    end
 
-    RETURN @remaining_amount; 
+    RETURN @remaining_amount; 
 END;
 --end of 2.4h
-
 GO
 
 --start of 2.4i
@@ -840,16 +844,37 @@ CREATE FUNCTION Extra_plan_amount
 RETURNS DECIMAL
 AS
 BEGIN
-    DECLARE @extra_amount DECIMAL(10,1);
+    DECLARE @plan_price DECIMAL(10,1);
+    DECLARE @payment_amount DECIMAL(10,1);
+    DECLARE @extra_amount Decimal(10,1);
 
-    SELECT @extra_amount = pp.additional_amounts 
-    FROM Subscription s 
-    INNER JOIN Service_Plan sp ON s.planID = sp.planID
-    INNER JOIN Process_Payment pp ON s.planID = pp.planID 
-    WHERE s.mobileNo = @MobileNo AND sp.name = @plan_name 
+    IF NOT EXISTS (SELECT 1 FROM Customer_Account WHERE mobileNo = @MobileNo)
+    BEGIN
+        RETURN NULL; 
+    END
 
-    RETURN @extra_amount
-END
+    SELECT @plan_price = price 
+    FROM Service_Plan
+    WHERE name = @plan_name;
+
+    SELECT Top 1 @payment_amount = P.amount
+    FROM Payment P
+    INNER JOIN Subscription S ON P.mobileNo = S.mobileNo
+    INNER JOIN Service_Plan SP ON S.planID = SP.planID
+    WHERE P.mobileNo =@MobileNo AND SP.name = @plan_name AND P.status = 'successful'
+    ORDER BY P.date_of_payment DESC;
+
+    IF @payment_amount IS NULL
+        SET @payment_amount = 0;
+
+    SET @extra_amount = @payment_amount - @plan_price;
+    if (@extra_amount < 0) 
+    begin
+    SET @extra_amount = 0;
+    end
+
+    RETURN @extra_amount; 
+END;
 --end of 2.4i
 
 GO
