@@ -527,13 +527,12 @@ WITH Filtered_Plan_provides_benefit AS (
     FROM plan_provides_benefits
     WHERE plan_provides_benefits.planID = @plan_ID
 )
-DELETE FROM Benefits WHERE mobileNo = @mobileNo --delete is likely from plan_provides_benefits
+DELETE FROM Benefits WHERE mobileNo = @mobileNo
     AND EXISTS (
         SELECT 1
         FROM Filtered_Plan_Provides_Benefit
         WHERE Filtered_Plan_Provides_Benefit.benefitID = Benefits.benefitID
-    ); 
-select * from Benefits
+    );
 END
  --end of 2.3 d
 
@@ -811,7 +810,6 @@ BEGIN
 
     IF NOT EXISTS (SELECT 1 FROM Customer_Account WHERE mobileNo = @MobileNo)
     BEGIN
-        print 'mobile number is not valid';
         RETURN NULL; 
     END
 
@@ -932,18 +930,6 @@ CREATE PROCEDURE Payment_wallet_cashback
 @benefit_id int
 AS
 BEGIN
-    if ((Select  * FROM Customer_Account WHERE @MobileNo=mobileNo ) is NULL)BEGIN
-     print 'invalid mobileNo';  
-     return;
-    END
-    if ((Select  * FROM Payment p WHERE p.paymentID = @payment_id  ) is NULL)BEGIN
-     print 'invalid payment ID';  
-     return;
-    END
-    if ((Select  * FROM Benefits WHERE @benefit_id=benefitID ) is NULL)BEGIN
-     print 'invalid benefit_id';  
-     return;
-    END
     DECLARE @oldBalance decimal(10,2);
     DECLARE @cashback decimal(10,2);
     DECLARE @payment decimal(10,2);
