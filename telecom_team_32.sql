@@ -121,7 +121,7 @@ Customer_Account(mobileNo),
         paymentID INT PRIMARY KEY,
         planID INT,
         remaining_balance as dbo.get_remaining_balance(paymentID,planID),
-        additional_amounts as dbo.get_additional_amount(paymentID,planID),
+        extra_amount as dbo.get_additional_amount(paymentID,planID),
         constraint proc_pay FOREIGN KEY (paymentID) REFERENCES Payment(paymentID),
         constraint proc_serv FOREIGN KEY (planID) REFERENCES Service_Plan(planID),
     );
@@ -138,13 +138,14 @@ Customer_Account(mobileNo),
     );
     
     CREATE TABLE Transfer_money (
-        transfer_id INT PRIMARY KEY IDENTITY(1,1),
+        transfer_id INT IDENTITY(1,1),
         walletID1 INT,
         walletID2 INT,
         amount DECIMAL(10,2),
         transfer_date DATE,
         constraint sender_wallet FOREIGN KEY (walletID1) REFERENCES Wallet(walletID),
-        constraint receive_wallet FOREIGN KEY (walletID2) REFERENCES Wallet(walletID)
+        constraint receive_wallet FOREIGN KEY (walletID2) REFERENCES Wallet(walletID),
+        constraint primaryKeyTransferMoney PRIMARY KEY (walletID1, walletID2, transfer_id)
     );
     
     CREATE TABLE Benefits (
@@ -158,31 +159,34 @@ Customer_Account(mobileNo),
     );
     
     CREATE TABLE Points_Group (
-        pointID INT PRIMARY KEY IDENTITY(1,1),
+        pointID INT IDENTITY(1,1),
         benefitID INT,
         pointsAmount INT,
         paymentID INT,
         constraint points_benefits FOREIGN KEY (benefitID) REFERENCES Benefits(benefitID) ON DELETE CASCADE,
-        constraint points_payment FOREIGN KEY (paymentID) REFERENCES Payment(paymentID)
+        constraint points_payment FOREIGN KEY (paymentID) REFERENCES Payment(paymentID),
+        constraint primaryKeyPointsGroup PRIMARY KEY (pointID, benefitID)
     );
     
     CREATE TABLE Exclusive_Offer (
-        offerID INT PRIMARY KEY IDENTITY(1,1),
+        offerID INT IDENTITY(1,1),
         benefitID INT,
         internet_offered INT,
         SMS_offered INT,
         minutes_offered INT,
-        constraint offer_benefit FOREIGN KEY (benefitID) REFERENCES Benefits(benefitID) ON DELETE CASCADE
+        constraint offer_benefit FOREIGN KEY (benefitID) REFERENCES Benefits(benefitID) ON DELETE CASCADE,
+        constraint primaryKeyExclusiveOffer PRIMARY KEY (offerID, benefitID)
     );
     
     CREATE TABLE Cashback (--10% of payment 
-        CashbackID INT PRIMARY KEY IDENTITY(1,1),
+        CashbackID INT IDENTITY(1,1),
         benefitID INT,
         walletID INT,
         amount INT,
         credit_date DATE,
         constraint cashback_benefit FOREIGN KEY (benefitID) REFERENCES Benefits(benefitID) ON DELETE CASCADE,
-        constraint cashback_wallet FOREIGN KEY (walletID) REFERENCES Wallet(walletID)
+        constraint cashback_wallet FOREIGN KEY (walletID) REFERENCES Wallet(walletID),
+        constraint primaryKeyCashback PRIMARY KEY (CashbackID, benefitID)
     );
     
     CREATE TABLE Plan_Provides_Benefits (
@@ -224,13 +228,14 @@ Customer_Account(mobileNo),
         CONSTRAINT shopID_FK FOREIGN KEY (shopID) REFERENCES Shop(shopID)
     );
     CREATE TABLE Technical_Support_Ticket (
-        ticketID INT PRIMARY KEY IDENTITY(1,1),
+        ticketID INT IDENTITY(1,1),
         mobileNo CHAR(11),
         Issue_description VARCHAR(50),
         priority_level INT,
         status VARCHAR(50),
         constraint ticket_stat_chk check (status in('open','in progress','resolved')),
-        constraint ticket_acc FOREIGN KEY (mobileNo) REFERENCES Customer_Account(mobileNo)
+        constraint ticket_acc FOREIGN KEY (mobileNo) REFERENCES Customer_Account(mobileNo),
+        constraint primaryKeyTechSupportTicket PRIMARY KEY (ticketID, mobileNo)
      );
  END
 --end of 2.1 b
