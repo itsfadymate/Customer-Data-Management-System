@@ -899,9 +899,10 @@ BEGIN
     DECLARE @paymentID INT;
     SELECT @today = CONVERT(DATE, GETDATE());
     select @plan_price = sp.price FROM service_plan sp WHERE sp.planID = @planID
+    insert into Payment VALUES (@amount,@today,@payment_method,'successful',@MobileNo);
+            
     if (@plan_price <= @amount) 
         BEGIN
-            insert into Payment VALUES (@amount,@today,@payment_method,'successful',@MobileNo);
             Update Subscription
             SET status = 'active'
             WHERE Subscription.mobileNo=@MobileNo and Subscription.planID=@planID
@@ -909,12 +910,12 @@ BEGIN
        END
     ELSE
     BEGIN
-       insert into Payment VALUES (@amount,@today,@payment_method,'rejected',@MobileNo)
        Update Subscription
             SET status = 'onhold'
             WHERE Subscription.mobileNo=@MobileNo and Subscription.planID=@planID
         print 'payment amount insuffecient';
     END    
+
     SELECT @paymentID = MAX(p.paymentID) 
     FROM Payment p;
     INSERT INTO Process_Payment (paymentID, planID)
