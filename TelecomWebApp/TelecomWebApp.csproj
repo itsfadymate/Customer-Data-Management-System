@@ -14,4 +14,11 @@
     </PackageReference>
   </ItemGroup>
 
+<<<<<<< Updated upstream
+=======
+  <ItemGroup>
+    <Folder Include="NewFolder\" />
+  </ItemGroup>
+
+>>>>>>> Stashed changes
 </Project>
