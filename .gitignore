@@ -1,1 +1,7 @@
 .vs/ 
+/TelecomWebApp/obj
+TelecomWebApp/obj/Debug/net8.0/TelecomWebApp.AssemblyInfo.cs
+TelecomWebApp/obj/Debug/net8.0/TelecomWebApp.AssemblyInfo.cs
+TelecomWebApp/obj/Debug/net8.0/TelecomWebApp.AssemblyInfoInputs.cache
+TelecomWebApp/obj/Debug/net8.0/TelecomWebApp.assets.cache
+TelecomWebApp/obj/Debug/net8.0/TelecomWebApp.GeneratedMSBuildEditorConfig.editorconfig
