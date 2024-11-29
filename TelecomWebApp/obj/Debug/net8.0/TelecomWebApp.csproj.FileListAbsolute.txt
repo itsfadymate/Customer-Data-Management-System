@@ -32,3 +32,38 @@ C:\Users\Abdelrahman Wael\source\repos\TelecomWebApp\TelecomWebApp\obj\Debug\net
 C:\Users\Abdelrahman Wael\source\repos\TelecomWebApp\TelecomWebApp\obj\Debug\net8.0\TelecomWebApp.pdb
 C:\Users\Abdelrahman Wael\source\repos\TelecomWebApp\TelecomWebApp\obj\Debug\net8.0\TelecomWebApp.genruntimeconfig.cache
 C:\Users\Abdelrahman Wael\source\repos\TelecomWebApp\TelecomWebApp\obj\Debug\net8.0\ref\TelecomWebApp.dll
+C:\Users\Bassem\source\repos\Customer-Data-Management-System\TelecomWebApp\bin\Debug\net8.0\appsettings.Development.json
+C:\Users\Bassem\source\repos\Customer-Data-Management-System\TelecomWebApp\bin\Debug\net8.0\appsettings.json
+C:\Users\Bassem\source\repos\Customer-Data-Management-System\TelecomWebApp\bin\Debug\net8.0\TelecomWebApp.staticwebassets.runtime.json
+C:\Users\Bassem\source\repos\Customer-Data-Management-System\TelecomWebApp\bin\Debug\net8.0\TelecomWebApp.staticwebassets.endpoints.json
+C:\Users\Bassem\source\repos\Customer-Data-Management-System\TelecomWebApp\bin\Debug\net8.0\TelecomWebApp.exe
+C:\Users\Bassem\source\repos\Customer-Data-Management-System\TelecomWebApp\bin\Debug\net8.0\TelecomWebApp.deps.json
+C:\Users\Bassem\source\repos\Customer-Data-Management-System\TelecomWebApp\bin\Debug\net8.0\TelecomWebApp.runtimeconfig.json
+C:\Users\Bassem\source\repos\Customer-Data-Management-System\TelecomWebApp\bin\Debug\net8.0\TelecomWebApp.dll
+C:\Users\Bassem\source\repos\Customer-Data-Management-System\TelecomWebApp\bin\Debug\net8.0\TelecomWebApp.pdb
+C:\Users\Bassem\source\repos\Customer-Data-Management-System\TelecomWebApp\obj\Debug\net8.0\TelecomWebApp.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Bassem\source\repos\Customer-Data-Management-System\TelecomWebApp\obj\Debug\net8.0\TelecomWebApp.AssemblyInfoInputs.cache
+C:\Users\Bassem\source\repos\Customer-Data-Management-System\TelecomWebApp\obj\Debug\net8.0\TelecomWebApp.AssemblyInfo.cs
+C:\Users\Bassem\source\repos\Customer-Data-Management-System\TelecomWebApp\obj\Debug\net8.0\TelecomWebApp.csproj.CoreCompileInputs.cache
+C:\Users\Bassem\source\repos\Customer-Data-Management-System\TelecomWebApp\obj\Debug\net8.0\TelecomWebApp.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Bassem\source\repos\Customer-Data-Management-System\TelecomWebApp\obj\Debug\net8.0\TelecomWebApp.RazorAssemblyInfo.cache
+C:\Users\Bassem\source\repos\Customer-Data-Management-System\TelecomWebApp\obj\Debug\net8.0\TelecomWebApp.RazorAssemblyInfo.cs
+C:\Users\Bassem\source\repos\Customer-Data-Management-System\TelecomWebApp\obj\Debug\net8.0\TelecomWebApp.sourcelink.json
+C:\Users\Bassem\source\repos\Customer-Data-Management-System\TelecomWebApp\obj\Debug\net8.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
+C:\Users\Bassem\source\repos\Customer-Data-Management-System\TelecomWebApp\obj\Debug\net8.0\scopedcss\bundle\TelecomWebApp.styles.css
+C:\Users\Bassem\source\repos\Customer-Data-Management-System\TelecomWebApp\obj\Debug\net8.0\scopedcss\projectbundle\TelecomWebApp.bundle.scp.css
+C:\Users\Bassem\source\repos\Customer-Data-Management-System\TelecomWebApp\obj\Debug\net8.0\staticwebassets.build.json
+C:\Users\Bassem\source\repos\Customer-Data-Management-System\TelecomWebApp\obj\Debug\net8.0\staticwebassets.development.json
+C:\Users\Bassem\source\repos\Customer-Data-Management-System\TelecomWebApp\obj\Debug\net8.0\staticwebassets.build.endpoints.json
+C:\Users\Bassem\source\repos\Customer-Data-Management-System\TelecomWebApp\obj\Debug\net8.0\staticwebassets\msbuild.TelecomWebApp.Microsoft.AspNetCore.StaticWebAssets.props
+C:\Users\Bassem\source\repos\Customer-Data-Management-System\TelecomWebApp\obj\Debug\net8.0\staticwebassets\msbuild.TelecomWebApp.Microsoft.AspNetCore.StaticWebAssetEndpoints.props
+C:\Users\Bassem\source\repos\Customer-Data-Management-System\TelecomWebApp\obj\Debug\net8.0\staticwebassets\msbuild.build.TelecomWebApp.props
+C:\Users\Bassem\source\repos\Customer-Data-Management-System\TelecomWebApp\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.TelecomWebApp.props
+C:\Users\Bassem\source\repos\Customer-Data-Management-System\TelecomWebApp\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.TelecomWebApp.props
+C:\Users\Bassem\source\repos\Customer-Data-Management-System\TelecomWebApp\obj\Debug\net8.0\staticwebassets.pack.json
+C:\Users\Bassem\source\repos\Customer-Data-Management-System\TelecomWebApp\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
+C:\Users\Bassem\source\repos\Customer-Data-Management-System\TelecomWebApp\obj\Debug\net8.0\TelecomWebApp.dll
+C:\Users\Bassem\source\repos\Customer-Data-Management-System\TelecomWebApp\obj\Debug\net8.0\refint\TelecomWebApp.dll
+C:\Users\Bassem\source\repos\Customer-Data-Management-System\TelecomWebApp\obj\Debug\net8.0\TelecomWebApp.pdb
+C:\Users\Bassem\source\repos\Customer-Data-Management-System\TelecomWebApp\obj\Debug\net8.0\TelecomWebApp.genruntimeconfig.cache
+C:\Users\Bassem\source\repos\Customer-Data-Management-System\TelecomWebApp\obj\Debug\net8.0\ref\TelecomWebApp.dll
