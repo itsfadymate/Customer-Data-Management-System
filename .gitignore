@@ -1,3 +1,50 @@
-.vs/ 
-bin/
-obj/
+# User-specific files
+.vs/
+*.user
+*.suo
+
+# Build Folders
+/TelecomWebApp/bin/
+/TelecomWebApp/obj/
+
+# Ignore Debug build files
+TelecomWebApp/obj/Debug/
+TelecomWebApp/obj/Debug/net*/TelecomWebApp.AssemblyInfo.cs
+TelecomWebApp/obj/Debug/net*/TelecomWebApp.AssemblyInfoInputs.cache
+TelecomWebApp/obj/Debug/net*/TelecomWebApp.assets.cache
+TelecomWebApp/obj/Debug/net*/TelecomWebApp.GeneratedMSBuildEditorConfig.editorconfig
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+*.temp
+
+# NuGet Packages (Optional)
+/packages/
+
+# Database Files
+*.db
+*.mdf
+*.ldf
+
+# Environment files
+.env
+appsettings.Development.json
+
+# Dynamically Generated Content (Optional)
+wwwroot/uploads/
+
+# Rider / JetBrains IDE files
+.idea/
+*.iml
+
+# MacOS system files
+.DS_Store
+
+# Windows thumbnail cache
+Thumbs.db
+
+# Linux folder settings
+.directory
