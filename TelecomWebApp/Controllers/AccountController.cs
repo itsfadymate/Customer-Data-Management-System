@@ -12,18 +12,18 @@ public class AccountController : Controller
 		_telecomContext = dbContext;
     }
 
-	public IActionResult GetUnresolvedTickets(int nationalID)
-	{
-		var unresolved = _telecomContext.GetUnresolvedTickets(nationalID);
-
-        return View(unresolved);
-	}
-
-    public IActionResult ViewAllPlans()
+	public IActionResult Index()
     {
-		var plans = _telecomContext.GetServicePlans;
-        return View(plans); 
-    }
+        var serviceInfo = new ServiceInfo
+        {
+            RemainingMoney = _context.GetRemainingMoney(),
+            ExtraMoney = _context.GetExtraMoney(),
+            UnresolvedTickets = _context.GetUnresolvedTickets(),
+            HighestValueVoucher = _context.GetHighestValueVoucher()
+        };
 
+        return View("LoggedInCustomerView", serviceInfo);
+    }
+	
 
 }

@@ -1,6 +1,4 @@
-@{
-    ViewData["Title"] = "Services";
-}
+@model ServiceInfo
 
 <!DOCTYPE html>
 <html lang="en">
@@ -23,7 +21,7 @@
                 <h3>Remaining Money</h3>
                 <p>
                     How much money is due since last payment
-                    <strong>5 EGP</strong>.
+                    <strong>@model.RemainingMoney  EGP</strong>.
                 </p>
             </div>
         </div>
@@ -32,22 +30,21 @@
                 <h3>Extra money</h3>
                 <p>
                     How much extra money you paid since last payment
-                    <strong>5 EGP</strong>.
+                    <strong>@model.ExtraMoney  EGP</strong>.
                 </p>
             </div>
         </div>
         <div class="service-bar">
             <div class="service-content">
                 <h3>Unresolved tickets</h3>
-                <p>See how many unresolved tickets are open <strong>No open tickets</strong>.</p>
+                <p>See how many unresolved tickets are open <strong>@model.UnresolvedTickets  </strong>.</p>
             </div>
         </div>
         <div class="service-bar">
             <div class="service-content">
                 <h3>Highest Value voucher</h3>
-                <p>Show your highest value vouchers.</p>
+                <p>Show your most valuable voucher<strong>ID: @model.HighestValueVoucher </strong>.</p>
             </div>
-            <button class="check-status-btn">Check Status</button>
         </div>
         <div class="service-bar">
             <div class="service-content">

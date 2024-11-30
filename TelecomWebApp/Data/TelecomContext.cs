@@ -15,29 +15,39 @@ public class TelecomContext : DbContext
     }
     public DbSet<UsagePlan> UsagePlans { get; set; }
 
-    public async Task<List<ServicePlan>> GetServicePlans()
+    p
+	public int GetRemainingPlanAmount(string mobileNo, string planName)
     {
-        return await ServicePlans
-            .FromSqlInterpolated($"SELECT * FROM dbo.allServicePlans")
-            .ToListAsync();
+        
+        var result = this.Database.SqlQuery<int>(
+            $"SELECT dbo.Remaining_plan_amount({mobileNo}, {planName})").FirstOrDefault();
+
+        return result;
     }
 
-    public DbSet<ServicePlan> ServicePlans { get; set; }
-
-    public async Task<int> GetUnresolvedTickets(int nationalID)
+	public int GetExtraPlanAmount(string mobileNo, string planName)
     {
-        var outputParam = new SqlParameter
-        {
-            ParameterName = "@out",
-            SqlDbType = System.Data.SqlDbType.Int,
-            Direction = System.Data.ParameterDirection.Output
-        };
+        var result = this.Database
+            .SqlQuery<int>($"SELECT dbo.Extra_plan_amount({mobileNo}, {planName})")
+            .FirstOrDefault();
 
-        await Database.ExecuteSqlInterpolatedAsync($@"
-        EXEC proc Ticket_Account_Customer {nationalID}, @out OUTPUT
-    ");
+        return result;
+    }
 
-        return (int)outputParam.Value;
+	 public int GetHighestVoucher(string mobileNo)
+    {
+        var result = this.Database
+            .SqlQuery<int>("EXEC Account_Highest_Voucher @MobileNo = {0}", mobileNo)
+            .FirstOrDefault();
+
+        return result;
+    }
+	public int GetUnresolvedTicketsByCustomer(int nationalId)
+    {
+         var result = this.Database
+            .SqlQuery<int>("EXEC Ticket_Account_Customer @NationalID = {0}", nationalId)
+            .FirstOrDefault(); 
+        return result;
     }
 
 
