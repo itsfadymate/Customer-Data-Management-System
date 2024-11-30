@@ -15,6 +15,15 @@ public class TelecomContext : DbContext
     }
     public DbSet<UsagePlan> UsagePlans { get; set; }
 
+    public async Task<List<ServicePlan>> GetServicePlans()
+    {
+        return await ServicePlans
+            .FromSqlInterpolated($"SELECT * FROM dbo.allServicePlans")
+            .ToListAsync();
+    }
+
+    public DbSet<ServicePlan> ServicePlans { get; set; }
+
     public async Task<int> GetUnresolvedTickets(int nationalID)
     {
         var outputParam = new SqlParameter

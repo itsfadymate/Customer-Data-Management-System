@@ -19,5 +19,11 @@ public class AccountController : Controller
         return View(unresolved);
 	}
 
+    public IActionResult ViewAllPlans()
+    {
+		var plans = _telecomContext.GetServicePlans;
+        return View(plans); 
+    }
+
 
 }
