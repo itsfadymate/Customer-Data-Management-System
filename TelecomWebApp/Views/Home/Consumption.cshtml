@@ -1,0 +1,29 @@
+﻿@model List<TelecomWebApp.Models.Consumption>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consumption is:</title>
+</head>
+<body>
+    <div>
+        <table>
+            <tr>
+                <th>SMS</th>
+                <th>Minutes</th>
+                <th>Internet</th>
+            </tr>
+            @foreach (var u in Model)
+            {
+                <tr>
+                    <td>@u.SMS</td>
+                    <td>@u.minutes</td>
+                    <td>@u.internet</td>
+                </tr>
+            }
+        </table>
+    </div>
+</body>
+</html>

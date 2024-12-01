@@ -24,6 +24,24 @@ public class AccountController : Controller
 
         return View("LoggedInCustomerView", serviceInfo);
     }
-	
 
+
+    public IActionResult ViewAllPlans()
+    {
+        var plans = _telecomContext.GetServicePlans;
+        return View("ServicePlan", plans);
+    }
+
+    public IActionResult UsageInDuration()
+    {
+        var usage = _telecomContext.GetConsumption;
+        return View("Consumption", usage);
+    }
+
+
+    public IActionResult ViewAllPlansNotSubbed()
+    {
+        var notSubbed = _telecomContext.GetServicePlansNotSubbed;
+        return View("NotSubbed", notSubbed);
+    }
 }

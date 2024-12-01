@@ -15,8 +15,34 @@ public class TelecomContext : DbContext
     }
     public DbSet<UsagePlan> UsagePlans { get; set; }
 
-    p
-	public int GetRemainingPlanAmount(string mobileNo, string planName)
+    public async Task<List<ServicePlan>> GetServicePlans()
+    {
+        return await ServicePlans
+            .FromSqlInterpolated($"SELECT * FROM dbo.allServicePlans")
+            .ToListAsync();
+    }
+
+    public DbSet<ServicePlan> ServicePlans { get; set; }
+
+    public async Task<List<Consumption>> GetConsumption(string planName, DateTime startDate, DateTime endDate)
+    {
+        return await Consumption
+            .FromSqlInterpolated($"SELECT * FROM dbo.Consumption({planName}, {startDate}, {endDate})")
+            .ToListAsync();
+    }
+
+    public DbSet<Consumption> Consumption { get; set; }
+
+     public async Task<List<NotSubbed>> GetServicePlansNotSubbed(string mobileNo)
+    {
+        return await ServicePlansNotSubbed
+            .FromSqlInterpolated($"SELECT * FROM dbo.Unsubscribed_Plans({mobileNo})")
+            .ToListAsync();
+    }
+
+    public DbSet<NotSubbed> ServicePlansNotSubbed { get; set; }
+
+    public int GetRemainingPlanAmount(string mobileNo, string planName)
     {
         
         var result = this.Database.SqlQuery<int>(
