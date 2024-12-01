@@ -15,7 +15,7 @@ public class TelecomContext : DbContext
     }
     public DbSet<UsagePlan> UsagePlans { get; set; }
 
-    p
+    
 	public int GetRemainingPlanAmount(string mobileNo, string planName)
     {
         
@@ -34,18 +34,23 @@ public class TelecomContext : DbContext
         return result;
     }
 
-	 public int GetHighestVoucher(string mobileNo)
+	 public int GetHighestValueVoucher(string mobileNo)
     {
         var result = this.Database
-            .SqlQuery<int>("EXEC Account_Highest_Voucher @MobileNo = {0}", mobileNo)
+            .SqlQuery<int>($"EXEC Account_Highest_Voucher @MobileNo = {mobileNo)}") 
             .FirstOrDefault();
 
         return result;
     }
-	public int GetUnresolvedTicketsByCustomer(int nationalId)
+	public int GetUnresolvedTickets(String mobileNo)
     {
+
+	int nationalID = this.Database
+            .SqlQuery<int>($"SELECT cp.nationalID FROM CUSTOMER_ACCOUNT cp WHERE cp.mobileNo = {mobileNo} ")
+            .FirstOrDefault();
+
          var result = this.Database
-            .SqlQuery<int>("EXEC Ticket_Account_Customer @NationalID = {0}", nationalId)
+            .SqlQuery<int>($"EXEC Ticket_Account_Customer @NationalID = {nationalID }")
             .FirstOrDefault(); 
         return result;
     }

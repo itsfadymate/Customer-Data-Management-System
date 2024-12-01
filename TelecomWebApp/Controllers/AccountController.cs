@@ -12,14 +12,12 @@ public class AccountController : Controller
 		_telecomContext = dbContext;
     }
 
-	public IActionResult Index()
+	public IActionResult Index(String mobileNo)
     {
         var serviceInfo = new ServiceInfo
         {
-            RemainingMoney = _context.GetRemainingMoney(),
-            ExtraMoney = _context.GetExtraMoney(),
-            UnresolvedTickets = _context.GetUnresolvedTickets(),
-            HighestValueVoucher = _context.GetHighestValueVoucher()
+            UnresolvedTickets = _telecomContext .GetUnresolvedTickets(mobileNo),
+            HighestValueVoucher = _telecomContext .GetHighestValueVoucher(mobileNo)
         };
 
         return View("LoggedInCustomerView", serviceInfo);
