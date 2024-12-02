@@ -1,0 +1,42 @@
+﻿@page
+@model TelecomWebApp.Views.Admin.DashboardModel
+@{
+    if (ViewData != null)
+    {
+        ViewData["Title"] = "Admin Dashboard";
+    }
+}
+
+<h1>Welcome, Admin!</h1>
+
+<div class="dashboard">
+    <div class="section">
+        <h2>Customer Management</h2>
+        <ul>
+            <li><a href="/Admin/Customer/Profiles">Customer Profiles</a></li>
+            <li><a href="/Admin/Stores/Vouchers">Physical Stores & Vouchers</a></li>
+            <li><a href="/Admin/Tickets/Resolved">Resolved Tickets</a></li>
+            <li><a href="/Admin/Accounts/SubscribedPlans">Customer Accounts & Subscribed Plans</a></li>
+            <li><a href="/Admin/Plans/SubscriptionByDate">Plan Subscription by Date</a></li>
+            <li><a href="/Admin/Usage/Details">Usage Details</a></li>
+            <li><a href="/Admin/Benefits/Remove">Remove Benefits</a></li>
+            <li><a href="/Admin/SMS/Offers">SMS Offers</a></li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Transaction & Wallet Management</h2>
+        <ul>
+            <li><a href="/Admin/Wallets/Details">Wallet Details</a></li>
+            <li><a href="/Admin/Eshops/Vouchers">E-Shops & Vouchers</a></li>
+            <li><a href="/Admin/Payments/Transactions">Payments & Transactions</a></li>
+            <li><a href="/Admin/Cashback/Transactions">Cashback Transactions</a></li>
+            <li><a href="/Admin/Payments/Accepted">Accepted Payment Transactions</a></li>
+            <li><a href="/Admin/Cashback/ByPlan">Cashback by Plan</a></li>
+            <li><a href="/Admin/Transactions/Average">Transaction Average</a></li>
+            <li><a href="/Admin/Wallets/MobileLinking">Mobile Wallet Linking</a></li>
+            <li><a href="/Admin/Points/Update">Update Earned Points</a></li>
+        </ul>
+    </div>
+</div>
+
