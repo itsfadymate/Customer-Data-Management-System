@@ -102,6 +102,15 @@ public class TelecomContext : DbContext
             .ToListAsync();
     }
 
+    public DbSet<PhysicalStoreVoucherDetails> PhysicalStoreVoucherDetailsView { get; set; }
+
+    public async Task<List<PhysicalStoreVoucherDetails>> GetPhysicalStoreVoucherDetailsAsync()
+    {
+        return await PhysicalStoreVoucherDetailsView
+            .FromSqlInterpolated($"EXEC PhysicalStoreVouchers")
+            .ToListAsync();
+    }
+
 
 
 
