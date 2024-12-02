@@ -15,7 +15,7 @@ public class TelecomContext : DbContext
     }
     public DbSet<UsagePlan> UsagePlans { get; set; }
 
-    p
+    
 	public int GetRemainingPlanAmount(string mobileNo, string planName)
     {
         
@@ -37,7 +37,7 @@ public class TelecomContext : DbContext
 	 public int GetHighestValueVoucher(string mobileNo)
     {
         var result = this.Database
-            .SqlQuery<int>($"EXEC Account_Highest_Voucher @MobileNo = {mobileNo)}") 
+            .SqlQuery<int>($"EXEC Account_Highest_Voucher @MobileNo = {mobileNo}") 
             .FirstOrDefault();
 
         return result;
@@ -55,6 +55,26 @@ public class TelecomContext : DbContext
         return result;
     }
 
-
+    public async Task<List<ServicePlan>> GetServicePlans()
+    {
+        return await ServicePlans
+            .FromSqlInterpolated($"SELECT * FROM dbo.allServicePlans")
+            .ToListAsync();
+    }
+    public DbSet<ServicePlan> ServicePlans { get; set; }
+    public async Task<List<Consumption>> GetConsumption(string planName, DateTime startDate, DateTime endDate)
+    {
+        return await Consumption
+            .FromSqlInterpolated($"SELECT * FROM dbo.Consumption({planName}, {startDate}, {endDate})")
+            .ToListAsync();
+    }
+    public DbSet<Consumption> Consumption { get; set; }
+    public async Task<List<NotSubbed>> GetServicePlansNotSubbed(string mobileNo)
+    {
+        return await ServicePlansNotSubbed
+            .FromSqlInterpolated($"SELECT * FROM dbo.Unsubscribed_Plans({mobileNo})")
+            .ToListAsync();
+    }
+    public DbSet<NotSubbed> ServicePlansNotSubbed { get; set; }
 
 }

@@ -26,13 +26,13 @@ public class AccountController : Controller
 
     public IActionResult ViewAllPlans()
     {
-        var plans = _telecomContext.GetServicePlans;
+        var plans = _telecomContext.GetServicePlans();
         return View("ServicePlan", plans);
     }
 
-    public IActionResult UsageInDuration()
+    public IActionResult UsageInDuration(string planName, DateTime startDate, DateTime endDate)
     {
-        var usage = _telecomContext.GetConsumption;
+        var usage = _telecomContext.GetConsumption(planName, startDate, endDate);
         return View("Consumption", usage);
     }
 
