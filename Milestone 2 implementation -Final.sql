@@ -1,4 +1,4 @@
-﻿--create database Milestone2DB_24
+﻿create database Milestone2DB_24
 
 use  Milestone2DB_24
 
@@ -1010,3 +1010,18 @@ Exec Initiate_balance_payment @mobile_num = '01234567890', @amount =100, @paymen
 
 Exec Redeem_voucher_points @mobile_num = '01234567890', @voucher_id = 3 
 
+-- Inserting data into customer_profile table
+INSERT INTO customer_profile (nationalID, first_name, last_name, email, address, date_of_birth)
+VALUES 
+(101, 'John', 'Doe', 'john.doe@example.com', '123 Main St, Cityville', '1985-08-15'),
+(102, 'Jane', 'Smith', 'jane.smith@example.com', '456 Oak St, Townsville', '1990-03-20'),
+(103, 'Alice', 'Johnson', 'alice.johnson@example.com', '789 Pine St, Villagetown', '1988-12-10');
+
+-- Inserting data into customer_account table
+INSERT INTO customer_account 
+VALUES 
+('01234567890', 'password123', 100.0, 'postpaid', '2024-01-01', 'active', 0, 101);
+INSERT INTO customer_account VALUES ('01234567891', 'securepass456', 200.0, 'prepaid', '2024-01-15', 'onhold', 50, 102);
+INSERT INTO customer_account VALUES ('01234567892', 'mypassword789', 300.0, 'prepaid', '2024-02-01', 'active', 100, 103);
+
+select * FROm customer_account

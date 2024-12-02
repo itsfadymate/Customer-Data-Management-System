@@ -6,6 +6,14 @@ public class TelecomContext : DbContext
 {
     public TelecomContext(DbContextOptions<TelecomContext> options)
         : base(options) { }
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<Consumption>().HasNoKey();
+        modelBuilder.Entity<NotSubbed>().HasNoKey();
+        modelBuilder.Entity<ServicePlan>().HasNoKey(); 
+        modelBuilder.Entity<UsagePlan>().HasNoKey();
+    }
+
 
     public async Task<List<UsagePlan>> GetUsagePlanCurrentMonthAsync(string mobileNo)
     {
@@ -65,7 +73,7 @@ public class TelecomContext : DbContext
     public async Task<List<Consumption>> GetConsumption(string planName, DateTime startDate, DateTime endDate)
     {
         return await Consumption
-            .FromSqlInterpolated($"SELECT * FROM dbo.Consumption({planName}, {startDate}, {endDate})")
+            .FromSqlInterpolated($"SELECT dbo.Consumption({planName}, {startDate}, {endDate})")
             .ToListAsync();
     }
     public DbSet<Consumption> Consumption { get; set; }
@@ -76,5 +84,14 @@ public class TelecomContext : DbContext
             .ToListAsync();
     }
     public DbSet<NotSubbed> ServicePlansNotSubbed { get; set; }
+
+    public bool login(String mobileNo, string password)
+    {
+        
+        return this.Database.SqlQuery<bool>($"SELECT dbo.AccountLoginValidation({mobileNo},{password}) AS Value").FirstOrDefault();
+        
+        
+    }
+
 
 }
