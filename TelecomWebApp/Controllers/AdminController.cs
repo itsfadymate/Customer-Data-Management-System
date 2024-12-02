@@ -36,7 +36,11 @@ namespace TelecomWebApp.Controllers
             var cashbacks = _context.Set<dynamic>().FromSqlRaw("SELECT * FROM Num_of_cashback").ToList();
             return View(cashbacks);
         }
-
+        public async Task<IActionResult> CustomerProfilesWithActiveAccounts()
+        {
+            var data = await _context.GetCustomerProfilesWithActiveAccountsAsync();
+            return View(data);
+        }
     }
 }
        

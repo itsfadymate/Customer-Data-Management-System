@@ -37,4 +37,9 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=GenericCustomer}/{action=Index}/{id?}");
 
+app.MapControllerRoute(
+    name: "admin",
+    pattern: "{controller=Admin}/{action=CustomerProfilesWithActiveAccounts}/{id?}");
+
+
 app.Run();

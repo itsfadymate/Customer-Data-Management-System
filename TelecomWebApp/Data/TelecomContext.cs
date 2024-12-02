@@ -93,5 +93,26 @@ public class TelecomContext : DbContext
         
     }
 
+    public DbSet<CustomerProfileActiveAccount> CustomerProfileActiveAccounts { get; set; }
+
+    public async Task<List<CustomerProfileActiveAccount>> GetCustomerProfilesWithActiveAccountsAsync()
+    {
+        return await CustomerProfileActiveAccounts
+            .FromSqlInterpolated($" SELECT * FROM Customer_Profile cp INNER JOIN Customer_Account ca ON cp.nationalID = ca.nationalID WHERE ca.status = 'active'")
+            .ToListAsync();
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 }

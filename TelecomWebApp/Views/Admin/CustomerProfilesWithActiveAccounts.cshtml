@@ -1,0 +1,39 @@
+﻿@model IEnumerable<TelecomWebApp.Models.CustomerProfileActiveAccount>
+
+<h1>Customer Profiles with Active Accounts</h1>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>National ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Address</th>
+            <th>Date of Birth</th>
+            <th>Mobile No</th>
+            <th>Account Type</th>
+            <th>Balance</th>
+            <th>Status</th>
+            <th>Start Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.nationalID</td>
+                <td>@item.first_name</td>
+                <td>@item.last_name</td>
+                <td>@item.email</td>
+                <td>@item.address</td>
+                <td>@item.date_of_birth.ToShortDateString()</td>
+                <td>@item.mobileNo</td>
+                <td>@item.account_type</td>
+                <td>@item.balance</td>
+                <td>@item.status</td>
+                <td>@item.start_date.ToShortDateString()</td>
+            </tr>
+        }
+    </tbody>
+</table>
