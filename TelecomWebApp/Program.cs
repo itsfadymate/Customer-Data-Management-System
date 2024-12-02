@@ -7,7 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 // Register the database context with dependency injection
-builder.Services.AddDbContext<TelecomContext >(options =>
+builder.Services.AddDbContext<TelecomContext>(options =>
     options.UseSqlServer(
         builder.Configuration.GetConnectionString("DefaultConnection")
     )
@@ -27,14 +27,11 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-app.UseEndpoints(endpoints =>
-{
-    endpoints.MapControllerRoute(
-        name: "areas",
-        pattern: "{area:exists}/{controller=Admin}/{action=Dashboard}/{id?}");
-});
-
 app.UseAuthorization();
+
+app.MapControllerRoute(
+    name: "areas",
+    pattern: "{area:exists}/{controller=Admin}/{action=Dashboard}/{id?}");
 
 app.MapControllerRoute(
     name: "default",
