@@ -118,6 +118,13 @@ public class TelecomContext : DbContext
             .FromSqlInterpolated($"EXEC allResolvedTickets")
             .ToListAsync();
     }
+    public async Task<List<CustomerAccountWithPlan>> GetCustomerAccountsWithPlansAsync()
+    {
+        return await this.Database
+            .SqlQuery<CustomerAccountWithPlan>($"EXEC Account_Plan")
+            .ToListAsync();
+    }
+
 
 
 
