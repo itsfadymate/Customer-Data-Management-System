@@ -46,6 +46,11 @@ namespace TelecomWebApp.Controllers
             var data = await _context.GetPhysicalStoreVoucherDetailsAsync();
             return View(data);
         }
+        public async Task<IActionResult> ResolvedTickets()
+        {
+            var data = await _context.GetResolvedTicketsAsync();
+            return View(data);
+        }
     }
 }
        

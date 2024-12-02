@@ -1,0 +1,27 @@
+﻿@model IEnumerable<TelecomWebApp.Models.ResolvedTicketDetails>
+
+<h1>Resolved Technical Support Tickets</h1>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Ticket ID</th>
+            <th>Mobile No</th>
+            <th>Issue Description</th>
+            <th>Priority Level</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.ticketID</td>
+                <td>@item.mobileNo</td>
+                <td>@item.Issue_description</td>
+                <td>@item.priority_level</td>
+                <td>@item.status</td>
+            </tr>
+        }
+    </tbody>
+</table>

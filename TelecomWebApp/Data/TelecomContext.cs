@@ -110,6 +110,15 @@ public class TelecomContext : DbContext
             .FromSqlInterpolated($"EXEC PhysicalStoreVouchers")
             .ToListAsync();
     }
+    public DbSet<ResolvedTicketDetails> ResolvedTicketDetailsView { get; set; }
+
+    public async Task<List<ResolvedTicketDetails>> GetResolvedTicketsAsync()
+    {
+        return await ResolvedTicketDetailsView
+            .FromSqlInterpolated($"EXEC allResolvedTickets")
+            .ToListAsync();
+    }
+
 
 
 
