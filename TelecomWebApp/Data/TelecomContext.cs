@@ -21,6 +21,7 @@ public class TelecomContext : DbContext
         modelBuilder.Entity<Num_of_cashback>().HasNoKey();
         modelBuilder.Entity<CustomerAccountWithPlanDetail>().HasNoKey();
         modelBuilder.Entity<CustomerAccountsByPlanDate>().HasNoKey();
+        modelBuilder.Entity<AccountUsagePlan>().HasNoKey();
     }
 
 
@@ -114,6 +115,16 @@ public class TelecomContext : DbContext
     public DbSet<CustomerAccountWithPlanDetail> CustomerAccountWithPlanDetails { get; set; }
 
     public DbSet<CustomerAccountsByPlanDate> CustomerAccountsByPlanDateView { get; set; }
+
+    public DbSet<AccountUsagePlan> AccountUsagePlans { get; set; }
+
+    public async Task<List<AccountUsagePlan>> GetAccountUsagePlanAsync(string mobileNum, DateTime startDate)
+    {
+        return await AccountUsagePlans
+            .FromSqlInterpolated($"SELECT * FROM dbo.Account_Usage_Plan({mobileNum}, {startDate})")
+            .ToListAsync();
+    }
+
 
     public async Task<List<CustomerAccountsByPlanDate>> GetCustomerAccountsByPlanDateAsync(DateTime subscriptionDate, int planId)
     {

@@ -72,4 +72,8 @@ app.MapControllerRoute(
     name:"cashbacksnum",
     pattern:"{controller=Admin}/{action=Num_of_cashbacks}/{id?}");
 
+app.MapControllerRoute(
+       name: "accountUsagePlan",
+       pattern: "{controller=Admin}/{action=AccountUsagePlan}/{id?}");
+
 app.Run();

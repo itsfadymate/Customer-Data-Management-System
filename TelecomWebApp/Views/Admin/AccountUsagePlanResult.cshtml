@@ -1,0 +1,32 @@
+﻿@model IEnumerable<TelecomWebApp.Models.AccountUsagePlan>
+
+<h1>Account Usage Details by Plan</h1>
+
+@if (!Model.Any())
+{
+    <p>No usage data found for the given inputs.</p>
+}
+else
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Plan ID</th>
+                <th>Total Data (MB)</th>
+                <th>Total Minutes</th>
+                <th>Total SMS</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.planID</td>
+                    <td>@item.total_data</td>
+                    <td>@item.total_mins</td>
+                    <td>@item.total_SMS</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
