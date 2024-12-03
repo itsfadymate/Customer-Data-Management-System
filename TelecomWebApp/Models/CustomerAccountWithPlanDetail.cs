@@ -6,9 +6,9 @@
         public string pass { get; set; }                 
         public decimal balance { get; set; }          
         public string account_type { get; set; }          
-        public DateTime start_date { get; set; }         
-        public string status { get; set; }             
-        public int point { get; set; }                   
+        public DateTime start_date { get; set; }   
+        
+        public string status { get; set; }                              
         public int nationalID { get; set; }               
         public string name { get; set; }            
         public string description { get; set; }     

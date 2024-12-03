@@ -1,28 +1,53 @@
 ﻿@model IEnumerable<TelecomWebApp.Models.CustomerAccountWithPlanDetail>
 
-<h1>Customer Accounts and Subscribed Service Plans</h1>
+<h1>Customer Accounts with Plan Details</h1>
 
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th>Mobile No</th>
-            <th>Account Type</th>
-            <th>Balance</th>
-            <th>Plan Name</th>
-            <th>Subscription Date</th>
-            <th>Plan Description</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
+@if (!Model.Any())
+{
+    <p>No records found.</p>
+}
+else
+{
+    <table class="table table-striped">
+        <thead>
             <tr>
-                <td>@item.mobileNo</td>
-                <td>@item.account_type</td>
-                <td>@item.balance</td>
-                <td>@item.name</td>
-                <td>@item.description</td>
+                <th>Mobile Number</th>
+                <th>Password</th>
+                <th>Balance</th>
+                <th>Account Type</th>
+                <th>Start Date</th>
+                <th>Status</th>
+                <th>Points</th>
+                <th>National ID</th>
+                <th>Plan Name</th>
+                <th>Description</th>
+                <th>Plan ID</th>
+                <th>SMS Offered</th>
+                <th>Minutes Offered</th>
+                <th>Data Offered</th>
+                <th>Price</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.mobileNo</td>
+                    <td>@item.pass</td>
+                    <td>@item.balance</td>
+                    <td>@item.account_type</td>
+                    <td>@item.start_date.ToShortDateString()</td>
+                    <td>@item.status</td>
+                    <td>@item.nationalID</td>
+                    <td>@item.name</td>
+                    <td>@item.description</td>
+                    <td>@item.planID</td>
+                    <td>@item.SMS_offered</td>
+                    <td>@item.minutes_offered</td>
+                    <td>@item.data_offered</td>
+                    <td>@item.price</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
