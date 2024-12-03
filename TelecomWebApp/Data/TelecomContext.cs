@@ -20,6 +20,7 @@ public class TelecomContext : DbContext
         modelBuilder.Entity<AccountPayment>().HasNoKey();
         modelBuilder.Entity<Num_of_cashback>().HasNoKey();
         modelBuilder.Entity<CustomerAccountWithPlan>().HasNoKey();
+        modelBuilder.Entity<CustomerAccountsByPlanDate>().HasNoKey();
     }
 
 
@@ -133,6 +134,14 @@ public class TelecomContext : DbContext
     {
         return await this.Database
             .SqlQuery<CustomerAccountWithPlan>($"EXEC Account_Plan")
+            .ToListAsync();
+    }
+    public DbSet<CustomerAccountsByPlanDate> CustomerAccountsByPlanDateView { get; set; }
+
+    public async Task<List<CustomerAccountsByPlanDate>> GetCustomerAccountsByPlanDateAsync(DateTime subscriptionDate, int planId)
+    {
+        return await CustomerAccountsByPlanDateView
+            .FromSqlInterpolated($"SELECT * FROM dbo.Account_Plan_date({subscriptionDate}, {planId})")
             .ToListAsync();
     }
 
