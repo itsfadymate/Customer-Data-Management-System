@@ -18,12 +18,9 @@ public class GenericCustomerController : Controller
 	}
     public IActionResult login(String mobileNo,String pass)
     {
-        if (_telecomContext.login(mobileNo, pass))
-            return View("~/ Views / Account / LoggedInCustomerView.cshtml");
-        else
-        {
-
-        }
+        if (_telecomContext.login(mobileNo, pass)){
+            return RedirectToAction("Index","Account");
+	}
         return View("login");
     }
 
