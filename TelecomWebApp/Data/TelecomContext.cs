@@ -51,8 +51,8 @@ public class TelecomContext : DbContext
 
         return result;
     }
-
-	public async Task<int> GetHighestValueVoucher(string mobileNo = "01012345678")
+    //temp hardcoded
+    public async Task<int> GetHighestValueVoucher(string mobileNo = "01012345678")
     {
         var result = await this.Database
         .SqlQuery<int>($"EXECUTE Account_Highest_Voucher @mobile_num = {mobileNo}")
@@ -60,6 +60,7 @@ public class TelecomContext : DbContext
         return result;
     }
 
+    //temp hardcoded
 	public int GetUnresolvedTickets(String mobileNo= "01012345678")
     {
 
@@ -74,7 +75,7 @@ public class TelecomContext : DbContext
             .FirstOrDefault(); 
         return result;
     }
-
+    //temp hardcoded
     public async Task<List<Service_plan>> GetLast5MonthsServicePlans(String mobileNo = "01012345678")
     {
         var sp = await ServicePlans.FromSqlInterpolated($"SELECT * FROM Subscribed_plans_5_Months({mobileNo})").ToListAsync();
@@ -98,6 +99,21 @@ public class TelecomContext : DbContext
         await this.Database.ExecuteSqlInterpolatedAsync($"EXEC Initiate_plan_payment @mobile_num = {mobileNo},@amount = {amount},@payment_method ={payment_method},@plan_id = {plan_id}");
         Debug.WriteLine("pproc executed with no issues");
         return true;
+    }
+
+    public async Task<double> Payment_wallet_cashback(String mobileNo, int paymentID, int benefitID) {
+        if (0 == await this.Database.ExecuteSqlInterpolatedAsync($"SELECT CASE WHEN EXISTS (SELECT 1 FROM Customer_Account WHERE MobileNo = {mobileNo}) THEN 1 ELSE 0 END AS MobileExists"))
+        { return -1; }
+        Debug.WriteLine("mobileNo exists for renewSubscription request");
+        if (0 == await this.Database.ExecuteSqlInterpolatedAsync($"SELECT CASE WHEN EXISTS (SELECT 1 FROM Payment WHERE paymentID = {paymentID}) THEN 1 ELSE 0 END AS planIDExists"))
+        { return -1; }
+        if (0 == await this.Database.ExecuteSqlInterpolatedAsync($"SELECT CASE WHEN EXISTS (SELECT 1 FROM Benefits WHERE benefitID = {benefitID}) THEN 1 ELSE 0 END AS benefitIDExists"))
+        { return -1; }
+
+        await this.Database.ExecuteSqlInterpolatedAsync($"EXEC Payment_wallet_cashback @mobile_num = {mobileNo},@payment_id = {paymentID},@benefit_id = {benefitID}");
+        return 0.1 * await this.Database.ExecuteSqlInterpolatedAsync($"select  p.amount  from Payment where p.paymentID = {paymentID} and p.status = 'successful'");
+
+
     }
     public async Task<List<Service_plan>> GetServicePlans()
     {

@@ -1,12 +1,13 @@
-﻿@model int
+﻿@model double
 <head>
         <link rel="stylesheet" href="~/css/CashbackPlanBenefit.css" asp-append-version="true" />
 </head>
-<form method="POST">
+<body>
+<form asp-controller ="account" asp-action="CashbackPaymentBenefit"method="POST">
 <div class="input-area">
   <h2>Enter the Plan ID to check remaining and extra balances</h2>
-  <input placeholder="plan ID e.g 1"></input>
-  <input placeholder="benefit ID"></input>
+  <input placeholder="plan ID e.g 1">
+  <input placeholder="benefit ID">
   
   <button> Check Cashback </button>
 </div>

@@ -42,6 +42,20 @@ public class AccountController : Controller
         bool success = await _telecomContext.RenewSubscription(mobileNo, amount, payment_method, plan_id);
         return RedirectToAction("Index", "Account");
     }
+    public ActionResult CashbackPaymentBenefitView()//for cashback button
+    {
+
+        Debug.WriteLine("AccountController CashbackPaymentView()");
+        return View("CashbackPaymentBenfitView");
+    }
+    //temp hardcoded
+    public async Task<IActionResult> CashbackPaymentBenefit(int paymentID, int benefitID)
+    {
+
+        double val = await _telecomContext.Payment_wallet_cashback("01012345678", paymentID, benefitID);
+        return View("CashbackPaymentBenefitView", val);
+    }
+
 
     public IActionResult ViewAllPlans()
     {
