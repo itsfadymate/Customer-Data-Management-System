@@ -11,11 +11,12 @@ public class GenericCustomerController : Controller
     }
     public IActionResult Index() {
 		return View("GenericCustomerView");
-	}
+    }
 
-	public IActionResult redirectToLogin() {
-		return View("login");
-	}
+    public IActionResult redirectToLogin() {
+	ViewData["hidenav"] = true;
+	return View("login");
+    }
     public IActionResult login(String mobileNo,String pass)
     {
         if (_telecomContext.login(mobileNo, pass)){
