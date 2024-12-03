@@ -43,6 +43,13 @@ public class AccountController : Controller
         var notSubbed = _telecomContext.GetServicePlansNotSubbed(mobileNo);
         return View("NotSubbed", notSubbed);
     }
+
+    public IActionResult ViewAllCashbackTransactions()
+    {
+        int nationalID=0;
+        var cashbackTransactions = _telecomContext.GetCashbackTransactions(nationalID);
+        return View("CashbackTransactions", cashbackTransactions);
+    }
     public IActionResult viewLast5MonthsServicePlans() {
         String mobileNo = "";
         var spmodel =  _telecomContext.GetLast5MonthsServicePlans(mobileNo);

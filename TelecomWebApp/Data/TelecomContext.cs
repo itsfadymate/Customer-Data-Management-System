@@ -110,6 +110,14 @@ public class TelecomContext : DbContext
     }
     public DbSet<NotSubbed> ServicePlansNotSubbed { get; set; }
 
+    public async Task<List<CashbackTransactions>> GetCashbackTransactions(int nationalID)
+    {
+        return await CashbackTransactions
+            .FromSqlInterpolated($"SELECT * FROM dbo.Cashback_Wallet_Customer({nationalID})")
+            .ToListAsync();
+    }
+    public DbSet<CashbackTransactions> CashbackTransactions { get; set; }
+
     public bool login(String mobileNo, string password)
     {
         

@@ -1,0 +1,29 @@
+﻿@model List<TelecomWebApp.Models.CashbackTransactions>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> The cashback transactions are:</title>
+</head>
+<body>
+    <div>
+        <table>
+            <tr>
+                <th>Cashback ID</th>
+                <th>Benefit ID</th>
+                <th>wallet ID</th>
+            </tr>
+            @foreach (var u in Model)
+            {
+                <tr>
+                    <td>@u.cashbackID</td>
+                    <td>@u.benefitID</td>
+                    <td>@u.walletID</td>
+                </tr>
+            }
+        </table>
+    </div>
+</body>
+</html>
