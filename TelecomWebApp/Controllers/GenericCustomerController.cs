@@ -20,8 +20,12 @@ public class GenericCustomerController : Controller
     public IActionResult login(String mobileNo,String pass)
     {
         if (_telecomContext.login(mobileNo, pass)){
+	    TempData["ToastrMessage"] = "Login successful";
+	    TempData["ToastrType"] = "success";
             return RedirectToAction("Index","Account");
 	}
+	    TempData["ToastrMessage"] = "Credentials not found";
+	    TempData["ToastrType"] = "error"
         return View("login");
     }
 
