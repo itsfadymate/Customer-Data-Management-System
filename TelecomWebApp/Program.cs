@@ -34,7 +34,7 @@ app.MapControllerRoute(
     pattern: "{area:exists}/{controller=Admin}/{action=Dashboard}/{id?}");
 
 app.MapControllerRoute(
-    name: "admin",
+    name: "dashboard",
     pattern: "Admin/{action=Dashboard}/{id}",
     defaults: new {controller = "Admin"});
 
@@ -43,11 +43,15 @@ app.MapControllerRoute(
     pattern: "{controller=GenericCustomer}/{action=Index}/{id?}");
 
 app.MapControllerRoute(
-    name: "admin",
+    name: "customersView",
     pattern: "{controller=Admin}/{action=CustomerProfilesWithActiveAccounts}/{id?}");
 
 app.MapControllerRoute(
-    name:"name",
+    name:"vouchersView",
     pattern: "{controller=Admin}/{action=E_shopVouchers}/{id?}");
+
+app.MapControllerRoute(
+    name:"viewPayments",
+    pattern: "{controller=Admin}/{action=AccountPayments}/{id?}");
 
 app.Run();

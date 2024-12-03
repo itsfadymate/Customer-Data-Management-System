@@ -1,0 +1,29 @@
+﻿@model IEnumerable<TelecomWebApp.Models.AccountPayment>
+
+<h1>Account Payments</h1>
+<table class="table table-striped">
+    <thread>
+        <tr>
+            <th>Payment ID</th>
+            <th>Amount</th>
+            <th>Date Paid</th>
+            <th>Method</th>
+            <th>Status</th>
+            <th>Account Mobile Number</th>
+            
+        </tr>
+    </thread>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.paymentID</td>
+                <td>@item.amount</td>
+                <td>@item.date_of_payment.ToShortDateString()</td>
+                <td>@item.payment_method</td>
+                <td>@item.status</td>
+                <td>@item.mobileNo</td>
+            </tr>
+        }
+    </tbody>
+</table>
