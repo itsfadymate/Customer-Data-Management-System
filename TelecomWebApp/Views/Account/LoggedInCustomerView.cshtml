@@ -10,7 +10,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewData["Title"]</title>
-    <!-- Reference the CSS file -->
     <link rel="stylesheet" href="~/css/loggedInCustomer.css" asp-append-version="true" />
 </head>
 <body>
@@ -18,20 +17,20 @@
         <h2>Stay In Control</h2>
         <p>Manage your line, your payment, balance, and all the services you need</p>
     </div>
+	
+    <div class="service-list">
 	<div class="service-bar">
             <div class="service-content">
                 <h3>Unresolved tickets</h3>
-                <p>See how many unresolved tickets are open <strong>@Model.UnresolvedTickets  </strong>.</p>
+                <p>You have <strong>@Model.UnresolvedTickets  </strong> open unresolved tickets.</p>
             </div>
         </div>
         <div class="service-bar">
             <div class="service-content">
                 <h3>Highest Value voucher</h3>
-                <p>Show your most valuable voucher<strong>ID: @Model.HighestValueVoucher </strong>.</p>
+                <p>your most valuable voucher ID:<strong>@Model.HighestValueVoucher </strong>.</p>
             </div>
         </div>
-
-    <div class="service-list">
         <div class="service-bar">
             <div class="service-content">
                 <h3>Remaining Money</h3>
