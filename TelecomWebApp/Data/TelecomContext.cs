@@ -10,9 +10,12 @@ public class TelecomContext : DbContext
     {
         modelBuilder.Entity<Consumption>().HasNoKey();
         modelBuilder.Entity<NotSubbed>().HasNoKey();
-        modelBuilder.Entity<ServicePlan>().HasNoKey(); 
+        modelBuilder.Entity<Service_plan>().HasNoKey(); 
         modelBuilder.Entity<UsagePlan>().HasNoKey();
     }
+
+   
+
 
 
     public async Task<List<UsagePlan>> GetUsagePlanCurrentMonthAsync(string mobileNo)
@@ -62,14 +65,18 @@ public class TelecomContext : DbContext
             .FirstOrDefault(); 
         return result;
     }
+    public async Task<List<Service_plan>> GetLast5MomthsServicePlans(String mobileNo)
+    {
+        return await ServicePlans.FromSqlInterpolated($"SELECT dbo.Subscribed_plans_5_Months({mobileNo})").ToListAsync();
 
-    public async Task<List<ServicePlan>> GetServicePlans()
+    }
+    public async Task<List<Service_plan>> GetServicePlans()
     {
         return await ServicePlans
             .FromSqlInterpolated($"SELECT * FROM dbo.allServicePlans")
             .ToListAsync();
     }
-    public DbSet<ServicePlan> ServicePlans { get; set; }
+    public DbSet<Service_plan> ServicePlans { get; set; }
     public async Task<List<Consumption>> GetConsumption(string planName, DateTime startDate, DateTime endDate)
     {
         return await Consumption

@@ -25,7 +25,7 @@ public class GenericCustomerController : Controller
             return RedirectToAction("Index","Account");
 	}
 	    TempData["ToastrMessage"] = "Credentials not found";
-	    TempData["ToastrType"] = "error"
+        TempData["ToastrType"] = "error";
         return View("login");
     }
 
