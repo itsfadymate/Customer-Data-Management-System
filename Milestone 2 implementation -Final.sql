@@ -368,7 +368,7 @@ GO
 -----------Fetch number of cashback transactions per each wallet---------------------
 GO
 CREATE VIEW [Num_of_cashback] AS
-select walletID,count(*)as 'count of transactions' from Cashback
+select walletID,count(*)as 'cashbackCount' from Cashback
 group by walletID
 
 GO

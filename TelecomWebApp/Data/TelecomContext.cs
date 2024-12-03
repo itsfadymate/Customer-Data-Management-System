@@ -18,6 +18,7 @@ public class TelecomContext : DbContext
         modelBuilder.Entity<ResolvedTicketDetails>().HasNoKey();
         modelBuilder.Entity<E_shopVoucher>().HasNoKey();
         modelBuilder.Entity<AccountPayment>().HasNoKey();
+        modelBuilder.Entity<Num_of_cashback>().HasNoKey();
     }
 
 
@@ -93,7 +94,7 @@ public class TelecomContext : DbContext
     public DbSet<CustomerWallet> CustomerWallets { get; set; }
     public DbSet<E_shopVoucher> E_ShopVouchers { get; set; }
     public DbSet<AccountPayment> AccountPayments { get; set; }
-
+    public DbSet<Num_of_cashback> Num_Of_Cashbacks { get; set; }
     public bool login(String mobileNo, string password)
     {
         

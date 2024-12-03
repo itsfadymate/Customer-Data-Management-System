@@ -53,5 +53,8 @@ app.MapControllerRoute(
 app.MapControllerRoute(
     name:"viewPayments",
     pattern: "{controller=Admin}/{action=AccountPayments}/{id?}");
+app.MapControllerRoute(
+    name:"viewCashbacksPerWallet",
+    pattern: "{controller=Admin}/{action=Num_of_cashbacks}/{id?}");
 
 app.Run();
