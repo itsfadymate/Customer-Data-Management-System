@@ -76,4 +76,8 @@ app.MapControllerRoute(
        name: "accountUsagePlan",
        pattern: "{controller=Admin}/{action=AccountUsagePlan}/{id?}");
 
+app.MapControllerRoute(
+            name: "removeBenefits",
+            pattern: "{controller=Admin}/{action=RemoveBenefits}/{id?}");
+
 app.Run();

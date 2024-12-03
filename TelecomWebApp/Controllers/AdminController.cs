@@ -83,6 +83,28 @@ namespace TelecomWebApp.Controllers
             var data = await _context.GetAccountUsagePlanAsync(mobileNum, startDate);
             return View("AccountUsagePlanResult", data); // Displays the results
         }
+        [HttpGet]
+        public IActionResult RemoveBenefits()
+        {
+            return View(); // Returns the input form view
+        }
+
+        // POST: Executes the stored procedure to remove benefits for the given input
+        [HttpPost]
+        public async Task<IActionResult> RemoveBenefits(RemoveBenefit input)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(input); 
+            }
+
+            
+            await _context.RemoveBenefitsAsync(input.mobileNo, input.planID);
+
+            
+            TempData["Message"] = "Benefits removed successfully.";
+            return RedirectToAction("RemoveBenefits"); 
+        }
 
 
 

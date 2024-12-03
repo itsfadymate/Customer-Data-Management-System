@@ -22,6 +22,7 @@ public class TelecomContext : DbContext
         modelBuilder.Entity<CustomerAccountWithPlanDetail>().HasNoKey();
         modelBuilder.Entity<CustomerAccountsByPlanDate>().HasNoKey();
         modelBuilder.Entity<AccountUsagePlan>().HasNoKey();
+        modelBuilder.Entity<RemoveBenefit>().HasNoKey();
     }
 
 
@@ -133,6 +134,14 @@ public class TelecomContext : DbContext
             .ToListAsync();
     }
 
+    public async Task RemoveBenefitsAsync(string mobileNo, int planId)
+    {
+        await this.Database.ExecuteSqlRawAsync(
+            "EXEC dbo.Benefits_Account @mobileNo, @planId",
+            new SqlParameter("@mobileNo", mobileNo),
+            new SqlParameter("@planId", planId)
+        );
+    }
 
 
 
@@ -147,5 +156,4 @@ public class TelecomContext : DbContext
 
 
 
-
-}
+    }
