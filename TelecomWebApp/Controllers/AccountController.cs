@@ -52,26 +52,16 @@ public class AccountController : Controller
         var notSubbed = _telecomContext.GetServicePlansNotSubbed(mobileNo);
         return View("NotSubbed", notSubbed);
     }
-   
 
-    /*public async Task<IActionResult> ViewLast5MonthsServicePlans()
+    public IActionResult ViewAllCashbackTransactions()
     {
-        String mobileNo = "01012345678";  // or pass this dynamically
-
-        // Use FromSqlRaw to directly call the stored function and fetch the service plans
-        var spmodel = await _telecomContext
-            .FromSqlRaw("SELECT * FROM dbo.Subscribed_plans_5_Months(@mobileNo)", new SqlParameter("@mobileNo", mobileNo))
-            .ToListAsync();
-
-        Debug.WriteLine("AccountController ViewLast5MonthsServicePlans()");
-
-        // Return the data to the view
-        return View("Last5MonthsServicePlans", spmodel);
-    }*/
-
-
-
-
-
-
+        int nationalID=0;
+        var cashbackTransactions = _telecomContext.GetCashbackTransactions(nationalID);
+        return View("CashbackTransactions", cashbackTransactions);
+    }
+    public IActionResult viewLast5MonthsServicePlans() {
+        String mobileNo = "";
+        var spmodel =  _telecomContext.GetLast5MonthsServicePlans(mobileNo);
+        return View("Last5MonthsServicePlans",spmodel);
+    }
 }
