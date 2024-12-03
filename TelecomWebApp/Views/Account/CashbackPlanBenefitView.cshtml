@@ -1,0 +1,19 @@
+﻿@model int
+<head>
+        <link rel="stylesheet" href="~/css/CashbackPlanBenefit.css" asp-append-version="true" />
+</head>
+<form method="POST">
+<div class="input-area">
+  <h2>Enter the Plan ID to check remaining and extra balances</h2>
+  <input placeholder="plan ID e.g 1"></input>
+  <input placeholder="benefit ID"></input>
+  
+  <button> Check Cashback </button>
+</div>
+</form>
+<div class="output-fields">
+    <div class = "Amount">
+      <h3>CashBack Amount: <Strong>@Model EGP</strong></h3>
+    </div>
+</div>
+</body>
