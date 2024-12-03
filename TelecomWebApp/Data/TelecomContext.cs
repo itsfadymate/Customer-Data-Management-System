@@ -19,6 +19,7 @@ public class TelecomContext : DbContext
         modelBuilder.Entity<E_shopVoucher>().HasNoKey();
         modelBuilder.Entity<AccountPayment>().HasNoKey();
         modelBuilder.Entity<Num_of_cashback>().HasNoKey();
+        modelBuilder.Entity<CustomerAccountWithPlan>().HasNoKey();
     }
 
 
