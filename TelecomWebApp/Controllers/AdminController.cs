@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using TelecomWebApp.Models;
 
 namespace TelecomWebApp.Controllers
 {
@@ -15,9 +16,9 @@ namespace TelecomWebApp.Controllers
             return View();
         }
 
-        public IActionResult CustomerWallet()
+        public async Task<IActionResult> CustomerWallet()
         {
-            var walletDetails = _context.Set<dynamic>().FromSqlRaw("SELECT * FROM CustomerWallet").ToList();
+            var walletDetails = await _context.CustomerWallets.FromSqlRaw("SELECT * FROM CustomerWallet").ToListAsync();
             return View(walletDetails);
         }
         public IActionResult E_shopVouchers()
@@ -38,9 +39,10 @@ namespace TelecomWebApp.Controllers
         }
         public async Task<IActionResult> CustomerProfilesWithActiveAccounts()
         {
-            var data = await _context.GetCustomerProfilesWithActiveAccountsAsync();
+            var data = await _context.CustomerProfileActiveAccounts.FromSqlRaw("SELECT * FROM allCustomerAccounts").ToListAsync();
             return View(data);
         }
+
         public async Task<IActionResult> PhysicalStoreVoucherDetails()
         {
             var data = await _context.GetPhysicalStoreVoucherDetailsAsync();

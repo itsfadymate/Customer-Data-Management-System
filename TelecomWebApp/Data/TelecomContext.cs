@@ -12,6 +12,10 @@ public class TelecomContext : DbContext
         modelBuilder.Entity<NotSubbed>().HasNoKey();
         modelBuilder.Entity<ServicePlan>().HasNoKey(); 
         modelBuilder.Entity<UsagePlan>().HasNoKey();
+        modelBuilder.Entity<CustomerWallet>().HasNoKey();
+        modelBuilder.Entity<CustomerProfileActiveAccount>().HasNoKey();
+        modelBuilder.Entity<PhysicalStoreVoucherDetails>().HasNoKey();
+        modelBuilder.Entity<ResolvedTicketDetails>().HasNoKey();
     }
 
 
@@ -84,6 +88,7 @@ public class TelecomContext : DbContext
             .ToListAsync();
     }
     public DbSet<NotSubbed> ServicePlansNotSubbed { get; set; }
+    public DbSet<CustomerWallet> CustomerWallets { get; set; }
 
     public bool login(String mobileNo, string password)
     {
