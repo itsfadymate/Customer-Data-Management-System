@@ -28,13 +28,13 @@ namespace TelecomWebApp.Controllers
         }
         public IActionResult AccountPayments()
         {
-            var payments = _context.Set<dynamic>().FromSqlRaw("SELECT * FROM AccountPayments").ToList();
+            var payments = _context.AccountPayments.FromSqlRaw("SELECT * FROM AccountPayments").ToList();
             return View(payments);
         }
 
         public IActionResult Num_of_cashback()
         {
-            var cashbacks = _context.Set<dynamic>().FromSqlRaw("SELECT * FROM Num_of_cashback").ToList();
+            var cashbacks = _context.Num_Of_Cashbacks.FromSqlRaw("SELECT * FROM Num_of_cashback").ToList();
             return View(cashbacks);
         }
         public async Task<IActionResult> CustomerProfilesWithActiveAccounts()
