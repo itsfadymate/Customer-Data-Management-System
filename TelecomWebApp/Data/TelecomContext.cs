@@ -51,12 +51,11 @@ public class TelecomContext : DbContext
         return result;
     }
 
-	public int GetHighestValueVoucher(string mobileNo = "01012345678")
+	public async Task<int> GetHighestValueVoucher(string mobileNo = "01012345678")
     {
-        var result = this.Database
-            .SqlQuery<int>($"EXEC Account_Highest_Voucher @MobileNo = {mobileNo}") 
-            .FirstOrDefault();
-
+        var result = await this.Database
+        .SqlQuery<int>($"EXECUTE Account_Highest_Voucher @mobile_num = {mobileNo}")
+        .FirstOrDefaultAsync();
         return result;
     }
 
@@ -77,7 +76,7 @@ public class TelecomContext : DbContext
 
     public async Task<List<Service_plan>> GetLast5MonthsServicePlans(String mobileNo = "01012345678")
     {
-        var sp = await ServicePlans.FromSqlInterpolated($"SELECT dbo.Subscribed_plans_5_Months({mobileNo})").ToListAsync();
+        var sp = await ServicePlans.FromSqlInterpolated($"SELECT * FROM Subscribed_plans_5_Months({mobileNo})").ToListAsync();
         foreach (var plan in sp)
         {
             Debug.WriteLine($"PlanID: {plan.planID}, Name: {plan.name}, Price: {plan.price}, " +
@@ -150,19 +149,5 @@ public class TelecomContext : DbContext
             .ToListAsync();
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+   
 }

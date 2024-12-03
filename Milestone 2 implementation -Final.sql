@@ -1051,3 +1051,122 @@ VALUES
     ('Premium Plan', 30, 500, 2000, 10000, 'Premium plan with'),
     ('Family Plan', 40, 1000, 5000, 20000, 'Family plan with multiple ');
 SELECT * FROM Service_plan;
+SELECT * FROM Subscribed_plans_5_Months('01012345678') 
+
+
+---
+-- Customer Profile Data
+INSERT INTO Customer_Profile (nationalID, first_name, last_name, email, address, date_of_birth)
+VALUES
+(1, 'John', 'Doe', 'john.doe@example.com', '123 Elm Street', '1985-05-12'),
+(2, 'Jane', 'Smith', 'jane.smith@example.com', '456 Oak Avenue', '1990-09-30'),
+(3, 'Emily', 'Johnson', 'emily.johnson@example.com', '789 Pine Road', '1993-07-15');
+
+-- Customer Account Data
+INSERT INTO Customer_Account (mobileNo, pass, balance, account_type, start_date, status, point, nationalID)
+VALUES
+('01234567890', 'password123', 100.0, 'Post Paid', '2024-01-01', 'Active', 50, 1),
+('09876543210', 'securepass', 50.0, 'Prepaid', '2024-02-15', 'Active', 30, 2),
+('01122334455', 'mypassword', 75.0, 'Pay_as_you_go', '2024-03-10', 'Onhold', 20, 3);
+
+-- Service Plan Data
+INSERT INTO Service_Plan (SMS_offered, minutes_offered, data_offered, name, price, description)
+VALUES
+(100, 200, 5, 'Basic Plan', 20, 'Affordable basic plan'),
+(300, 500, 10, 'Standard Plan', 50, 'Standard plan with good benefits'),
+(500, 1000, 20, 'Premium Plan', 100, 'Comprehensive plan for heavy users');
+
+-- Subscription Data
+INSERT INTO Subscription (mobileNo, planID, subscription_date, status)
+VALUES
+('01234567890', 1, '2024-02-01', 'Active'),
+('09876543210', 2, '2024-03-01', 'Active'),
+('01122334455', 3, '2024-04-01', 'Onhold');
+
+-- Plan Usage Data
+INSERT INTO Plan_Usage (start_date, end_date, data_consumption, minutes_used, SMS_sent, mobileNo, planID)
+VALUES
+('2024-02-01', '2024-02-28', 3, 150, 80, '01234567890', 1),
+('2024-03-01', '2024-03-31', 8, 400, 250, '09876543210', 2);
+
+-- Payment Data
+INSERT INTO Payment (amount, date_of_payment, payment_method, status, mobileNo)
+VALUES
+(20.0, '2024-02-01', 'Cash', 'Successful', '01234567890'),
+(50.0, '2024-03-01', 'Credit', 'Successful', '09876543210'),
+(100.0, '2024-03-15', 'Credit', 'Pending', '01122334455');
+
+-- Process Payment Data
+-- Assuming the functions dbo.GetRemainingBalance and dbo.GetExtraAmount are already created
+INSERT INTO Process_Payment (paymentID, planID)
+VALUES
+(1, 1),
+(2, 2);
+
+-- Wallet Data
+INSERT INTO Wallet (current_balance, currency, last_modified_date, nationalID, mobileNo)
+VALUES
+(100.00, 'USD', '2024-03-15', 1, '01234567890'),
+(200.00, 'USD', '2024-03-20', 2, '09876543210');
+
+-- Transfer Money Data
+INSERT INTO Transfer_Money (walletID1, walletID2, transfer_id, amount, transfer_date)
+VALUES
+(1, 2, 1001, 50.00, '2024-03-25');
+
+-- Benefits Data
+INSERT INTO Benefits (description, validity_date, status, mobileNo)
+VALUES
+('Free SMS Package', '2024-12-31', 'Active', '01234567890'),
+('Discounted Minutes', '2024-06-30', 'Expired', '09876543210');
+
+-- Points Group Data
+INSERT INTO Points_Group (benefitID, pointsAmount, PaymentID)
+VALUES
+(1, 20, 1),
+(2, 15, 2);
+
+-- Exclusive Offer Data
+INSERT INTO Exclusive_Offer (benefitID, internet_offered, SMS_offered, minutes_offered)
+VALUES
+(1, 2, 50, 100);
+
+-- Cashback Data
+INSERT INTO Cashback (benefitID, walletID, amount, credit_date)
+VALUES
+(1, 1, 10, '2024-03-10');
+
+-- Plan Provides Benefits Data
+INSERT INTO Plan_Provides_Benefits (benefitID, planID)
+VALUES
+(1, 1),
+(2, 2);
+
+-- Shop Data
+INSERT INTO Shop (name, category)
+VALUES
+('Tech Shop', 'Electronics'),
+('Supermart', 'Groceries');
+
+-- Physical Shop Data
+INSERT INTO Physical_Shop (shopID, address, working_hours)
+VALUES
+(1, '321 Main Street', '9 AM - 9 PM');
+
+-- E-Shop Data
+INSERT INTO E_Shop (shopID, URL, rating)
+VALUES
+(2, 'www.supermart.com', 5);
+
+-- Voucher Data
+INSERT INTO Voucher (value, expiry_date, points, mobileNo, shopID, redeem_date)
+VALUES
+(10, '2024-12-31', 50, '01234567890', 1, '2024-03-20');
+
+-- Technical Support Ticket Data
+INSERT INTO Technical_Support_Ticket (mobileNo, Issue_description, priority_level, status)
+VALUES
+('01234567890', 'Network issues', 1, 'Open'),
+('09876543210', 'Slow internet speed', 2, 'In Progress');
+
+

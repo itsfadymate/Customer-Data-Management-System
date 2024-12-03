@@ -34,6 +34,7 @@ public class GenericCustomerController : Controller
         Debug.WriteLine("invalid creadentials");
         TempData["ToastrMessage"] = "Credentials not found";
         TempData["ToastrType"] = "error";
+        ViewData["hidenav"] = true;
         return View("login");
     }
 

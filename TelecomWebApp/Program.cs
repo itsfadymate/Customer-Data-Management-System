@@ -54,6 +54,9 @@ app.MapControllerRoute(
 app.MapControllerRoute(
     name: "profile",
     pattern: "{controller=GenericCustomer}/{action=RedirectToLogin}/{id?}");
+app.MapControllerRoute(
+    name: "ViewLast5MonthsServicePlans",
+    pattern: "{controller=AccountController}/{action=ViewLast5MonthsServicePlans}/{id?}");
 
 
 app.Run();
