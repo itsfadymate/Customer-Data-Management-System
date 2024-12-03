@@ -1,0 +1,26 @@
+﻿@{
+    ViewData["Title"] = "Check if Mobile Number is Linked to Wallet";
+}
+
+<h2>Check if Mobile Number is Linked to a Wallet</h2>
+
+<!-- Form to accept mobile number -->
+<form method="post" action="/Admin/IsWalletLinked">
+    <label for="mobileNo">Mobile Number:</label>
+    <input type="text" id="mobileNo" name="mobileNo" pattern="^\d{11}$" required title="Mobile number must be 11 digits." />
+
+    <button type="submit">Check</button>
+</form>
+
+<!-- Display result -->
+@if (ViewBag.IsLinked != null)
+{
+    if (ViewBag.IsLinked == true)
+    {
+        <h3>The mobile number is linked to a wallet.</h3>
+    }
+    else
+    {
+        <h3>The mobile number is not linked to any wallet.</h3>
+    }
+}

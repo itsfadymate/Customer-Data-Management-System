@@ -88,5 +88,8 @@ app.MapControllerRoute(
 app.MapControllerRoute(
     name:"averageFunction",
     pattern: "{controller=Admin}/{action=TransactionAverage}/{id?}");
+app.MapControllerRoute(
+    name: "mobileNoLinked",
+    pattern: "{controller=Admin}/{action=IsWalletLinked}/{id?}");
 
 app.Run();

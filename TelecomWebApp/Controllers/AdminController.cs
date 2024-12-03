@@ -75,6 +75,21 @@ namespace TelecomWebApp.Controllers
             ViewBag.TransactionAverage = average;
             return View();
         }
+        [HttpGet]
+        public IActionResult IsWalletLinked()
+        {
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> IsWalletLinked(string mobileNo)
+        {
+            var linked = await _context.Database.ExecuteSqlRawAsync(
+                "SELECT dbo.Wallet_MobileNo(@mobileNum)",
+                new SqlParameter("@mobileNum", mobileNo)
+                );
+            ViewBag.IsLinked = linked == 1;
+            return View();
+        }
 
         public async Task<IActionResult> CustomerProfilesWithActiveAccounts()
         {
