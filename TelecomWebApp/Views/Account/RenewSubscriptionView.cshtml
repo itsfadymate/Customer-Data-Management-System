@@ -2,14 +2,14 @@
     <link rel="stylesheet" href="~/css/RenewSubscription.css" asp-append-version="true" />
 </head>
 <body>
-<form method="POST">
+    <form asp-controller="Account" asp-action="RenewSubscription" method="POST">
     <div class="input-area">
         <h2>Enter the Plan ID to check remaining and extra balances</h2>
-        <input placeholder="plan ID e.g 1"></input>
-        <input placeholder="Amount to pay"></input>
-        <input placeholder="Mobile Number"></input>
-        <label for="payment_method">Choose a payment Method:</label>
-        <select name="payment_method">
+            <input placeholder="Mobile Number"  name="mobileNo">
+            <input placeholder="Amount to pay"  name="amount">
+            <input placeholder="plan ID e.g 1"  name="plan_id">
+             <label for="payment_method" >Choose a payment Method:</label>
+            <select name="payment_method">
             <option value="credit">credit</option>
             <option value="cash">cash</option>
         </select>

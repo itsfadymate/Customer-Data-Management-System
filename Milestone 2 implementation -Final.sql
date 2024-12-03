@@ -1040,9 +1040,13 @@ VALUES
 ('01098765432', 'securepass456', 200.0, 'prepaid', '2023-06-10', 'active', 100, 2),
 ('01045678901', 'mypassword789', 100.0, 'pay-as-you-go', '2024-03-15', 'onhold', 0, 3),
 ('01023456789', 'testpassword321', 500.0, 'postpaid', '2023-12-25', 'active', 20, 4);
-
+EXEC Initiate_plan_payment @mobile_num = '01012345678',@amount = 100.2,@payment_method ='cash',@plan_id = 5
+SELECT CASE WHEN EXISTS (SELECT 1 FROM Customer_Account WHERE MobileNo = '01012345678') THEN 1 ELSE 0 END AS MobileExists;
+SELECT CASE WHEN EXISTS (SELECT 1 FROM Service_Plan sp WHERE sp.planID = '6') THEN 1 ELSE 0 END AS MobileExists;
+EXEC Initiate_plan_payment @mobile_num = '01098765432',@amount = 200,@payment_method ='cash',@plan_id = 6
 SELECT * FROM customer_profile;
 SELECT * FROM customer_account;
+SELECT * FROM Service_plan;
 
 INSERT INTO Service_plan 
 VALUES 

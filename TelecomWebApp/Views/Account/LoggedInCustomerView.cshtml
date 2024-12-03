@@ -69,7 +69,9 @@
                 <h3>Renew Subscription</h3>
                 <p>Renew subscription for a certain plan</p>
             </div>
-            <button class="check-status-btn">Renew</button>
+            <form asp-controller="Account" asp-action="RenewSubscriptionView" method="POST">
+            <button class="check-status-btn" >Renew</button>
+            </form>
         </div>
 
         <div class="services-grid">

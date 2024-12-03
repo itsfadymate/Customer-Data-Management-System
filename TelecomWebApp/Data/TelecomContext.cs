@@ -87,7 +87,18 @@ public class TelecomContext : DbContext
         return sp;
 
     }
-
+    public async Task<bool> RenewSubscription(String mobileNo, decimal amount, String payment_method, int plan_id) {
+        Debug.WriteLine("renewing subscription");
+        if (0==await this.Database.ExecuteSqlInterpolatedAsync($"SELECT CASE WHEN EXISTS (SELECT 1 FROM Customer_Account WHERE MobileNo = {mobileNo}) THEN 1 ELSE 0 END AS MobileExists")) 
+            { return false; }
+        Debug.WriteLine("mobileNo exists for renewSubscription request" );
+        if (0== await this.Database.ExecuteSqlInterpolatedAsync($"SELECT CASE WHEN EXISTS (SELECT 1 FROM Service_Plan WHERE planID = {plan_id}) THEN 1 ELSE 0 END AS MobileExists"))
+        { return false; }
+        Debug.WriteLine("planId exists for renewSubscription request");
+        await this.Database.ExecuteSqlInterpolatedAsync($"EXEC Initiate_plan_payment @mobile_num = {mobileNo},@amount = {amount},@payment_method ={payment_method},@plan_id = {plan_id}");
+        Debug.WriteLine("pproc executed with no issues");
+        return true;
+    }
     public async Task<List<Service_plan>> GetServicePlans()
     {
         return await ServicePlans

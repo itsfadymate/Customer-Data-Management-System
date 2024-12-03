@@ -29,9 +29,19 @@ public class AccountController : Controller
         String mobileNo = "01012345678";
         var spmodel = await _telecomContext.GetLast5MonthsServicePlans(mobileNo);
 
-        return View("Last5MonthsServicePlans", spmodel);
+        return View("Last5MonthsServicePlansView", spmodel);
     }
 
+    public ActionResult RenewSubscriptionView()//for renew button
+    {
+        
+        Debug.WriteLine("AccountController RenewSubscriptionView()");
+        return View("RenewSubscriptionView");
+    }
+    public async Task<IActionResult> RenewSubscription(String mobileNo, decimal amount,int plan_id, String payment_method ) {
+        bool success = await _telecomContext.RenewSubscription(mobileNo, amount, payment_method, plan_id);
+        return RedirectToAction("Index", "Account");
+    }
 
     public IActionResult ViewAllPlans()
     {
@@ -52,16 +62,12 @@ public class AccountController : Controller
         var notSubbed = _telecomContext.GetServicePlansNotSubbed(mobileNo);
         return View("NotSubbed", notSubbed);
     }
-
+    
     public IActionResult ViewAllCashbackTransactions()
     {
         int nationalID=0;
         var cashbackTransactions = _telecomContext.GetCashbackTransactions(nationalID);
         return View("CashbackTransactions", cashbackTransactions);
     }
-    public IActionResult viewLast5MonthsServicePlans() {
-        String mobileNo = "";
-        var spmodel =  _telecomContext.GetLast5MonthsServicePlans(mobileNo);
-        return View("Last5MonthsServicePlans",spmodel);
-    }
+ 
 }
