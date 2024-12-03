@@ -15,7 +15,8 @@ public class TelecomContext : DbContext
         modelBuilder.Entity<UsagePlan>().HasNoKey();
         modelBuilder.Entity<CustomerProfileActiveAccount>().HasNoKey();
         modelBuilder.Entity<PhysicalStoreVoucherDetails>().HasNoKey();
-        modelBuilder.Entity<ResolvedTicketDetails>().HasNoKey(); 
+        modelBuilder.Entity<ResolvedTicketDetails>().HasNoKey();
+        modelBuilder.Entity<CashbackTransactions>().HasNoKey();
     }
 
 
