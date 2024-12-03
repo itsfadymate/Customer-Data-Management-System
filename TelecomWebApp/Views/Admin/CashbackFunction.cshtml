@@ -1,0 +1,20 @@
+﻿@{
+    ViewData["Title"] = "Cashback Function";
+}
+
+<h2>Cashback Function</h2>
+
+<form method="post" action="/Admin/CashbackFunction">
+    <label for="walletId">Wallet ID:</label>
+    <input type="number" id="walletId" name="walletId" required />
+
+    <label for="planId">Plan ID:</label>
+    <input type="number" id="planId" name="planId" required />
+
+    <button type="submit">Submit</button>
+</form>
+
+@if (ViewBag.CashbackAmount != null)
+{
+    <h3>Cashback Amount: $@ViewBag.CashbackAmount</h3>
+}

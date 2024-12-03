@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using System.Numerics;
 using TelecomWebApp.Models;
 
 namespace TelecomWebApp.Controllers
@@ -37,6 +39,25 @@ namespace TelecomWebApp.Controllers
             var data = await _context.Num_Of_Cashbacks.FromSqlRaw("SELECT * FROM Num_of_cashback").ToListAsync();
             return View(data);
         }
+        [HttpGet]
+        public IActionResult CashbackFunction()
+        {
+            return View();
+        }
+        [HttpPost]
+        [HttpPost]
+        public async Task<IActionResult> CashbackFunction(int walletID, int planID)
+        {
+            var cashbackAmount = await _context.Database.ExecuteSqlRawAsync(
+                "SELECT dbo.Wallet_Cashback_Amount(@walletID, @planID)",
+                new SqlParameter("@walletID", walletID),
+                new SqlParameter("@planID", planID)
+            );
+
+            ViewBag.CashbackAmount = cashbackAmount;
+            return View();
+        }
+
         public async Task<IActionResult> CustomerProfilesWithActiveAccounts()
         {
             var data = await _context.CustomerProfileActiveAccounts.FromSqlRaw("SELECT * FROM allCustomerAccounts").ToListAsync();

@@ -82,5 +82,8 @@ app.MapControllerRoute(
 app.MapControllerRoute(
     name: "getSMSOffers",
     pattern: "{controller=Admin}/{action=GetSMSOffers}/{id?}");
+app.MapControllerRoute(
+    name:"cashbackFunction",
+    pattern:"{controller=Admin}/{action=CashbackFunction}/{id?}");
 
 app.Run();
