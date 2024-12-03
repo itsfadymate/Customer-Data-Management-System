@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using TelecomWebApp.Models;
 
@@ -10,21 +11,28 @@ public class GenericCustomerController : Controller
         _telecomContext = dbContext;
     }
     public IActionResult Index() {
-		return View("GenericCustomerView");
+        Debug.WriteLine("Generic customer Index()");
+        return View("GenericCustomerView");
     }
 
-    public IActionResult redirectToLogin() {
-	ViewData["hidenav"] = true;
+    public IActionResult RedirectToLogin() {
+        Debug.WriteLine("Generic customer RedirectToLogin()");
+        ViewData["hidenav"] = true;
 	return View("login");
     }
-    public IActionResult login(String mobileNo,String pass)
+
+    [HttpPost]
+    public IActionResult Login(String mobileNo,String pass)
     {
+        Debug.WriteLine("Generic customer login()");
         if (_telecomContext.login(mobileNo, pass)){
-	    TempData["ToastrMessage"] = "Login successful";
-	    TempData["ToastrType"] = "success";
+            Debug.WriteLine("valid creadentials");
+            TempData["ToastrMessage"] = "Login successful";
+	        TempData["ToastrType"] = "success";
             return RedirectToAction("Index","Account");
 	}
-	    TempData["ToastrMessage"] = "Credentials not found";
+        Debug.WriteLine("invalid creadentials");
+        TempData["ToastrMessage"] = "Credentials not found";
         TempData["ToastrType"] = "error";
         return View("login");
     }

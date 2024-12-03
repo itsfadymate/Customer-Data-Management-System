@@ -2,7 +2,7 @@
 {
     public class Service_plan
     {
-        public int planId { get; set; }
+        public int planID { get; set; }
         public string name { get; set; }
         public int price { get; set; }
         public int SMS_offered { get; set; }

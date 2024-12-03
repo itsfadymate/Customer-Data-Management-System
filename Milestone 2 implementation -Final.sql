@@ -1025,3 +1025,29 @@ INSERT INTO customer_account VALUES ('01234567891', 'securepass456', 200.0, 'pre
 INSERT INTO customer_account VALUES ('01234567892', 'mypassword789', 300.0, 'prepaid', '2024-02-01', 'active', 100, 103);
 
 select * FROm customer_account
+
+INSERT INTO customer_profile (nationalID, first_name, last_name, email, address, date_of_birth)
+VALUES 
+(1, 'John', 'Doe', 'john.doe@example.com', '123 Main St, Cairo, Egypt', '1985-08-15'),
+(2, 'Jane', 'Smith', 'jane.smith@example.com', '456 Elm St, Alexandria, Egypt', '1990-11-25'),
+(3, 'Mohamed', 'Ali', 'mohamed.ali@example.com', '789 Pine St, Giza, Egypt', '1982-03-10'),
+(4, 'Sara', 'Ahmed', 'sara.ahmed@example.com', '321 Oak St, Cairo, Egypt', '1995-07-22');
+
+
+INSERT INTO customer_account (mobileNo, pass, balance, account_type, start_date, status, points, nationalID)
+VALUES
+('01012345678', 'password123', 150.5, 'postpaid', '2024-01-01', 'active', 50, 1),
+('01098765432', 'securepass456', 200.0, 'prepaid', '2023-06-10', 'active', 100, 2),
+('01045678901', 'mypassword789', 100.0, 'pay-as-you-go', '2024-03-15', 'onhold', 0, 3),
+('01023456789', 'testpassword321', 500.0, 'postpaid', '2023-12-25', 'active', 20, 4);
+
+SELECT * FROM customer_profile;
+SELECT * FROM customer_account;
+
+INSERT INTO Service_plan 
+VALUES 
+    ('Basic Plan', 10, 100, 500, 1000, 'Basic service plan '),
+    ('Standard Plan', 20, 200, 1000, 5000, 'Standard plan '),
+    ('Premium Plan', 30, 500, 2000, 10000, 'Premium plan with'),
+    ('Family Plan', 40, 1000, 5000, 20000, 'Family plan with multiple ');
+SELECT * FROM Service_plan;

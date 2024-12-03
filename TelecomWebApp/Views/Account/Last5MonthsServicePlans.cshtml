@@ -1,0 +1,43 @@
+﻿@model IEnumerable<Service_plan>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subscribed Plans</title>
+</head>
+<body>
+    <h1>Subscribed Plans in the Last 5 Months</h1>
+
+    @if (Model != null && Model.Any())
+    {
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Plan ID</th>
+                    <th>Plan Name</th>
+                    <th>Description</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var plan in Model)
+                {
+                    <tr>
+                        <td>@plan.planID</td>
+                        <td>@plan.name</td>
+                        <td>@plan.description</td>
+                        <td>@plan.price</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p>No plans found for this mobile number in the last 5 months.</p>
+    }
+</body>
+</html>
+

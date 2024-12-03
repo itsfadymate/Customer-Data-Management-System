@@ -1,6 +1,8 @@
 using Microsoft.EntityFrameworkCore;
+using System.Diagnostics;
+using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Shared;
 using TelecomWebApp;
-
+Debug.WriteLine("entry point");
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -48,6 +50,10 @@ app.MapControllerRoute(
 app.MapControllerRoute(
     name: "admin",
     pattern: "{controller=Admin}/{action=CustomerProfilesWithActiveAccounts}/{id?}");
+
+app.MapControllerRoute(
+    name: "profile",
+    pattern: "{controller=GenericCustomer}/{action=RedirectToLogin}/{id?}");
 
 
 app.Run();

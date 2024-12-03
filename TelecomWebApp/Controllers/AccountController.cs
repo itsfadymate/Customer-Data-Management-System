@@ -16,8 +16,8 @@ public class AccountController : Controller
     {
         var serviceInfo = new ServiceInfo
         {
-            UnresolvedTickets = _telecomContext .GetUnresolvedTickets(mobileNo),
-            HighestValueVoucher = _telecomContext .GetHighestValueVoucher(mobileNo)
+            UnresolvedTickets = 5,//_telecomContext .GetUnresolvedTickets(mobileNo),
+            HighestValueVoucher = 0//_telecomContext .GetHighestValueVoucher(mobileNo)
         };
 
         return View("LoggedInCustomerView", serviceInfo);
@@ -39,7 +39,13 @@ public class AccountController : Controller
 
     public IActionResult ViewAllPlansNotSubbed()
     {
-        var notSubbed = _telecomContext.GetServicePlansNotSubbed;
+        String mobileNo = "";
+        var notSubbed = _telecomContext.GetServicePlansNotSubbed(mobileNo);
         return View("NotSubbed", notSubbed);
+    }
+    public IActionResult viewLast5MonthsServicePlans() {
+        String mobileNo = "";
+        var spmodel =  _telecomContext.GetLast5MonthsServicePlans(mobileNo);
+        return View("Last5MonthsServicePlans",spmodel);
     }
 }
