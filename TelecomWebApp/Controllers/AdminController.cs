@@ -26,15 +26,15 @@ namespace TelecomWebApp.Controllers
             var vouchers = await _context.E_ShopVouchers.FromSqlRaw("SELECT * FROM E_shopVouchers").ToListAsync();
             return View(vouchers);
         }
-        public async Task<IActionResult> AccountPayments()
+        public IActionResult AccountPayments()
         {
-            var payments = await _context.AccountPayments.FromSqlRaw("SELECT * FROM AccountPayments").ToListAsync();
+            var payments = _context.Set<dynamic>().FromSqlRaw("SELECT * FROM AccountPayments").ToList();
             return View(payments);
         }
 
-        public async Task<IActionResult> Num_of_cashbacks()
+        public IActionResult Num_of_cashback()
         {
-            var cashbacks = await _context.Num_Of_Cashbacks.FromSqlRaw("SELECT * FROM Num_of_cashback").ToListAsync();
+            var cashbacks = _context.Set<dynamic>().FromSqlRaw("SELECT * FROM Num_of_cashback").ToList();
             return View(cashbacks);
         }
         public async Task<IActionResult> CustomerProfilesWithActiveAccounts()
@@ -53,6 +53,22 @@ namespace TelecomWebApp.Controllers
             var data = await _context.GetResolvedTicketsAsync();
             return View(data);
         }
+        public async Task<IActionResult> CustomerAccountsWithPlans()
+        {
+            var data = await _context.GetCustomerAccountsWithPlansAsync();
+            return View(data);
+        }
+
+
+
+
+
+
+
+
+
+
+
     }
 }
        

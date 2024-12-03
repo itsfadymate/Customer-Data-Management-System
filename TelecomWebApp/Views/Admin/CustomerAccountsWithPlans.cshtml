@@ -1,0 +1,29 @@
+﻿@model IEnumerable<TelecomWebApp.Models.CustomerAccountWithPlan>
+
+<h1>Customer Accounts and Subscribed Service Plans</h1>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Mobile No</th>
+            <th>Account Type</th>
+            <th>Balance</th>
+            <th>Plan Name</th>
+            <th>Subscription Date</th>
+            <th>Plan Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.mobileNo</td>
+                <td>@item.account_type</td>
+                <td>@item.balance</td>
+                <td>@item.planName</td>
+                <td>@item.subscription_date.ToShortDateString()</td>
+                <td>@item.plan_description</td>
+            </tr>
+        }
+    </tbody>
+</table>

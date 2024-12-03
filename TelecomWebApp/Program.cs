@@ -34,7 +34,7 @@ app.MapControllerRoute(
     pattern: "{area:exists}/{controller=Admin}/{action=Dashboard}/{id?}");
 
 app.MapControllerRoute(
-    name: "dashboard",
+    name: "admin",
     pattern: "Admin/{action=Dashboard}/{id}",
     defaults: new {controller = "Admin"});
 
@@ -43,18 +43,25 @@ app.MapControllerRoute(
     pattern: "{controller=GenericCustomer}/{action=Index}/{id?}");
 
 app.MapControllerRoute(
-    name: "customersView",
+    name: "admin",
     pattern: "{controller=Admin}/{action=CustomerProfilesWithActiveAccounts}/{id?}");
 
 app.MapControllerRoute(
-    name:"vouchersView",
+        name: "physicalStoreVoucherDetails",
+        pattern: "{controller=Admin}/{action=PhysicalStoreVoucherDetails}/{id?}");
+
+app.MapControllerRoute(
+        name: "resolvedTickets",
+        pattern: "{controller=Admin}/{action=ResolvedTickets}/{id?}");
+
+
+
+app.MapControllerRoute(
+    name:"name",
     pattern: "{controller=Admin}/{action=E_shopVouchers}/{id?}");
 
 app.MapControllerRoute(
-    name:"viewPayments",
-    pattern: "{controller=Admin}/{action=AccountPayments}/{id?}");
-app.MapControllerRoute(
-    name:"viewCashbacksPerWallet",
-    pattern: "{controller=Admin}/{action=Num_of_cashbacks}/{id?}");
+        name: "customerAccountsWithPlans",
+        pattern: "{controller=Admin}/{action=CustomerAccountsWithPlans}/{id?}");
 
 app.Run();
