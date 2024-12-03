@@ -1,4 +1,4 @@
-﻿@model IEnumerable<TelecomWebApp.Models.CustomerAccountWithPlan>
+﻿@model IEnumerable<TelecomWebApp.Models.CustomerAccountWithPlanDetail>
 
 <h1>Customer Accounts and Subscribed Service Plans</h1>
 
@@ -20,9 +20,8 @@
                 <td>@item.mobileNo</td>
                 <td>@item.account_type</td>
                 <td>@item.balance</td>
-                <td>@item.planName</td>
-                <td>@item.subscription_date.ToShortDateString()</td>
-                <td>@item.plan_description</td>
+                <td>@item.name</td>
+                <td>@item.description</td>
             </tr>
         }
     </tbody>

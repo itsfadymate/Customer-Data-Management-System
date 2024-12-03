@@ -19,7 +19,7 @@ public class TelecomContext : DbContext
         modelBuilder.Entity<E_shopVoucher>().HasNoKey();
         modelBuilder.Entity<AccountPayment>().HasNoKey();
         modelBuilder.Entity<Num_of_cashback>().HasNoKey();
-        modelBuilder.Entity<CustomerAccountWithPlan>().HasNoKey();
+        modelBuilder.Entity<CustomerAccountWithPlanDetail>().HasNoKey();
         modelBuilder.Entity<CustomerAccountsByPlanDate>().HasNoKey();
     }
 
@@ -111,12 +111,8 @@ public class TelecomContext : DbContext
 
     public DbSet<ResolvedTicketDetail> ResolvedTicketDetails { get; set; }
 
-    public async Task<List<CustomerAccountWithPlan>> GetCustomerAccountsWithPlansAsync()
-    {
-        return await this.Database
-            .SqlQuery<CustomerAccountWithPlan>($"EXEC Account_Plan")
-            .ToListAsync();
-    }
+    public DbSet<CustomerAccountWithPlanDetail> CustomerAccountWithPlanDetails { get; set; }
+
     public DbSet<CustomerAccountsByPlanDate> CustomerAccountsByPlanDateView { get; set; }
 
     public async Task<List<CustomerAccountsByPlanDate>> GetCustomerAccountsByPlanDateAsync(DateTime subscriptionDate, int planId)

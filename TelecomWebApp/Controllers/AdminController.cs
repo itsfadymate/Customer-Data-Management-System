@@ -52,14 +52,11 @@ namespace TelecomWebApp.Controllers
             var data = await _context.ResolvedTicketDetails.FromSqlRaw("SELECT * FROM allResolvedTickets").ToListAsync();
             return View(data);
         }
-        //public async Task<IActionResult> ResolvedTickets()
-        //{
-        //    var data = await _context.GetResolvedTicketsAsync();
-        //    return View(data);
-        //}
-        public async Task<IActionResult> CustomerAccountsWithPlans()
+
+
+        public async Task<IActionResult> CustomerAccountWithPlanDetails()
         {
-            var data = await _context.GetCustomerAccountsWithPlansAsync();
+            var data = await _context.CustomerAccountWithPlanDetails.FromSqlRaw("EXEC Account_Plan").ToListAsync();
             return View(data);
         }
         [HttpGet]
