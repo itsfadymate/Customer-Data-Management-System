@@ -34,7 +34,7 @@ namespace TelecomWebApp.Controllers
 
         public async Task<IActionResult> Num_of_cashbacks()
         {
-            var data = _context.Num_Of_Cashbacks.FromSqlRaw("SELECT * FROM Num_of_cashback").ToListAsync();
+            var data = await _context.Num_Of_Cashbacks.FromSqlRaw("SELECT * FROM Num_of_cashback").ToListAsync();
             return View(data);
         }
         public async Task<IActionResult> CustomerProfilesWithActiveAccounts()
