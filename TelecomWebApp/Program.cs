@@ -85,5 +85,8 @@ app.MapControllerRoute(
 app.MapControllerRoute(
     name:"cashbackFunction",
     pattern:"{controller=Admin}/{action=CashbackFunction}/{id?}");
+app.MapControllerRoute(
+    name:"averageFunction",
+    pattern: "{controller=Admin}/{action=TransactionAverage}/{id?}");
 
 app.Run();
