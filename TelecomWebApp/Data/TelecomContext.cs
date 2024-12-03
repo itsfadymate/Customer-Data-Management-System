@@ -14,8 +14,8 @@ public class TelecomContext : DbContext
         modelBuilder.Entity<UsagePlan>().HasNoKey();
         modelBuilder.Entity<CustomerWallet>().HasNoKey();
         modelBuilder.Entity<CustomerProfileActiveAccount>().HasNoKey();
-        modelBuilder.Entity<PhysicalStoreVoucherDetails>().HasNoKey();
-        modelBuilder.Entity<ResolvedTicketDetails>().HasNoKey();
+        modelBuilder.Entity<PhysicalStoreVoucherDetail>().HasNoKey();
+        modelBuilder.Entity<ResolvedTicketDetail>().HasNoKey();
         modelBuilder.Entity<E_shopVoucher>().HasNoKey();
         modelBuilder.Entity<AccountPayment>().HasNoKey();
         modelBuilder.Entity<Num_of_cashback>().HasNoKey();
@@ -107,29 +107,10 @@ public class TelecomContext : DbContext
 
     public DbSet<CustomerProfileActiveAccount> CustomerProfileActiveAccounts { get; set; }
 
-    public async Task<List<CustomerProfileActiveAccount>> GetCustomerProfilesWithActiveAccountsAsync()
-    {
-        return await CustomerProfileActiveAccounts
-            .FromSqlInterpolated($"EXEC allCustomerAccounts")
-            .ToListAsync();
-    }
+    public DbSet<PhysicalStoreVoucherDetail> PhysicalStoreVoucherDetails { get; set; }
 
-    public DbSet<PhysicalStoreVoucherDetails> PhysicalStoreVoucherDetailsView { get; set; }
+    public DbSet<ResolvedTicketDetail> ResolvedTicketDetails { get; set; }
 
-    public async Task<List<PhysicalStoreVoucherDetails>> GetPhysicalStoreVoucherDetailsAsync()
-    {
-        return await PhysicalStoreVoucherDetailsView
-            .FromSqlInterpolated($"EXEC PhysicalStoreVouchers")
-            .ToListAsync();
-    }
-    public DbSet<ResolvedTicketDetails> ResolvedTicketDetailsView { get; set; }
-
-    public async Task<List<ResolvedTicketDetails>> GetResolvedTicketsAsync()
-    {
-        return await ResolvedTicketDetailsView
-            .FromSqlInterpolated($"EXEC allResolvedTickets")
-            .ToListAsync();
-    }
     public async Task<List<CustomerAccountWithPlan>> GetCustomerAccountsWithPlansAsync()
     {
         return await this.Database

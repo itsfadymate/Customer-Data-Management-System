@@ -1,6 +1,6 @@
 ﻿namespace TelecomWebApp.Models
 {
-    public class ResolvedTicketDetails
+    public class ResolvedTicketDetail
     {
         public int ticketID { get; set; }               
         public string mobileNo { get; set; }         

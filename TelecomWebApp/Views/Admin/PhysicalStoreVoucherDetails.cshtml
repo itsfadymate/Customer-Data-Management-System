@@ -1,4 +1,4 @@
-﻿@model IEnumerable<TelecomWebApp.Models.PhysicalStoreVoucherDetails>
+﻿@model IEnumerable<TelecomWebApp.Models.PhysicalStoreVoucherDetail>
 
 <h1>Physical Stores and Redeemed Vouchers</h1>
 
@@ -6,16 +6,10 @@
     <thead>
         <tr>
             <th>Shop ID</th>
-            <th>Shop Name</th>
-            <th>Category</th>
             <th>Address</th>
             <th>Working Hours</th>
             <th>Voucher ID</th>
             <th>Voucher Value</th>
-            <th>Voucher Expiry Date</th>
-            <th>Voucher Redeem Date</th>
-            <th>Points</th>
-            <th>Customer Mobile No</th>
         </tr>
     </thead>
     <tbody>
@@ -23,16 +17,10 @@
         {
             <tr>
                 <td>@item.shopID</td>
-                <td>@item.name</td>
-                <td>@item.category</td>
                 <td>@item.address</td>
                 <td>@item.working_hours</td>
                 <td>@item.voucherID</td>
                 <td>@item.value</td>
-                <td>@item.expiry_date.ToShortDateString()</td>
-                <td>@item.redeem_date.ToShortDateString()</td>
-                <td>@item.points</td>
-                <td>@item.mobileNo</td>
             </tr>
         }
     </tbody>

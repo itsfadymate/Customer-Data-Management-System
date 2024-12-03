@@ -42,17 +42,21 @@ namespace TelecomWebApp.Controllers
             var data = await _context.CustomerProfileActiveAccounts.FromSqlRaw("SELECT * FROM allCustomerAccounts").ToListAsync();
             return View(data);
         }
-
         public async Task<IActionResult> PhysicalStoreVoucherDetails()
         {
-            var data = await _context.GetPhysicalStoreVoucherDetailsAsync();
+            var data = await _context.PhysicalStoreVoucherDetails.FromSqlRaw("SELECT * FROM PhysicalStoreVouchers").ToListAsync();
             return View(data);
         }
         public async Task<IActionResult> ResolvedTickets()
         {
-            var data = await _context.GetResolvedTicketsAsync();
+            var data = await _context.ResolvedTicketDetails.FromSqlRaw("SELECT * FROM allResolvedTickets").ToListAsync();
             return View(data);
         }
+        //public async Task<IActionResult> ResolvedTickets()
+        //{
+        //    var data = await _context.GetResolvedTicketsAsync();
+        //    return View(data);
+        //}
         public async Task<IActionResult> CustomerAccountsWithPlans()
         {
             var data = await _context.GetCustomerAccountsWithPlansAsync();
