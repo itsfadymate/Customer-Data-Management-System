@@ -46,5 +46,8 @@ app.MapControllerRoute(
     name: "admin",
     pattern: "{controller=Admin}/{action=CustomerProfilesWithActiveAccounts}/{id?}");
 
+app.MapControllerRoute(
+    name:"name",
+    pattern: "{controller=Admin}/{action=E_shopVouchers}/{id?}");
 
 app.Run();

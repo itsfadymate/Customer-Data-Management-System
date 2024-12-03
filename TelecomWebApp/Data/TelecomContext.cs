@@ -16,6 +16,7 @@ public class TelecomContext : DbContext
         modelBuilder.Entity<CustomerProfileActiveAccount>().HasNoKey();
         modelBuilder.Entity<PhysicalStoreVoucherDetails>().HasNoKey();
         modelBuilder.Entity<ResolvedTicketDetails>().HasNoKey();
+        modelBuilder.Entity<E_shopVoucher>().HasNoKey();
     }
 
 
@@ -89,6 +90,7 @@ public class TelecomContext : DbContext
     }
     public DbSet<NotSubbed> ServicePlansNotSubbed { get; set; }
     public DbSet<CustomerWallet> CustomerWallets { get; set; }
+    public DbSet<E_shopVoucher> E_ShopVouchers { get; set; }
 
     public bool login(String mobileNo, string password)
     {

@@ -21,9 +21,9 @@ namespace TelecomWebApp.Controllers
             var walletDetails = await _context.CustomerWallets.FromSqlRaw("SELECT * FROM CustomerWallet").ToListAsync();
             return View(walletDetails);
         }
-        public IActionResult E_shopVouchers()
+        public async Task<IActionResult> E_shopVouchers()
         {
-            var vouchers = _context.Set<dynamic>().FromSqlRaw("SELECT * FROM E_shopVouchers").ToList();
+            var vouchers = await _context.E_ShopVouchers.FromSqlRaw("SELECT * FROM E_shopVouchers").ToListAsync();
             return View(vouchers);
         }
         public IActionResult AccountPayments()

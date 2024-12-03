@@ -1,0 +1,26 @@
+﻿@model IEnumerable<TelecomWebApp.Models.E_shopVoucher>
+
+<h1>E-Shop Vouchers</h1>
+
+<table class="table">
+    <thread>
+        <tr>
+            <th>Shop ID</th>
+            <th>URL</th>
+            <th>Rating</th>
+            <th>Voucher ID</th>
+            <th>Value</th>
+        </tr>
+    </thread>
+    <tbody>
+        @foreach (var item in Model){
+            <tr>
+                <td>@item.shopID</td>
+                <td>@item.URL</td>
+                <td>@item.rating</td>
+                <td>@item.voucherID</td>
+                <td>@item.value</td>
+            </tr>
+        }
+    </tbody>
+</table>
