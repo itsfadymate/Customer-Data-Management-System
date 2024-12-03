@@ -105,7 +105,27 @@ namespace TelecomWebApp.Controllers
             TempData["Message"] = "Benefits removed successfully.";
             return RedirectToAction("RemoveBenefits"); 
         }
+        [HttpGet]
+        public IActionResult GetSMSOffers()
+        {
+            return View(); // Returns the input form view
+        }
 
+        // POST: Fetches the SMS offers for the given MobileNo and displays them
+        [HttpPost]
+        public async Task<IActionResult> GetSMSOffers(string mobileNo)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(mobileNo); // Return the form with validation errors
+            }
+
+            // Fetch the SMS offers using the function
+            var smsOffers = await _context.GetSMSOffersAsync(mobileNo);
+
+            // Pass the result to the view
+            return View("SMSOffersResult", smsOffers); // Displays the result view
+        }
 
 
 

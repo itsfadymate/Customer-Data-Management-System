@@ -23,6 +23,8 @@ public class TelecomContext : DbContext
         modelBuilder.Entity<CustomerAccountsByPlanDate>().HasNoKey();
         modelBuilder.Entity<AccountUsagePlan>().HasNoKey();
         modelBuilder.Entity<RemoveBenefit>().HasNoKey();
+        modelBuilder.Entity<SMSOffer>().HasNoKey();
+
     }
 
 
@@ -119,6 +121,14 @@ public class TelecomContext : DbContext
 
     public DbSet<AccountUsagePlan> AccountUsagePlans { get; set; }
 
+    public DbSet<SMSOffer> SMSOffers { get; set; }
+
+    public async Task<List<SMSOffer>> GetSMSOffersAsync(string mobileNo)
+    {
+        return await SMSOffers
+            .FromSqlInterpolated($" SELECT * FROM dbo.Account_SMS_Offers({mobileNo})")
+            .ToListAsync();
+    }
     public async Task<List<AccountUsagePlan>> GetAccountUsagePlanAsync(string mobileNum, DateTime startDate)
     {
         return await AccountUsagePlans
