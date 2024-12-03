@@ -32,10 +32,10 @@ namespace TelecomWebApp.Controllers
             return View(payments);
         }
 
-        public IActionResult Num_of_cashback()
+        public async Task<IActionResult> Num_of_cashbacks()
         {
-            var cashbacks = _context.Num_Of_Cashbacks.FromSqlRaw("SELECT * FROM Num_of_cashback").ToList();
-            return View(cashbacks);
+            var data = _context.Num_Of_Cashbacks.FromSqlRaw("SELECT * FROM Num_of_cashback").ToListAsync();
+            return View(data);
         }
         public async Task<IActionResult> CustomerProfilesWithActiveAccounts()
         {
