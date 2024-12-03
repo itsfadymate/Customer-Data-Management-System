@@ -58,7 +58,18 @@ namespace TelecomWebApp.Controllers
             var data = await _context.GetCustomerAccountsWithPlansAsync();
             return View(data);
         }
+        [HttpGet]
+        public IActionResult CustomerAccountsByPlanDate()
+        {
+            return View(); // Returns a form for input
+        }
 
+        [HttpPost]
+        public async Task<IActionResult> CustomerAccountsByPlanDate(DateTime subscriptionDate, int planId)
+        {
+            var data = await _context.GetCustomerAccountsByPlanDateAsync(subscriptionDate, planId);
+            return View("CustomerAccountsByPlanDateResult", data); // Displays results
+        }
 
 
 
