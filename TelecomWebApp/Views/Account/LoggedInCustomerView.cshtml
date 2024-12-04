@@ -80,17 +80,19 @@
 
         <div class="services-grid">
             <div class="service-card">
-                <h3>View Your Month's Usage</h3>
+                <h3><a asp-controller="Account" asp-action="UsageCurrMonth">Your Month's Usage</a></h3>
             </div>
             <div class="service-card">
-                <h3>Check out other plans</h3>
+                <h3><a asp-controller="Account" asp-action="NotSubbed">Check out other plans</a></h3>
             </div>
             <div class="service-card">
                 <h3>
                     <a asp-controller="Account" asp-action="ViewLast5MonthsServicePlans">Last 5 months service history</a>
                 </h3>
+            <div class="service-card">
+                <h3><a asp-controller="Account" asp-action="CashbackTransactions">Cashback Transactions</a></h3>
+            </div>
 
-                
             </div>
             <div class="service-card">
                 <h3>Check plan consumptions</h3>

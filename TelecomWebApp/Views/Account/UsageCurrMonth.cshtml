@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="stylesheet" href="~/css/PlanUsage.css" asp-append-version="true" />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Usage in current month is:</title>
@@ -18,9 +19,9 @@
             @foreach (var u in Model)
             {
                 <tr>
-                    <td>@u.data</td>
-                    <td>@u.minutes</td>
-                    <td>@u.sms</td>
+                    <td>@u.data_consumption</td>
+                    <td>@u.minutes_used</td>
+                    <td>@u.SMS_sent</td>
                 </tr>
             }
         </table>

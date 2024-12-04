@@ -40,7 +40,7 @@ public class TelecomContext : DbContext
     }
 
 
-    public DbSet<UsagePlan> UsagePlans { get; set; }
+    public DbSet<UsageCurrMonth> UsageCurrMonths { get; set; }
     public DbSet<Service_plan> ServicePlans { get; set; }
     public DbSet<ResolvedTicketDetail> ResolvedTicketDetailsView { get; set; }
     public DbSet<HighestValueVoucher> vouchers { get; set; }
@@ -95,10 +95,10 @@ public class TelecomContext : DbContext
         int v = this.Database.SqlQuery<int>($"SELECT CASE WHEN EXISTS (SELECT 1 FROM Benefits WHERE benefitID = {benefitID}) THEN 1 ELSE 0 END AS benefitIDExists").FirstOrDefault();
         return v == 0;
     }
-    public async Task<List<UsagePlan>> GetUsagePlanCurrentMonthAsync(string mobileNo)
+    public async Task<List<UsageCurrMonth>> GetUsagePlanCurrentMonthAsync(string mobileNo)
     {
         Debug.WriteLine("TelecomContext GetUsagePlanCurrentMonthAsync()");
-        return await UsagePlans
+        return await UsageCurrMonths
             .FromSqlInterpolated($"SELECT * FROM dbo.Usage_Plan_CurrentMonth({mobileNo})")
             .ToListAsync();
     }
@@ -208,20 +208,32 @@ public class TelecomContext : DbContext
             .FromSqlInterpolated($"SELECT dbo.Consumption({planName}, {startDate}, {endDate})")
             .ToListAsync();
     }
-    
+
     public async Task<List<NotSubbed>> GetServicePlansNotSubbed(string mobileNo)
     {
         return await ServicePlansNotSubbed
-            .FromSqlInterpolated($"SELECT * FROM dbo.Unsubscribed_Plans({mobileNo})")
+            .FromSqlInterpolated($"EXEC dbo.Unsubscribed_Plans @mobile_num = {mobileNo}")
             .ToListAsync();
     }
-    
+
     public async Task<List<CashbackTransactions>> GetCashbackTransactions(int nationalID)
     {
         return await CashbackTransactions
             .FromSqlInterpolated($"SELECT * FROM dbo.Cashback_Wallet_Customer({nationalID})")
             .ToListAsync();
     }
+
+    public int GetNationalIDfromMobileNo(string mobileNo)
+    {
+        var nationalID = this.Database
+            .SqlQuery<int>($"SELECT nationalID FROM customer_account WHERE mobileNo = {mobileNo}")
+            .FirstOrDefault();
+
+        return nationalID;
+    }
+
+
+
 
     public bool login(String mobileNo, string password)
     {

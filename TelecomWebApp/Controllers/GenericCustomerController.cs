@@ -55,4 +55,21 @@ public class GenericCustomerController : Controller
         return View("AllActiveBenefitsView");
     }
 
+    public async Task<IActionResult> ViewAllPlans(){
+        ViewData["hidenav"] = true;
+
+        try
+        {
+            var plans = await _telecomContext.GetServicePlans(); 
+            return View("ServicePlan", plans);
+        }
+        catch (Exception e)
+        {
+            Debug.WriteLine(e.Message);
+            TempData["ErrorMessage"] = "Could not retrieve service plans.";
+        }
+
+        return View("ServicePlan", new List<Service_plan>()); 
+    }
+
 }

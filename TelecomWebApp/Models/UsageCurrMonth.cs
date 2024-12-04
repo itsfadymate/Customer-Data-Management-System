@@ -2,8 +2,8 @@
 {
     public class UsageCurrMonth
     {
-        public int data { get; set; }             
-        public int minutes { get; set; }      
-        public int sms { get; set; }         
+        public int data_consumption { get; set; }             
+        public int minutes_used { get; set; }      
+        public int SMS_sent { get; set; }         
     }
 }

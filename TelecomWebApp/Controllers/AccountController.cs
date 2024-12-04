@@ -24,7 +24,7 @@ public class AccountController : Controller
         try
         {
              unresolvedCount = _telecomContext.GetUnresolvedTickets(MobileNo);
-             HighestValueVoucherID = (await _telecomContext.GetHighestValueVoucher(MobileNo)).voucherID;
+             HighestValueVoucherID = (await _telecomContext.GetHighestValueVoucher(MobileNo))?.voucherID ?? default;
         }
         catch (Exception ex) {
             //Debug.WriteLine(ex.Message);
@@ -95,12 +95,7 @@ public class AccountController : Controller
     }
 
 
-    public IActionResult ViewAllPlans()
-    {
-        ViewData["hidenav"] = true;
-        var plans = _telecomContext.GetServicePlans();
-        return View("ServicePlan", plans);
-    }
+ 
     public IActionResult CheckDueAmountsView() {
         ViewData["hidenav"] = true;
         ViewData["hidenav"] = true;
@@ -140,27 +135,38 @@ public class AccountController : Controller
         return View("Consumption", usage);
     }
 
-    /*public IActionResult UsageCurrMonth() needs fix idk who did it ~fady
+    public async Task<IActionResult> UsageCurrMonth()
     {
+        ViewData["hidenav"] = true;
         String mobileNo = HttpContext.Session.GetString("MobileNo");
-        var usage = _telecomContext.GetUsageCurrMonth(mobileNo);
-        return View("UsageCurrMonth", usage);
-    }*/
+        var usage = await _telecomContext.GetUsagePlanCurrentMonthAsync(mobileNo);
+        return View("UsageCurrMonth", usage); 
+    }
 
-    
 
-    public IActionResult ViewAllPlansNotSubbed()
+
+    public async Task<IActionResult> NotSubbed()
     {
         ViewData["hidenav"] = true;
         String MobileNo = HttpContext.Session.GetString("MobileNo");
-        var notSubbed = _telecomContext.GetServicePlansNotSubbed(MobileNo);
-        return View("NotSubbed", notSubbed);
+        var notSubbed = await _telecomContext.GetServicePlansNotSubbed(MobileNo);
+        return View("NotSubbed", notSubbed); 
     }
-    
-    public IActionResult ViewAllCashbackTransactions()
+
+    [HttpPost]
+    public IActionResult CashbackTransactionsForm(int nationalId)
+    {
+
+        return View("CashbackTransactions", nationalId); 
+    }
+
+
+    public IActionResult CashbackTransactions()
     {
         ViewData["hidenav"] = true;
         int nationalID=0;
+        String MobileNo = HttpContext.Session.GetString("MobileNo");
+        nationalID = _telecomContext.GetNationalIDfromMobileNo(MobileNo);
         var cashbackTransactions = _telecomContext.GetCashbackTransactions(nationalID);
         return View("CashbackTransactions", cashbackTransactions);
     }

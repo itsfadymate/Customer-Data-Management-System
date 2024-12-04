@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="stylesheet" href="~/css/PlanUsage.css" asp-append-version="true" />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>All Service Plans Youre Not Subscribed yo</title>
@@ -22,10 +23,10 @@
             @foreach (var u in Model)
             {
                 <tr>
-                    <td>@u.planId</td>
+                    <td>@u.planID</td>
                     <td>@u.SMS_offered</td>
-                    <td>@u.minutesOffered</td>
-                    <td>@u.dataOffered</td>
+                    <td>@u.minutes_offered</td>
+                    <td>@u.data_offered</td>
                     <td>@u.name</td>
                     <td>@u.price</td>
                     <td>@u.description</td>
