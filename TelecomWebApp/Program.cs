@@ -111,5 +111,8 @@ app.MapControllerRoute(
 app.MapControllerRoute(
     name:"accountPaymentPoints",
     pattern:"{controller=Admin}/{action=AccountPaymentPoints}/{id?}");
+app.MapControllerRoute(
+    name:"updatePoints",
+    pattern: "{controller=Admin}/{action=UpdateAccountPoints}/{id?}");
 
 app.Run();
