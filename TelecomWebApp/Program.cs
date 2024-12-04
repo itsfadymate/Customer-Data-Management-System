@@ -91,5 +91,8 @@ app.MapControllerRoute(
 app.MapControllerRoute(
     name: "mobileNoLinked",
     pattern: "{controller=Admin}/{action=IsWalletLinked}/{id?}");
+app.MapControllerRoute(
+    name:"accountPaymentPoints",
+    pattern:"{controller=Admin}/{action=AccountPaymentPoints}/{id?}");
 
 app.Run();

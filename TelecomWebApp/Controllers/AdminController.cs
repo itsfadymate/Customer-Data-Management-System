@@ -90,6 +90,36 @@ namespace TelecomWebApp.Controllers
             ViewBag.IsLinked = linked == 1;
             return View();
         }
+        [HttpGet]
+        public IActionResult AccountPaymentPoints()
+        {
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> AccountPaymentPoints(string mobileNo)
+        {
+            // Ensure the query has the correct format
+            var res = (await _context.PaymentPointsResults
+                .FromSqlRaw("EXEC Account_Payment_Points @mobile_num ", mobileNo)
+                .ToListAsync()).FirstOrDefault();
+
+            // Handle the result from the stored procedure
+            if (res != null)
+            {
+                ViewBag.NumberOfTransactions = res.transactions;
+                ViewBag.TotalEarnedPoints = res.points;
+            }
+            else
+            {
+                // Handle cases where no result is returned (optional)
+                ViewBag.NumberOfTransactions = 0;
+                ViewBag.TotalEarnedPoints = 0;
+            }
+
+            return View();
+        }
+
+
 
         public async Task<IActionResult> CustomerProfilesWithActiveAccounts()
         {

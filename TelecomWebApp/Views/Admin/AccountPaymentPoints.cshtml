@@ -1,0 +1,20 @@
+﻿@{
+    ViewData["Title"] = "Payment Transactions and Earned Points";
+}
+
+<h2>Payment Transactions and Earned Points for Account</h2>
+
+<!-- Form to accept account ID -->
+<form method="post" action="/Admin/AccountPaymentPoints">
+    <label for="accountId">Account ID:</label>
+    <input type="number" id="accountId" name="accountId" required />
+
+    <button type="submit">Submit</button>
+</form>
+
+<!-- Display results -->
+@if (ViewBag.NumberOfTransactions != null && ViewBag.TotalEarnedPoints != null)
+{
+    <h3>Number of Accepted Transactions: @ViewBag.NumberOfTransactions</h3>
+    <h3>Total Earned Points: @ViewBag.TotalEarnedPoints</h3>
+}

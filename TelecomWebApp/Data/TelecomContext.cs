@@ -24,7 +24,7 @@ public class TelecomContext : DbContext
         modelBuilder.Entity<AccountUsagePlan>().HasNoKey();
         modelBuilder.Entity<RemoveBenefit>().HasNoKey();
         modelBuilder.Entity<SMSOffer>().HasNoKey();
-
+        modelBuilder.Entity<PaymentPointsResults>().HasNoKey();
     }
 
 
@@ -101,6 +101,7 @@ public class TelecomContext : DbContext
     public DbSet<E_shopVoucher> E_ShopVouchers { get; set; }
     public DbSet<AccountPayment> AccountPayments { get; set; }
     public DbSet<Num_of_cashback> Num_Of_Cashbacks { get; set; }
+    public DbSet<PaymentPointsResults> PaymentPointsResults { get; set; }
     public bool login(String mobileNo, string password)
     {
         
