@@ -112,8 +112,20 @@ namespace TelecomWebApp.Controllers
 
             return View();
         }
-
-
+        [HttpGet]
+        public IActionResult UpdateAccountPoints()
+        {
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> UpdateAccountPoints(string mobileNo)
+        {
+            var mobileNumPar = new SqlParameter("@mobile_num", mobileNo);
+            var totalPt = await _context.Database.ExecuteSqlRawAsync(
+                "EXEC Total_Points_Account @mobile_num", mobileNumPar);
+            ViewBag.TotalPoints = totalPt;
+            return View();
+        }
 
 
 
