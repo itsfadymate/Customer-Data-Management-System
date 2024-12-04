@@ -1,0 +1,22 @@
+﻿<head>
+    <link rel="stylesheet" href="~/css/Adminlogin.css" asp-append-version="true" />
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-box">
+            <h1>Login</h1>
+            <form asp-controller="Admin" asp-action="AdminLogin" method="POST">
+                <div class="form-group">
+                    <label for="UserName">UserName</label>
+                    <input type="tel" name="UserName" placeholder="Enter your UserName" required>
+                </div>
+                <div class="form-group">
+                    <label for="pass">Password</label>
+                    <input type="password" id="pass" name="pass" placeholder="Enter your password" required>
+                </div>
+                <button type="submit" class="login-button">Login</button>
+            </form>
+            <p class="signup-text">Don't have an account? <a href="#">Sign up</a></p>
+        </div>
+    </div>
+</body>

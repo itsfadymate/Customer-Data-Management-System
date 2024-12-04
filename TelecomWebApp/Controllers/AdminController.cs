@@ -23,6 +23,22 @@ namespace TelecomWebApp.Controllers
             var walletDetails = await _context.CustomerWallets.FromSqlRaw("SELECT * FROM CustomerWallet").ToListAsync();
             return View(walletDetails);
         }
+        public async Task<IActionResult> AdminLogin(String UserName,String pass)
+        {
+            ViewData["hidenav"] = true;
+            if (UserName == "Admin") {
+                if (pass == "Admin")
+                {
+                    TempData["SuccessMessage"] = "logged in successfully";
+                    return View("Dashboard");
+                }
+                TempData["ErrorMessage"] = "wrong password";
+                return View("AdminLogin");
+            }
+            
+            TempData["ErrorMessage"] = "wrong user name";
+            return View("AdminLogin");
+        }
         public async Task<IActionResult> E_shopVouchers()
         {
             var vouchers = await _context.E_ShopVouchers.FromSqlRaw("SELECT * FROM E_shopVouchers").ToListAsync();
