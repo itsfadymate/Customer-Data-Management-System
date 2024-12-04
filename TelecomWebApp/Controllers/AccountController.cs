@@ -20,6 +20,7 @@ public class AccountController : Controller
         int unresolvedCount = 0;
         int HighestValueVoucherID = 0;
         String MobileNo = HttpContext.Session.GetString("MobileNo");
+        ViewData["hidenav"] = true;
         try
         {
              unresolvedCount = _telecomContext.GetUnresolvedTickets(MobileNo);
@@ -40,6 +41,7 @@ public class AccountController : Controller
     }
     public async Task<IActionResult> ViewLast5MonthsServicePlans()
     {
+        ViewData["hidenav"] = true;
         Debug.WriteLine("AccountController ViewLast5MonthsServicePlans()");
         String mobileNo = HttpContext.Session.GetString("MobileNo"); 
         var spmodel = await _telecomContext.GetLast5MonthsServicePlans(mobileNo);
@@ -49,23 +51,25 @@ public class AccountController : Controller
 
     public ActionResult RenewSubscriptionView()//for renew button
     {
-        
+        ViewData["hidenav"] = true;
         Debug.WriteLine("AccountController RenewSubscriptionView()");
         return View("RenewSubscriptionView");
     }
     public async Task<IActionResult> RenewSubscription(String mobileNo, decimal amount,int plan_id, String payment_method ) {
+        ViewData["hidenav"] = true;
         bool success = await _telecomContext.RenewSubscription(mobileNo, amount, payment_method, plan_id);
         return RedirectToAction("Index", "Account");
     }
     public ActionResult CashbackPaymentBenefitView()//for cashback button
     {
-
+        ViewData["hidenav"] = true;
         Debug.WriteLine("AccountController CashbackPaymentView()");
         return View("CashbackPaymentBenfitView");
     }
     
     public async Task<IActionResult> CashbackPaymentBenefit(int paymentID, int benefitID)
     {
+        ViewData["hidenav"] = true;
         String MobileNo = HttpContext.Session.GetString("MobileNo");
 
         double val = await _telecomContext.Payment_wallet_cashback(MobileNo, paymentID, benefitID);
@@ -74,9 +78,9 @@ public class AccountController : Controller
 
     public async Task<IActionResult> TopTenPaymentsView()
     {
+        ViewData["hidenav"] = true;
         Debug.WriteLine("Account TopTenPaymentsView()");
         String mobileNo = HttpContext.Session.GetString("MobileNo");
-        ViewData["hidenav"] = true;
         try
         {
             var payments = await _telecomContext.GetTopTenPayments(mobileNo);
@@ -93,10 +97,12 @@ public class AccountController : Controller
 
     public IActionResult ViewAllPlans()
     {
+        ViewData["hidenav"] = true;
         var plans = _telecomContext.GetServicePlans();
         return View("ServicePlan", plans);
     }
     public IActionResult CheckDueAmountsView() {
+        ViewData["hidenav"] = true;
         ViewData["hidenav"] = true;
         return View("CheckDueAmountsView");
     }
@@ -129,6 +135,7 @@ public class AccountController : Controller
 
     public IActionResult UsageInDuration(string planName, DateTime startDate, DateTime endDate)
     {
+        ViewData["hidenav"] = true;
         var usage = _telecomContext.GetConsumption(planName, startDate, endDate);
         return View("Consumption", usage);
     }
@@ -144,6 +151,7 @@ public class AccountController : Controller
 
     public IActionResult ViewAllPlansNotSubbed()
     {
+        ViewData["hidenav"] = true;
         String MobileNo = HttpContext.Session.GetString("MobileNo");
         var notSubbed = _telecomContext.GetServicePlansNotSubbed(MobileNo);
         return View("NotSubbed", notSubbed);
@@ -151,6 +159,7 @@ public class AccountController : Controller
     
     public IActionResult ViewAllCashbackTransactions()
     {
+        ViewData["hidenav"] = true;
         int nationalID=0;
         var cashbackTransactions = _telecomContext.GetCashbackTransactions(nationalID);
         return View("CashbackTransactions", cashbackTransactions);
