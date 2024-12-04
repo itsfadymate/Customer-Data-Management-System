@@ -1,0 +1,26 @@
+﻿@model DueAmounts
+<head>
+    <link rel="stylesheet" href="~/css/CheckDueAmounts.css" asp-append-version="true" />
+</head>
+<body>
+<form asp-controller="Account" asp-action="CheckDueAmounts" method="POST">
+<div class="input-area">
+  <h2>Check remaining and extra balances for a plan </h2>
+  <input placeholder="plan Name e.g 1">
+  
+  <button> Check Amounts </button>
+</div>
+</form>
+<div class="output-fields">
+   <div class ="out-container">
+       @if (!(Model==null)){
+          <div class = "Amount">
+                 <h3>Remaining Amount: <Strong>@Model.RemainingAmount EGP</strong></h3>
+          </div>
+          <div class = "Amount">
+                <h3>Extra Amount: <Strong>@Model.ExtraAmount EGP</strong></h3>
+          </div>
+       }
+    </div>
+</div>
+</body>

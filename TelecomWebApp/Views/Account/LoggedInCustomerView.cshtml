@@ -38,7 +38,9 @@
                     Check how much is left to pay for a certain plan
                 </p>
             </div>
-            <button class="check-status-btn">Check status</button>
+            <form asp-controller="Account" asp-action="CheckDueAmountsView" method="POST">
+            <button class="check-status-btn" >Check status</button>
+            </form>
         </div>
         <div class="service-bar">
             <div class="service-content">
@@ -47,7 +49,9 @@
                     How much extra money you paid for a certain plan
                 </p>
             </div>
+            <form asp-controller="Account" asp-action="CheckDueAmountsView" method="POST">
             <button class="check-status-btn">Check status</button>
+            </form>
         </div>
         
         <div class="service-bar">
@@ -95,7 +99,7 @@
                 <h3><a asp-controller="Account" asp-action="CashbackPaymentBenefitView">Cashback Amounts</a></h3>
             </div>
             <div class="service-card">
-                <h3>Top successful payments</h3>
+                <h3><a asp-controller="Account" asp-action="TopTenPaymentsView"> CashbackTop successful payments</a></h3>
             </div>
         </div>
     </div>

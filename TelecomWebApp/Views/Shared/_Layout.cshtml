@@ -8,7 +8,9 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/TelecomWebApp.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/admin-board.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
+    <link rel="stylesheet" href="/lib/toastr/toastr.min.css" />
+    <link rel="stylesheet" href="/lib/toastr/toastr.css" />
+
 </head>
 <body>
     <header>
@@ -34,17 +36,19 @@
         </nav>
         }
     </header>
-    <div class="container">
-        <main role="main" class="pb-3">
+        <div class="container">
+            <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
 
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+   <script src="~/lib/jquery/dist/jquery.js"></script>
+   <script src="~/lib/jquery/dist/jquery.min.js"></script>
+   <script src="~/js/site.js" asp-append-version="true"></script>
+   <script src="~/lib/toastr/toastr.js"></script>
+    @if (TempData["SuccessMessage"] != null || TempData["ErrorMessage"] != null)
+    {   
     <script>
         toastr.options = {
             "closeButton": true,
@@ -53,28 +57,21 @@
             "timeOut": "5000",
         };
 
+ 
+   
         $(document).ready(function () {
-    var toastrData = $("#toastrData");
-    var message = toastrData.data("message");
-    var type = toastrData.data("type");
+            @if (TempData["SuccessMessage"] != null)
+            {
+                <text>toastr.success('@TempData["SuccessMessage"]');</text>
+            }
+            @if (TempData["ErrorMessage"] != null)
+            {
+                <text>toastr.error('@TempData["ErrorMessage"]');</text>
+            }
+        });
+    </script>
+}
 
-        if (message) {
-            switch (type) {
-                 case "success":
-                    toastr.success(message);
-                    break;
-                case "info":
-                    toastr.info(message);
-                    break;
-                case "warning":
-                    toastr.warning(message);
-                    break;
-                case "error":
-                    toastr.error(message);
-                break;
-             }
-        }
-    });
 
     </script>
     @await RenderSectionAsync("Scripts", required: false)

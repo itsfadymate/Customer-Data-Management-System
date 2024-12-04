@@ -14,12 +14,26 @@ public class AccountController : Controller
 		_telecomContext = dbContext;
     }
 
-	public async Task<IActionResult> Index(String mobileNo)
+	public async Task<IActionResult> Index()
     {
+        Debug.WriteLine("Account Index()");
+        int unresolvedCount = 0;
+        int HighestValueVoucherID = 0;
+        String MobileNo = HttpContext.Session.GetString("MobileNo");
+        try
+        {
+             unresolvedCount = _telecomContext.GetUnresolvedTickets(MobileNo);
+             HighestValueVoucherID = (await _telecomContext.GetHighestValueVoucher(MobileNo)).voucherID;
+        }
+        catch (Exception ex) {
+            //Debug.WriteLine(ex.Message);
+            Debug.WriteLine("------------------------- couldn't read from the database unresolvedCount & highestVoucherID");
+        }
+
         var serviceInfo = new ServiceInfo
         {
-            UnresolvedTickets = 5,//_telecomContext .GetUnresolvedTickets(mobileNo),
-            HighestValueVoucher = 0//await _telecomContext .GetHighestValueVoucher(mobileNo)
+            UnresolvedTickets = unresolvedCount,
+            HighestValueVoucher = HighestValueVoucherID
         };
 
         return View("LoggedInCustomerView", serviceInfo);
@@ -27,7 +41,7 @@ public class AccountController : Controller
     public async Task<IActionResult> ViewLast5MonthsServicePlans()
     {
         Debug.WriteLine("AccountController ViewLast5MonthsServicePlans()");
-        String mobileNo = "01012345678";
+        String mobileNo = HttpContext.Session.GetString("MobileNo"); 
         var spmodel = await _telecomContext.GetLast5MonthsServicePlans(mobileNo);
 
         return View("Last5MonthsServicePlansView", spmodel);
@@ -49,19 +63,68 @@ public class AccountController : Controller
         Debug.WriteLine("AccountController CashbackPaymentView()");
         return View("CashbackPaymentBenfitView");
     }
-    //temp hardcoded
+    
     public async Task<IActionResult> CashbackPaymentBenefit(int paymentID, int benefitID)
     {
+        String MobileNo = HttpContext.Session.GetString("MobileNo");
 
-        double val = await _telecomContext.Payment_wallet_cashback("01012345678", paymentID, benefitID);
+        double val = await _telecomContext.Payment_wallet_cashback(MobileNo, paymentID, benefitID);
         return View("CashbackPaymentBenefitView", val);
     }
 
+    public async Task<IActionResult> TopTenPaymentsView()
+    {
+        Debug.WriteLine("Account TopTenPaymentsView()");
+        String mobileNo = HttpContext.Session.GetString("MobileNo");
+        ViewData["hidenav"] = true;
+        ViewData["hidecontainer"] = true;
+        try
+        {
+            var payments = await _telecomContext.GetTopTenPayments(mobileNo);
+            return View("TopTenPaymentsView", payments);
+        }
+        catch (Exception e)
+        {
+            TempData["ErrorMessage"] = "couldn't retrieve payments";
+            Debug.WriteLine(e.Message);
+        }
+        return View("TopTenPaymentsView");
+    }
 
     public IActionResult ViewAllPlans()
     {
         var plans = _telecomContext.GetServicePlans();
         return View("ServicePlan", plans);
+    }
+    public IActionResult CheckDueAmountsView() {
+        ViewData["hidenav"] = true;
+        return View("CheckDueAmountsView");
+    }
+    public IActionResult CheckDueAmounts(String PlanName)
+    {
+        String mobileNo = HttpContext.Session.GetString("MobileNo");
+        ViewData["hidenav"] = true;
+        Debug.WriteLine("AccountController CheckDueAmounts() ");
+        
+        int dbRemaining = 0;
+        int dbExtra = 0;
+
+        try
+        {
+            dbExtra = _telecomContext.GetExtraPlanAmount(mobileNo, PlanName);
+            dbRemaining = _telecomContext.GetRemainingPlanAmount(mobileNo, PlanName);
+            Debug.WriteLine($"ExtraAMounts:{dbExtra} RemainingAmounts:{dbRemaining} ");
+        }catch (Exception e)
+        {
+            TempData["ErrorMessage"] = "Invalid plan name";
+            Debug.WriteLine(e.Message);
+        }
+        var DueAmounts = new DueAmounts
+        {
+            ExtraAmount = dbExtra,
+            RemainingAmount = dbRemaining
+        };
+        return View("CheckDueAmountsView", DueAmounts);
     }
 
     public IActionResult UsageInDuration(string planName, DateTime startDate, DateTime endDate)
@@ -70,17 +133,19 @@ public class AccountController : Controller
         return View("Consumption", usage);
     }
 
-    public IActionResult UsageCurrMonth(String mobileNo)
+    /*public IActionResult UsageCurrMonth() needs fix idk who did it ~fady
     {
+        String mobileNo = HttpContext.Session.GetString("MobileNo");
         var usage = _telecomContext.GetUsageCurrMonth(mobileNo);
         return View("UsageCurrMonth", usage);
-    }
+    }*/
 
+    
 
     public IActionResult ViewAllPlansNotSubbed()
     {
-        String mobileNo = "";
-        var notSubbed = _telecomContext.GetServicePlansNotSubbed(mobileNo);
+        String MobileNo = HttpContext.Session.GetString("MobileNo");
+        var notSubbed = _telecomContext.GetServicePlansNotSubbed(MobileNo);
         return View("NotSubbed", notSubbed);
     }
     
