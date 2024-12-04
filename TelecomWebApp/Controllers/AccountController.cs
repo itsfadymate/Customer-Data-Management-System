@@ -97,6 +97,7 @@ public class AccountController : Controller
             Debug.WriteLine($"ExtraAMounts:{dbExtra} RemainingAmounts:{dbRemaining} ");
         }catch (Exception e)
         {
+            TempData["ErrorMessage"] = "Invalid plan name";
             Debug.WriteLine(e.Message);
         }
         var DueAmounts = new DueAmounts
