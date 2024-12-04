@@ -113,8 +113,9 @@ public class AccountController : Controller
         return View("Consumption", usage);
     }
 
-    /*public IActionResult UsageCurrMonth(String mobileNo) needs fix idk who did it ~fady
+    /*public IActionResult UsageCurrMonth() needs fix idk who did it ~fady
     {
+        String mobileNo = HttpContext.Session.GetString("MobileNo");
         var usage = _telecomContext.GetUsageCurrMonth(mobileNo);
         return View("UsageCurrMonth", usage);
     }*/
