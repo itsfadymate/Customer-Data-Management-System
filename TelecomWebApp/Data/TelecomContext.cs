@@ -14,8 +14,8 @@ public class TelecomContext : DbContext
         modelBuilder.Entity<Service_plan>().HasNoKey(); 
         modelBuilder.Entity<UsagePlan>().HasNoKey();
         modelBuilder.Entity<CustomerProfileActiveAccount>().HasNoKey();
-        modelBuilder.Entity<PhysicalStoreVoucherDetails>().HasNoKey();
-        modelBuilder.Entity<ResolvedTicketDetails>().HasNoKey();
+        modelBuilder.Entity<PhysicalStoreVoucherDetail>().HasNoKey();
+        modelBuilder.Entity<ResolvedTicketDetail>().HasNoKey();
         modelBuilder.Entity<CashbackTransactions>().HasNoKey();
         modelBuilder.Entity<CustomerWallet>().HasNoKey();
         modelBuilder.Entity<CustomerProfileActiveAccount>().HasNoKey();
@@ -44,7 +44,7 @@ public class TelecomContext : DbContext
     }
     public DbSet<UsagePlan> UsagePlans { get; set; }
     public DbSet<Service_plan> ServicePlans { get; set; }
-    public DbSet<ResolvedTicketDetails> ResolvedTicketDetailsView { get; set; }
+    public DbSet<ResolvedTicketDetail> ResolvedTicketDetailsView { get; set; }
 
 
     public int GetRemainingPlanAmount(string mobileNo, string planName)
