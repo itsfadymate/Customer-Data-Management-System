@@ -98,26 +98,23 @@ namespace TelecomWebApp.Controllers
         [HttpPost]
         public async Task<IActionResult> AccountPaymentPoints(string mobileNo)
         {
-            // Ensure the query has the correct format
-            var res = (await _context.PaymentPointsResults
-                .FromSqlRaw("EXEC Account_Payment_Points @mobile_num ", mobileNo)
-                .ToListAsync()).FirstOrDefault();
+            var mobileNumPar = new SqlParameter("@mobile_num", mobileNo ?? (object)DBNull.Value);
 
-            // Handle the result from the stored procedure
-            if (res != null)
-            {
-                ViewBag.NumberOfTransactions = res.transactions;
-                ViewBag.TotalEarnedPoints = res.points;
-            }
-            else
-            {
-                // Handle cases where no result is returned (optional)
-                ViewBag.NumberOfTransactions = 0;
-                ViewBag.TotalEarnedPoints = 0;
-            }
+            // Execute the stored procedure
+            var res = (await _context.PaymentPointsResults
+                .FromSqlRaw("EXEC Account_Payment_Points @mobile_num", new[] { mobileNumPar })
+                .ToListAsync())
+                .FirstOrDefault();
+
+            // Handle null values in the result
+            ViewBag.NumberOfTransactions = res?.transactions ?? 0; // Default to 0 if null
+            ViewBag.TotalEarnedPoints = res?.points ?? 0;         // Default to 0 if null
 
             return View();
         }
+
+
+
 
 
 

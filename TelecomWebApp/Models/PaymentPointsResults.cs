@@ -2,7 +2,7 @@
 {
     public class PaymentPointsResults
     {
-        public int transactions { get; set; }
-        public int points { get; set; }
+        public int? transactions { get; set; }
+        public int? points { get; set; }
     }
 }
