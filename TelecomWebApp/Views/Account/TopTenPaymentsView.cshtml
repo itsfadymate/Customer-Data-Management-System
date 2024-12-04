@@ -1,0 +1,29 @@
+﻿pay IEnumerable<Payment>
+<head>
+        <link rel="stylesheet" href="~/css/TopTenPayments.css" asp-append-version="true" />
+</head>
+<body>
+<div class="table-container">
+    <div class="table-header">
+        <div class="table-cell">ID</div>
+        <div class="table-cell">Amount</div>
+        <div class="table-cell">Payment date</div>
+        <div class="table-cell">Method</div>
+       <div class="table-cell">status</div>
+      <div class="table-cell">Mobile Number</div>
+    </div>
+    @foreach (var pay in Model)
+    {
+        <div class="table-row">
+            <div class="table-cell">pay.paymentID</div>
+        <div class="table-cell">pay.amount</div>
+        <div class="table-cell">pay.date_of_payment</div>
+        <div class="table-cell">pay.payment_method</div>
+       <div class="table-cell">pay.status</div>
+      <div class="table-cell">pay.mobileNo</div>
+    </div>
+    }
+    
+</div>
+    </body>
+

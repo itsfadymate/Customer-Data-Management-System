@@ -1,0 +1,55 @@
+﻿
+.table-container {
+    width: 80%;
+    margin: 30px auto;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+}
+
+
+.table-header {
+    display: flex;
+    background-color: #d12127;
+    color: #fff;
+    font-weight: bold;
+}
+
+
+.table-cell {
+    flex: 1;
+    padding: 15px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+
+.table-row {
+    display: flex;
+    transition: background-color 0.3s ease;
+}
+
+    .table-row:hover {
+        background-color: #f2f2f2;
+    }
+
+
+.table-header .table-cell {
+    font-size: 16px;
+}
+
+
+.table-row .table-cell {
+    font-size: 14px;
+}
+
+
+.table-row:nth-child(odd) {
+    background-color: #f9f9f9;
+}
+
+
+.table-row:hover {
+    background-color: #e0e0e0;
+}
