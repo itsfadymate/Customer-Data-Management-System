@@ -1,5 +1,6 @@
 ﻿create database Milestone2DB_24
 
+drop database Milestone2DB_24
 use  Milestone2DB_24
 
 go
@@ -368,7 +369,7 @@ GO
 -----------Fetch number of cashback transactions per each wallet---------------------
 GO
 CREATE VIEW [Num_of_cashback] AS
-select walletID,count(*)as 'count of transactions' from Cashback
+select walletID,count(*)as 'cashbackCount' from Cashback
 group by walletID
 
 GO
@@ -401,7 +402,6 @@ WHERE Subscription.subscription_date = @sub_date AND Service_plan.planID = @plan
 go
 --//////////////////////////////////////////////////////////////////////////////////////////////////////
 ------------------------------------------------------------------------------------------------------------
-
 -----------------------------Account_Usage_Plan table valued function-------------------------------------------------------
 --Retrieve the total usage of the input account on each subscribed plan from a given input date.
 go
@@ -409,7 +409,7 @@ create FUNCTION [Account_Usage_Plan]
 (@mobile_num char(11), @start_date date) --Define Function Inputs
 RETURNS Table -- Define Function Output
 AS
-Return (Select Plan_Usage.planID, sum(Plan_Usage.data_consumption) as 'total data' ,sum(Plan_Usage.minutes_used) as 'total mins',sum(Plan_Usage.SMS_sent) as 'total SMS'
+Return (Select Plan_Usage.planID, sum(Plan_Usage.data_consumption) as 'total_data' ,sum(Plan_Usage.minutes_used) as 'total_mins',sum(Plan_Usage.SMS_sent) as 'total_SMS'
 from Plan_Usage
 where  Plan_Usage.mobileNo = @mobile_num and Plan_Usage.start_date >= @start_date
 group by Plan_Usage.planID)

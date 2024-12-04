@@ -1,0 +1,20 @@
+﻿@{
+    ViewData["Title"] = "Get SMS Offers for Account";
+}
+
+<h1>Get SMS Offers for Account</h1>
+
+<form method="post">
+    <div class="form-group">
+        <label for="mobileNo">Mobile Number</label>
+        <input type="text" class="form-control" id="mobileNo" name="mobileNo" maxlength="11" required />
+        <span class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Get SMS Offers</button>
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

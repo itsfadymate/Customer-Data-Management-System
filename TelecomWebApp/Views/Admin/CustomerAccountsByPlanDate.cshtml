@@ -1,0 +1,17 @@
+﻿@{
+    ViewData["Title"] = "Search Customer Accounts by Plan and Date";
+}
+
+<h1>Search Customer Accounts by Plan and Date</h1>
+
+<form method="post">
+    <div class="form-group">
+        <label for="subscriptionDate">Subscription Date</label>
+        <input type="date" class="form-control" id="subscriptionDate" name="subscriptionDate" required />
+    </div>
+    <div class="form-group">
+        <label for="planId">Plan ID</label>
+        <input type="number" class="form-control" id="planId" name="planId" required />
+    </div>
+    <button type="submit" class="btn btn-primary">Search</button>
+</form>

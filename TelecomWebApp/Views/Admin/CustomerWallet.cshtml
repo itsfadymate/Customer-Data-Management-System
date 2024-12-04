@@ -1,0 +1,33 @@
+﻿@model IEnumerable<TelecomWebApp.Models.CustomerWallet>
+
+<h2>Customer Wallets</h2>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Wallet ID</th>
+                <th>Current Balance</th>
+                <th>Currency</th>
+                <th>Last Modified Date</th>
+                <th>National ID</th>
+                <th>Mobile No</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.walletID</td>
+                    <td>@item.current_balance</td>
+                    <td>@item.currency</td>
+                    <td>@item.last_modified_date</td>
+                    <td>@item.nationalID</td>
+                    <td>@item.mobileNo</td>
+                    <td>@item.first_name</td>
+                    <td>@item.last_name</td>
+                </tr>
+            }
+        </tbody>
+    </table>

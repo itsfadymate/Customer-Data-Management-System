@@ -1,0 +1,30 @@
+﻿@model IEnumerable<TelecomWebApp.Models.CustomerAccountsByPlanDate>
+
+<h1>Customer Accounts Subscribed to Plan on Given Date</h1>
+
+@if (!Model.Any())
+{
+    <p>No records found for the given inputs.</p>
+}
+else
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Mobile Number</th>
+                <th>Plan ID</th>
+                <th>Plan Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.mobileNo</td>
+                    <td>@item.planID</td>
+                    <td>@item.name</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

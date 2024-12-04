@@ -1,0 +1,19 @@
+﻿@model IEnumerable<TelecomWebApp.Models.Num_of_cashback>
+
+<h1>Number of cashbacks per wallet</h1>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Wallet ID</th>
+            <th>Cashback Count</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model){
+            <tr>
+                <td>@item.walletID</td>
+                <td>@item.cashbackCount</td>
+            </tr>
+        }
+    </tbody>
+</table>

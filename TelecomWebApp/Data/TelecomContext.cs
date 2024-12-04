@@ -17,6 +17,19 @@ public class TelecomContext : DbContext
         modelBuilder.Entity<PhysicalStoreVoucherDetails>().HasNoKey();
         modelBuilder.Entity<ResolvedTicketDetails>().HasNoKey();
         modelBuilder.Entity<CashbackTransactions>().HasNoKey();
+        modelBuilder.Entity<CustomerWallet>().HasNoKey();
+        modelBuilder.Entity<CustomerProfileActiveAccount>().HasNoKey();
+        modelBuilder.Entity<PhysicalStoreVoucherDetail>().HasNoKey();
+        modelBuilder.Entity<ResolvedTicketDetail>().HasNoKey();
+        modelBuilder.Entity<E_shopVoucher>().HasNoKey();
+        modelBuilder.Entity<AccountPayment>().HasNoKey();
+        modelBuilder.Entity<Num_of_cashback>().HasNoKey();
+        modelBuilder.Entity<CustomerAccountWithPlanDetail>().HasNoKey();
+        modelBuilder.Entity<CustomerAccountsByPlanDate>().HasNoKey();
+        modelBuilder.Entity<AccountUsagePlan>().HasNoKey();
+        modelBuilder.Entity<RemoveBenefit>().HasNoKey();
+        modelBuilder.Entity<SMSOffer>().HasNoKey();
+        modelBuilder.Entity<PaymentPointsResults>().HasNoKey();
     }
 
 
@@ -136,7 +149,11 @@ public class TelecomContext : DbContext
             .ToListAsync();
     }
     public DbSet<NotSubbed> ServicePlansNotSubbed { get; set; }
-
+    public DbSet<CustomerWallet> CustomerWallets { get; set; }
+    public DbSet<E_shopVoucher> E_ShopVouchers { get; set; }
+    public DbSet<AccountPayment> AccountPayments { get; set; }
+    public DbSet<Num_of_cashback> Num_Of_Cashbacks { get; set; }
+    public DbSet<PaymentPointsResults> PaymentPointsResults { get; set; }
     public async Task<List<CashbackTransactions>> GetCashbackTransactions(int nationalID)
     {
         return await CashbackTransactions
@@ -155,34 +172,46 @@ public class TelecomContext : DbContext
 
     public DbSet<CustomerProfileActiveAccount> CustomerProfileActiveAccounts { get; set; }
 
-    public async Task<List<CustomerProfileActiveAccount>> GetCustomerProfilesWithActiveAccountsAsync()
+    public DbSet<PhysicalStoreVoucherDetail> PhysicalStoreVoucherDetails { get; set; }
+
+    public DbSet<ResolvedTicketDetail> ResolvedTicketDetails { get; set; }
+
+    public DbSet<CustomerAccountWithPlanDetail> CustomerAccountWithPlanDetails { get; set; }
+
+    public DbSet<CustomerAccountsByPlanDate> CustomerAccountsByPlanDateView { get; set; }
+
+    public DbSet<AccountUsagePlan> AccountUsagePlans { get; set; }
+
+    public DbSet<SMSOffer> SMSOffers { get; set; }
+
+    public async Task<List<SMSOffer>> GetSMSOffersAsync(string mobileNo)
     {
-        return await CustomerProfileActiveAccounts
-            .FromSqlInterpolated($"EXEC allCustomerAccounts")
+        return await SMSOffers
+            .FromSqlInterpolated($" SELECT * FROM dbo.Account_SMS_Offers({mobileNo})")
+            .ToListAsync();
+    }
+    public async Task<List<AccountUsagePlan>> GetAccountUsagePlanAsync(string mobileNum, DateTime startDate)
+    {
+        return await AccountUsagePlans
+            .FromSqlInterpolated($"SELECT * FROM dbo.Account_Usage_Plan({mobileNum}, {startDate})")
             .ToListAsync();
     }
 
-    public DbSet<PhysicalStoreVoucherDetails> PhysicalStoreVoucherDetailsView { get; set; }
 
-    public async Task<List<PhysicalStoreVoucherDetails>> GetPhysicalStoreVoucherDetailsAsync()
+    public async Task<List<CustomerAccountsByPlanDate>> GetCustomerAccountsByPlanDateAsync(DateTime subscriptionDate, int planId)
     {
-        return await PhysicalStoreVoucherDetailsView
-            .FromSqlInterpolated($"EXEC PhysicalStoreVouchers")
+        return await CustomerAccountsByPlanDateView
+            .FromSqlInterpolated($"SELECT * FROM dbo.Account_Plan_date({subscriptionDate}, {planId})")
             .ToListAsync();
     }
-  
 
-    public async Task<List<ResolvedTicketDetails>> GetResolvedTicketsAsync()
+    public async Task RemoveBenefitsAsync(string mobileNo, int planId)
     {
-        return await ResolvedTicketDetailsView
-            .FromSqlInterpolated($"EXEC allResolvedTickets")
-            .ToListAsync();
-    }
-    public async Task<List<CustomerAccountWithPlan>> GetCustomerAccountsWithPlansAsync()
-    {
-        return await this.Database
-            .SqlQuery<CustomerAccountWithPlan>($"EXEC Account_Plan")
-            .ToListAsync();
+        await this.Database.ExecuteSqlRawAsync(
+            "EXEC dbo.Benefits_Account @mobileNo, @planId",
+            new SqlParameter("@mobileNo", mobileNo),
+            new SqlParameter("@planId", planId)
+        );
     }
 
    
