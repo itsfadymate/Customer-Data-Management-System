@@ -214,5 +214,8 @@ public class TelecomContext : DbContext
         );
     }
 
-   
+    public DbSet<TelecomWebApp.Models.shop> shop { get; set; }
+
+
+
 }
