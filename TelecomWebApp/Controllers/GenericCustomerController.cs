@@ -28,13 +28,12 @@ public class GenericCustomerController : Controller
         if (_telecomContext.login(mobileNo, pass)){
             HttpContext.Session.SetString("MobileNo", mobileNo);
             Debug.WriteLine("valid creadentials");
-            TempData["ToastrMessage"] = "Login successful";
-	        TempData["ToastrType"] = "success";
+            TempData["SuccessMessage"] = "Login successful";
+	        
             return RedirectToAction("Index","Account");
 	}
         Debug.WriteLine("invalid creadentials");
-        TempData["ToastrMessage"] = "Credentials not found";
-        TempData["ToastrType"] = "error";
+        TempData["ErrorMessage"] = "Credentials not found";
         ViewData["hidenav"] = true;
         return View("login");
     }
