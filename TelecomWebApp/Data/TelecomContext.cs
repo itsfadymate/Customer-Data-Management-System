@@ -2,6 +2,7 @@
 using Microsoft.Data.SqlClient;
 using System.Diagnostics;
 using TelecomWebApp.Models;
+using Newtonsoft.Json.Linq;
 
 public class TelecomContext : DbContext
 {
@@ -30,6 +31,8 @@ public class TelecomContext : DbContext
         modelBuilder.Entity<RemoveBenefit>().HasNoKey();
         modelBuilder.Entity<SMSOffer>().HasNoKey();
         modelBuilder.Entity<PaymentPointsResults>().HasNoKey();
+        modelBuilder.Entity<HighestValueVoucher>().HasNoKey();
+        modelBuilder.Entity<Value>().HasNoKey();
     }
 
 
@@ -45,6 +48,8 @@ public class TelecomContext : DbContext
     public DbSet<UsagePlan> UsagePlans { get; set; }
     public DbSet<Service_plan> ServicePlans { get; set; }
     public DbSet<ResolvedTicketDetail> ResolvedTicketDetailsView { get; set; }
+    public DbSet<HighestValueVoucher> vouchers { get; set; }
+    public DbSet<Value> values { get; set; }
 
 
     public int GetRemainingPlanAmount(string mobileNo, string planName)
@@ -55,7 +60,7 @@ public class TelecomContext : DbContext
 
         return result;
     }
-
+    
 	public int GetExtraPlanAmount(string mobileNo, String planName)
     {
          var result = this.Database
@@ -64,29 +69,31 @@ public class TelecomContext : DbContext
 
         return result;
     }
+
     //temp hardcoded
-    public async Task<int> GetHighestValueVoucher(string mobileNo = "01012345678")
+    public async Task<HighestValueVoucher?> GetHighestValueVoucher(string mobileNo = "01234567890")
     {
-        var result = await this.Database
-        .SqlQuery<int>($"EXECUTE Account_Highest_Voucher @mobile_num = {mobileNo}")
-        .FirstOrDefaultAsync();
-        return result;
+        Debug.WriteLine("Account GetHighestValueVoucher()");
+        var result = await this.vouchers
+            .FromSqlInterpolated($"EXECUTE Account_Highest_Voucher @mobile_num = {mobileNo}")
+            .ToListAsync(); // Load results into memory
+
+        return result.FirstOrDefault(); // Apply FirstOrDefault after data is retrieved
     }
 
+
+
+
     //temp hardcoded
-	public int GetUnresolvedTickets(String mobileNo= "01012345678")
+    public int GetUnresolvedTickets(String mobileNo= "01234567890")
     {
-
-        
-
-        int nationalID = this.Database
-            .SqlQuery<int>($"SELECT cp.nationalID AS Value FROM CUSTOMER_ACCOUNT cp WHERE cp.mobileNo = {mobileNo} ")
-            .FirstOrDefault();
+        Debug.WriteLine("Account GetUnresolvedTickets()");
+        int nationalID = this.values.FromSqlInterpolated<Value>($"SELECT top 1 cp.nationalID AS Value FROM CUSTOMER_ACCOUNT cp WHERE cp.mobileNo = {mobileNo} ")
+            .FirstOrDefault().value;
           Debug.WriteLine($"nationalID in GetUnresolvedTickets: {nationalID} " );
-         var result = this.Database
-            .SqlQuery<int>($"EXEC Ticket_Account_Customer @NID = {nationalID};")
-            .FirstOrDefault(); 
-        return result;
+        var result = this.Database.SqlQuery<int>($"EXEC [Ticket_Account_Customer] @NID = {nationalID}").ToList();
+        Debug.WriteLine($"no of unresolved tickets: {result} ");
+        return result.First();
     }
     //temp hardcoded
     public async Task<List<Service_plan>> GetLast5MonthsServicePlans(String mobileNo = "01012345678")

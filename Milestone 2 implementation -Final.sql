@@ -658,11 +658,12 @@ CREATE PROCEDURE [Ticket_Account_Customer]
 @NID int 
 
 AS
-select count(t.ticketID) from Technical_support_ticket t
+select count(t.ticketID) as 'Value' from Technical_support_ticket t
 inner join customer_account a 
 on t.mobileNo = a.mobileNo
 where t.status <> 'resolved' and a.nationalID = @NID
 go
+EXEC Ticket_Account_Customer @NID =101
 
 
 --//////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1147,7 +1148,7 @@ VALUES
 (2, 2);
 
 -- Shop Data
-INSERT INTO Shop (name, category)
+INSERT INTO Shop 
 VALUES
 ('Tech Shop', 'Electronics'),
 ('Supermart', 'Groceries');
@@ -1161,11 +1162,13 @@ VALUES
 INSERT INTO E_Shop (shopID, URL, rating)
 VALUES
 (2, 'www.supermart.com', 5);
-
+SELECT top 1 cp.nationalID AS Value FROM CUSTOMER_ACCOUNT cp WHERE cp.mobileNo = '01234567890';
 -- Voucher Data
 INSERT INTO Voucher (value, expiry_date, points, mobileNo, shopID, redeem_date)
 VALUES
-(10, '2024-12-31', 50, '01234567890', 1, '2024-03-20');
+(10, '2024-12-31', 50, '01234567890', 1, '2024-03-20'),
+(11, '2024-12-31', 10, '01234567890', 1, '2024-03-20');
+EXECUTE Account_Highest_Voucher @mobile_num = '01234567890'
 
 -- Technical Support Ticket Data
 INSERT INTO Technical_Support_Ticket (mobileNo, Issue_description, priority_level, status)

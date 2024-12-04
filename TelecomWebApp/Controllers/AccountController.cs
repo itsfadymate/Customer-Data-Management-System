@@ -13,12 +13,25 @@ public class AccountController : Controller
 		_telecomContext = dbContext;
     }
 
-	public async Task<IActionResult> Index(String mobileNo)
+	public async Task<IActionResult> Index()
     {
+        Debug.WriteLine("Account Index()");
+        int unresolvedCount = 0;
+        int HighestValueVoucherID = 0;
+        try
+        {
+             unresolvedCount = _telecomContext.GetUnresolvedTickets();
+             HighestValueVoucherID = (await _telecomContext.GetHighestValueVoucher()).voucherID;
+        }
+        catch (Exception ex) {
+            //Debug.WriteLine(ex.Message);
+            Debug.WriteLine("------------------------- couldn't read from the database unresolvedCount & highestVoucherID");
+        }
+
         var serviceInfo = new ServiceInfo
         {
-            UnresolvedTickets = 5,//_telecomContext .GetUnresolvedTickets(mobileNo),
-            HighestValueVoucher = 0//await _telecomContext .GetHighestValueVoucher(mobileNo)
+            UnresolvedTickets = unresolvedCount,
+            HighestValueVoucher = HighestValueVoucherID
         };
 
         return View("LoggedInCustomerView", serviceInfo);
