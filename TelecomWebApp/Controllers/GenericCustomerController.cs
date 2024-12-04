@@ -38,4 +38,21 @@ public class GenericCustomerController : Controller
         return View("login");
     }
 
+    public async Task<IActionResult> AllBenefitsView()
+    {
+        Debug.WriteLine("Generic AllBenefitsView()");
+        
+        try
+        {
+            var benefits = await _telecomContext.GetAllActiveBenefits();
+            return View("TopTenPaymentsView", benefits);
+        }
+        catch (Exception e)
+        {
+            TempData["ErrorMessage"] = "couldn't retrieve active benfits";
+            Debug.WriteLine(e.Message);
+        }
+        return View("AllActiveBenefitsView");
+    }
+
 }

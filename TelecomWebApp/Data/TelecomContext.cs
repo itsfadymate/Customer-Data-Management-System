@@ -3,6 +3,8 @@ using Microsoft.Data.SqlClient;
 using System.Diagnostics;
 using TelecomWebApp.Models;
 using Newtonsoft.Json.Linq;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Microsoft.AspNetCore.Mvc;
 
 public class TelecomContext : DbContext
 {
@@ -65,6 +67,7 @@ public class TelecomContext : DbContext
 
     public DbSet<SMSOffer> SMSOffers { get; set; }
     public DbSet<Payment> payments { get; set; }
+    public DbSet<Benefit> benefits { get; set; }
 
     private bool IsInvalidMobileNo(string mobileNo)
     {
@@ -224,8 +227,6 @@ public class TelecomContext : DbContext
     {
         
         return this.Database.SqlQuery<bool>($"SELECT dbo.AccountLoginValidation({mobileNo},{password}) AS Value").FirstOrDefault();
-        
-        
     }
 
     public async Task<List<SMSOffer>> GetSMSOffersAsync(string mobileNo)
@@ -233,6 +234,9 @@ public class TelecomContext : DbContext
         return await SMSOffers
             .FromSqlInterpolated($" SELECT * FROM dbo.Account_SMS_Offers({mobileNo})")
             .ToListAsync();
+    }
+    public async Task<List<Benefit>> GetAllActiveBenefits() {
+        return await this.benefits.FromSqlRaw("SELECT * FROM allBenefits").ToListAsync();   
     }
     public async Task<List<AccountUsagePlan>> GetAccountUsagePlanAsync(string mobileNum, DateTime startDate)
     {
