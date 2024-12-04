@@ -1,0 +1,83 @@
+﻿.input-area {
+    background-color: #f4f4f9;
+    border-radius: 8px;
+    padding: 30px;
+    max-width: 400px;
+    margin: 50px auto;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+    .input-area h2 {
+        font-size: 1.5rem;
+        color: #333;
+        margin-bottom: 20px;
+        font-family: 'Arial', sans-serif;
+    }
+
+    .input-area input {
+        width: 80%;
+        padding: 12px 20px;
+        margin: 10px 0;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 1rem;
+        outline: none;
+        transition: all 0.3s ease;
+    }
+
+
+        .input-area input:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 8px rgba(0, 123, 255, 0.3);
+        }
+
+    .input-area button {
+        width: 80%;
+        padding: 12px 20px;
+        background-color: #ff1100;
+        color: white;
+        font-size: 1rem;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+        .input-area button:hover {
+            background-color: #771100;
+        }
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+}
+
+.output-fields {
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    gap: 20px;
+    padding: 20px;
+}
+
+    .output-fields .Amount {
+        background: #f0f0f0;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .output-fields h3 {
+        margin-bottom: 10px;
+    }
+
+    .output-fields strong {
+        color: #ff1100;
+    }
