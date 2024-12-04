@@ -77,7 +77,6 @@ public class AccountController : Controller
         Debug.WriteLine("Account TopTenPaymentsView()");
         String mobileNo = HttpContext.Session.GetString("MobileNo");
         ViewData["hidenav"] = true;
-        ViewData["hidecontainer"] = true;
         try
         {
             var payments = await _telecomContext.GetTopTenPayments(mobileNo);
@@ -90,6 +89,7 @@ public class AccountController : Controller
         }
         return View("TopTenPaymentsView");
     }
+
 
     public IActionResult ViewAllPlans()
     {
