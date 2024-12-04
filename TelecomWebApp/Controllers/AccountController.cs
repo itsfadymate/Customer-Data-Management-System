@@ -62,6 +62,34 @@ public class AccountController : Controller
         var plans = _telecomContext.GetServicePlans();
         return View("ServicePlan", plans);
     }
+    public IActionResult CheckDueAmountsView() {
+        ViewData["hidenav"] = true;
+        return View("CheckDueAmountsView");
+    }
+    public IActionResult CheckDueAmounts(String PlanName)
+    {
+        ViewData["hidenav"] = true;
+        Debug.WriteLine("AccountController CheckDueAmounts() ");
+        String mobileNo = "";
+        int dbRemaining = 0;
+        int dbExtra = 0;
+
+        try
+        {
+            dbExtra = _telecomContext.GetExtraPlanAmount(mobileNo, PlanName);
+            dbRemaining = _telecomContext.GetRemainingPlanAmount(mobileNo, PlanName);
+            Debug.WriteLine($"ExtraAMounts:{dbExtra} RemainingAmounts:{dbRemaining} ");
+        }catch (Exception e)
+        {
+            Debug.WriteLine(e.Message);
+        }
+        var DueAmounts = new DueAmounts
+        {
+            ExtraAmount = dbExtra,
+            RemainingAmount = dbRemaining
+        };
+        return View("CheckDueAmountsView", DueAmounts);
+    }
 
     public IActionResult UsageInDuration(string planName, DateTime startDate, DateTime endDate)
     {

@@ -56,9 +56,9 @@ public class TelecomContext : DbContext
         return result;
     }
 
-	public int GetExtraPlanAmount(string mobileNo, string planName)
+	public int GetExtraPlanAmount(string mobileNo, String planName)
     {
-        var result = this.Database
+         var result = this.Database
             .SqlQuery<int>($"SELECT dbo.Extra_plan_amount({mobileNo}, {planName})")
             .FirstOrDefault();
 
