@@ -72,6 +72,24 @@ public class AccountController : Controller
         return View("CashbackPaymentBenefitView", val);
     }
 
+    public async Task<IActionResult> TopTenPaymentsView()
+    {
+        Debug.WriteLine("Account TopTenPaymentsView()");
+        String mobileNo = HttpContext.Session.GetString("MobileNo");
+        ViewData["hidenav"] = true;
+        ViewData["hidecontainer"] = true;
+        try
+        {
+            var payments = await _telecomContext.GetTopTenPayments(mobileNo);
+            return View("TopTenPaymentsView", payments);
+        }
+        catch (Exception e)
+        {
+            TempData["ErrorMessage"] = "couldn't retrieve payments";
+            Debug.WriteLine(e.Message);
+        }
+        return View("TopTenPaymentsView");
+    }
 
     public IActionResult ViewAllPlans()
     {
@@ -84,9 +102,10 @@ public class AccountController : Controller
     }
     public IActionResult CheckDueAmounts(String PlanName)
     {
+        String mobileNo = HttpContext.Session.GetString("MobileNo");
         ViewData["hidenav"] = true;
         Debug.WriteLine("AccountController CheckDueAmounts() ");
-        String mobileNo = HttpContext.Session.GetString("MobileNo");
+        
         int dbRemaining = 0;
         int dbExtra = 0;
 
@@ -121,6 +140,7 @@ public class AccountController : Controller
         return View("UsageCurrMonth", usage);
     }*/
 
+    
 
     public IActionResult ViewAllPlansNotSubbed()
     {

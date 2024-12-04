@@ -34,6 +34,7 @@ public class TelecomContext : DbContext
         modelBuilder.Entity<HighestValueVoucher>().HasNoKey();
         modelBuilder.Entity<Value>().HasNoKey();
         modelBuilder.Entity<UsageCurrMonth>().HasNoKey();
+        modelBuilder.Entity<Payment>().HasNoKey();
     }
 
 
@@ -63,6 +64,7 @@ public class TelecomContext : DbContext
     public DbSet<AccountUsagePlan> AccountUsagePlans { get; set; }
 
     public DbSet<SMSOffer> SMSOffers { get; set; }
+    public DbSet<Payment> payments { get; set; }
 
     private bool IsInvalidMobileNo(string mobileNo)
     {
@@ -253,6 +255,12 @@ public class TelecomContext : DbContext
             new SqlParameter("@mobileNo", mobileNo),
             new SqlParameter("@planId", planId)
         );
+    }
+
+    public async Task<List<Payment>> GetTopTenPayments(string mobileNo)
+    {
+        Debug.WriteLine("TelecomContext GetTopTenPayments()");
+        return await this.payments.FromSql<Payment>($"EXEC Top_Successful_Payments @mobile_num = {mobileNo}").ToListAsync();
     }
 
     public DbSet<TelecomWebApp.Models.shop> shop { get; set; }
