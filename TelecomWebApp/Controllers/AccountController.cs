@@ -113,11 +113,11 @@ public class AccountController : Controller
         return View("Consumption", usage);
     }
 
-    public IActionResult UsageCurrMonth(String mobileNo)
+    /*public IActionResult UsageCurrMonth(String mobileNo) needs fix idk who did it ~fady
     {
         var usage = _telecomContext.GetUsageCurrMonth(mobileNo);
         return View("UsageCurrMonth", usage);
-    }
+    }*/
 
 
     public IActionResult ViewAllPlansNotSubbed()
