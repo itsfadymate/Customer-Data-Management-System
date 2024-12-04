@@ -236,6 +236,7 @@ public class TelecomContext : DbContext
             .ToListAsync();
     }
     public async Task<List<Benefit>> GetAllActiveBenefits() {
+        Debug.WriteLine("telecom GetAllActiveBenefits()");
         return await this.benefits.FromSqlRaw("SELECT * FROM allBenefits").ToListAsync();   
     }
     public async Task<List<AccountUsagePlan>> GetAccountUsagePlanAsync(string mobileNum, DateTime startDate)

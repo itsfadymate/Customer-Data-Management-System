@@ -45,7 +45,7 @@ public class GenericCustomerController : Controller
         try
         {
             var benefits = await _telecomContext.GetAllActiveBenefits();
-            return View("TopTenPaymentsView", benefits);
+            return View("AllActiveBenefitsView", benefits);
         }
         catch (Exception e)
         {
