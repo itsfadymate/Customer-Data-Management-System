@@ -30,6 +30,7 @@ public class TelecomContext : DbContext
         modelBuilder.Entity<RemoveBenefit>().HasNoKey();
         modelBuilder.Entity<SMSOffer>().HasNoKey();
         modelBuilder.Entity<PaymentPointsResults>().HasNoKey();
+        modelBuilder.Entity<UsageCurrMonth>().HasNoKey();
     }
 
 
@@ -155,7 +156,6 @@ public class TelecomContext : DbContext
     public DbSet<Num_of_cashback> Num_Of_Cashbacks { get; set; }
     public DbSet<PaymentPointsResults> PaymentPointsResults { get; set; }
 
-    public DbSet
     public async Task<List<CashbackTransactions>> GetCashbackTransactions(int nationalID)
     {
         return await CashbackTransactions

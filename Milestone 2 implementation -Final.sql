@@ -1,6 +1,4 @@
 ﻿create database Milestone2DB_24
-
-drop database Milestone2DB_24
 use  Milestone2DB_24
 
 go

@@ -1,26 +1,26 @@
-﻿@model List<TelecomWebApp.Models.Consumption>
+﻿@model List<TelecomWebApp.Models.UsageCurrMonth>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Consumption is:</title>
+    <title>Usage in current month is:</title>
 </head>
 <body>
     <div>
         <table>
             <tr>
-                <th>SMS</th>
+                <th>Data</th>
                 <th>Minutes</th>
-                <th>Internet</th>
+                <th>SMS</th>
             </tr>
             @foreach (var u in Model)
             {
                 <tr>
-                    <td>@u.SMS</td>
+                    <td>@u.data</td>
                     <td>@u.minutes</td>
-                    <td>@u.internet</td>
+                    <td>@u.sms</td>
                 </tr>
             }
         </table>

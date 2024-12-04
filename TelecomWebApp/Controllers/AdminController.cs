@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Numerics;
 using TelecomWebApp.Models;
 
-namespace TelecomWebApp.Controllers
+namespace TelecomWebApp.Controllers 
 {
     public class AdminController : Controller
     {
