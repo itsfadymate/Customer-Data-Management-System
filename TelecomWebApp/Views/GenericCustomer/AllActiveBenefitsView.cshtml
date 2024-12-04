@@ -1,0 +1,31 @@
+﻿@model IEnumerable<Benefit>
+    <head>
+        <link rel="stylesheet" href="~/css/TopTenPayments.css" asp-append-version="true" />
+    </head>
+    <body>
+        <div class="table-container">
+            <div class="table-header">
+                <div class="table-cell">ID</div>
+                <div class="table-cell">date</div>
+                <div class="table-cell">status</div>
+                <div class="table-cell">Mobile Number</div>
+                <div class="table-cell">description</div>
+            </div>
+            @if (Model != null)
+            {
+                @foreach (var benefit in Model)
+                {
+                    <div class="table-row">
+                        <div class="table-cell">benefit.benefitID</div>
+                        <div class="table-cell">date</div>
+                        <div class="table-cell">benefit.status</div>
+                        <div class="table-cell">pay.mobileNo</div>
+                        <div class="table-cell">description</div>
+                    </div>
+                }
+
+            }
+
+        </div>
+    </body>
+
