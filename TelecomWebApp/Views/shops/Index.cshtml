@@ -1,0 +1,44 @@
+﻿
+@model IEnumerable<TelecomWebApp.Models.shop> 
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop List</title>
+    <link rel="stylesheet" href="~/css/styles.css"> <!-- Link to the CSS file for styling -->
+</head>
+<body>
+    <header>
+        <h1>Shop List</h1>
+    </header>
+
+    <main>
+        <!-- Table to display the shop list -->
+        <table class="shop-table">
+            <thead>
+                <tr>
+                    <th>Shop ID</th>
+                    <th>Name</th>
+                    <th>Category</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var shop in Model)
+                {
+                    <tr>
+                        <td>@shop.shopID</td>
+                        <td>@shop.name</td>
+                        <td>@shop.Category</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 TelecomWebApp. All rights reserved.</p>
+    </footer>
+</body>
+</html>

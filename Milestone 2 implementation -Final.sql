@@ -1,6 +1,4 @@
 ﻿create database Milestone2DB_24
-
-drop database Milestone2DB_24
 use  Milestone2DB_24
 
 go
@@ -1010,7 +1008,6 @@ Exec Initiate_balance_payment @mobile_num = '01234567890', @amount =100, @paymen
 -----------------------Redeem_voucher_points Procedure execution----------------------------------
 
 Exec Redeem_voucher_points @mobile_num = '01234567890', @voucher_id = 3 
-
 -- Inserting data into customer_profile table
 INSERT INTO customer_profile (nationalID, first_name, last_name, email, address, date_of_birth)
 VALUES 
@@ -1068,7 +1065,7 @@ VALUES
 (3, 'Emily', 'Johnson', 'emily.johnson@example.com', '789 Pine Road', '1993-07-15');
 
 -- Customer Account Data
-INSERT INTO Customer_Account (mobileNo, pass, balance, account_type, start_date, status, point, nationalID)
+INSERT INTO Customer_Account (mobileNo, pass, balance, account_type, start_date, status, points, nationalID)
 VALUES
 ('01234567890', 'password123', 100.0, 'Post Paid', '2024-01-01', 'Active', 50, 1),
 ('09876543210', 'securepass', 50.0, 'Prepaid', '2024-02-15', 'Active', 30, 2),

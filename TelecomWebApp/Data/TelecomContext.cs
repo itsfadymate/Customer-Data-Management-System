@@ -33,6 +33,7 @@ public class TelecomContext : DbContext
         modelBuilder.Entity<PaymentPointsResults>().HasNoKey();
         modelBuilder.Entity<HighestValueVoucher>().HasNoKey();
         modelBuilder.Entity<Value>().HasNoKey();
+        modelBuilder.Entity<UsageCurrMonth>().HasNoKey();
     }
 
 
@@ -254,5 +255,8 @@ public class TelecomContext : DbContext
         );
     }
 
-   
+    public DbSet<TelecomWebApp.Models.shop> shop { get; set; }
+
+
+
 }

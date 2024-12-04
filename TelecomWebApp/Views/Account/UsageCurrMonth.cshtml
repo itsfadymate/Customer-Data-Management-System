@@ -1,0 +1,29 @@
+﻿@model List<TelecomWebApp.Models.UsageCurrMonth>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Usage in current month is:</title>
+</head>
+<body>
+    <div>
+        <table>
+            <tr>
+                <th>Data</th>
+                <th>Minutes</th>
+                <th>SMS</th>
+            </tr>
+            @foreach (var u in Model)
+            {
+                <tr>
+                    <td>@u.data</td>
+                    <td>@u.minutes</td>
+                    <td>@u.sms</td>
+                </tr>
+            }
+        </table>
+    </div>
+</body>
+</html>
