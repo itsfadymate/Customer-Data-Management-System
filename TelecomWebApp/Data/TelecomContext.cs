@@ -154,6 +154,8 @@ public class TelecomContext : DbContext
     public DbSet<AccountPayment> AccountPayments { get; set; }
     public DbSet<Num_of_cashback> Num_Of_Cashbacks { get; set; }
     public DbSet<PaymentPointsResults> PaymentPointsResults { get; set; }
+
+    public DbSet
     public async Task<List<CashbackTransactions>> GetCashbackTransactions(int nationalID)
     {
         return await CashbackTransactions
@@ -182,6 +184,8 @@ public class TelecomContext : DbContext
 
     public DbSet<AccountUsagePlan> AccountUsagePlans { get; set; }
 
+    public DbSet<UsageCurrMonth> CurrMonthUsage { get; set; }
+
     public DbSet<SMSOffer> SMSOffers { get; set; }
 
     public async Task<List<SMSOffer>> GetSMSOffersAsync(string mobileNo)
@@ -194,6 +198,13 @@ public class TelecomContext : DbContext
     {
         return await AccountUsagePlans
             .FromSqlInterpolated($"SELECT * FROM dbo.Account_Usage_Plan({mobileNum}, {startDate})")
+            .ToListAsync();
+    }
+
+    public async Task<List<UsageCurrMonth>> GetUsageCurrMonth(string mobileNum)
+    {
+        return await CurrMonthUsage
+            .FromSqlInterpolated($"SELECT * FROM dbo.Usage_Plan_CurrentMonth({mobileNum})")
             .ToListAsync();
     }
 

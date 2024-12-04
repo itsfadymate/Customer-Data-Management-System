@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.Reflection.Metadata;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
@@ -67,6 +68,12 @@ public class AccountController : Controller
     {
         var usage = _telecomContext.GetConsumption(planName, startDate, endDate);
         return View("Consumption", usage);
+    }
+
+    public IActionResult UsageCurrMonth(String mobileNo)
+    {
+        var usage = _telecomContext.GetUsageCurrMonth(mobileNo);
+        return View("UsageCurrMonth", usage);
     }
 
 
