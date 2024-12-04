@@ -26,6 +26,7 @@ public class GenericCustomerController : Controller
     {
         Debug.WriteLine("Generic customer login()");
         if (_telecomContext.login(mobileNo, pass)){
+            HttpContext.Session.SetString("MobileNo", mobileNo);
             Debug.WriteLine("valid creadentials");
             TempData["ToastrMessage"] = "Login successful";
 	        TempData["ToastrType"] = "success";

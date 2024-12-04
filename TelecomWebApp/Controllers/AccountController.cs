@@ -18,10 +18,11 @@ public class AccountController : Controller
         Debug.WriteLine("Account Index()");
         int unresolvedCount = 0;
         int HighestValueVoucherID = 0;
+        String MobileNo = HttpContext.Session.GetString("MobileNo");
         try
         {
-             unresolvedCount = _telecomContext.GetUnresolvedTickets();
-             HighestValueVoucherID = (await _telecomContext.GetHighestValueVoucher()).voucherID;
+             unresolvedCount = _telecomContext.GetUnresolvedTickets(MobileNo);
+             HighestValueVoucherID = (await _telecomContext.GetHighestValueVoucher(MobileNo)).voucherID;
         }
         catch (Exception ex) {
             //Debug.WriteLine(ex.Message);
@@ -39,7 +40,7 @@ public class AccountController : Controller
     public async Task<IActionResult> ViewLast5MonthsServicePlans()
     {
         Debug.WriteLine("AccountController ViewLast5MonthsServicePlans()");
-        String mobileNo = "01012345678";
+        String mobileNo = HttpContext.Session.GetString("MobileNo"); 
         var spmodel = await _telecomContext.GetLast5MonthsServicePlans(mobileNo);
 
         return View("Last5MonthsServicePlansView", spmodel);
@@ -61,11 +62,12 @@ public class AccountController : Controller
         Debug.WriteLine("AccountController CashbackPaymentView()");
         return View("CashbackPaymentBenfitView");
     }
-    //temp hardcoded
+    
     public async Task<IActionResult> CashbackPaymentBenefit(int paymentID, int benefitID)
     {
+        String MobileNo = HttpContext.Session.GetString("MobileNo");
 
-        double val = await _telecomContext.Payment_wallet_cashback("01012345678", paymentID, benefitID);
+        double val = await _telecomContext.Payment_wallet_cashback(MobileNo, paymentID, benefitID);
         return View("CashbackPaymentBenefitView", val);
     }
 
@@ -83,7 +85,7 @@ public class AccountController : Controller
     {
         ViewData["hidenav"] = true;
         Debug.WriteLine("AccountController CheckDueAmounts() ");
-        String mobileNo = "";
+        String mobileNo = HttpContext.Session.GetString("MobileNo");
         int dbRemaining = 0;
         int dbExtra = 0;
 
@@ -113,8 +115,8 @@ public class AccountController : Controller
 
     public IActionResult ViewAllPlansNotSubbed()
     {
-        String mobileNo = "";
-        var notSubbed = _telecomContext.GetServicePlansNotSubbed(mobileNo);
+        String MobileNo = HttpContext.Session.GetString("MobileNo");
+        var notSubbed = _telecomContext.GetServicePlansNotSubbed(MobileNo);
         return View("NotSubbed", notSubbed);
     }
     
