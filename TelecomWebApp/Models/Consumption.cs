@@ -2,9 +2,9 @@
 {
     public class Consumption
     {
-        public int SMS { get; set; }
-        public int minutes { get; set; }
-        public int internet { get; set; }
+        public int SMS_sent { get; set; }
+        public int minutes_used { get; set; }
+        public int data_consumption { get; set; }
     }
 
 

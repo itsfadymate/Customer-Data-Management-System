@@ -230,7 +230,7 @@ public class TelecomContext : DbContext
     public async Task<List<Consumption>> GetConsumption(string planName, DateTime startDate, DateTime endDate)
     {
         return await Consumption
-            .FromSqlInterpolated($"SELECT dbo.Consumption({planName}, {startDate}, {endDate})")
+            .FromSqlInterpolated($"SELECT * FROM dbo.Consumption({planName}, {startDate}, {endDate})")
             .ToListAsync();
     }
 

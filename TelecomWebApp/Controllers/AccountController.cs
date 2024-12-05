@@ -161,12 +161,21 @@ public class AccountController : Controller
         return View("CheckDueAmountsView", DueAmounts);
     }
 
-    public IActionResult UsageInDuration(string planName, DateTime startDate, DateTime endDate)
+    [HttpPost]
+    public async Task<IActionResult> ConsumptionForm(string plan_name, DateTime start_date, DateTime end_date)
     {
         ViewData["hidenav"] = true;
-        var usage = _telecomContext.GetConsumption(planName, startDate, endDate);
+        var usage = await _telecomContext.GetConsumption(plan_name, start_date, end_date);
         return View("Consumption", usage);
     }
+
+    public IActionResult ConsumptionForm()
+    {
+        return View(); 
+    }
+
+  
+
 
     public async Task<IActionResult> UsageCurrMonth()
     {
