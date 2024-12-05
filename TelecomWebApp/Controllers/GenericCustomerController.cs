@@ -56,8 +56,6 @@ public class GenericCustomerController : Controller
     }
 
     public async Task<IActionResult> ViewAllPlans(){
-        ViewData["hidenav"] = true;
-
         try
         {
             var plans = await _telecomContext.GetServicePlans(); 

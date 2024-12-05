@@ -16,11 +16,11 @@
                 @foreach (var benefit in Model)
                 {
                     <div class="table-row">
-                        <div class="table-cell">benefit.benefitID</div>
-                        <div class="table-cell">date</div>
-                        <div class="table-cell">benefit.status</div>
-                        <div class="table-cell">pay.mobileNo</div>
-                        <div class="table-cell">description</div>
+                        <div class="table-cell">@benefit.benefitID</div>
+                        <div class="table-cell">@benefit.validity_date</div>
+                        <div class="table-cell">@benefit.status</div>
+                         <div class="table-cell">@benefit.mobileNo</div>
+                        <div class="table-cell">@benefit.description</div>
                     </div>
                 }
 

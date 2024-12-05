@@ -6,6 +6,6 @@
         public String description { get; set; }
         public DateTime validity_date { get; set; }
         public String status { get; set; }
-        public int mobileNo { get; set; }
+        public String mobileNo { get; set; }
     }
 }
