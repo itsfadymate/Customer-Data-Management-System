@@ -92,8 +92,11 @@ public class TelecomContext : DbContext
 
     private bool IsInvalidPaymentID(int paymentID)
     {
-        Debug.WriteLine("TelecomContext IsInvalidPaymentID()");
-        int v = this.Database.SqlQuery<int>($"SELECT CASE WHEN EXISTS (SELECT 1 FROM Payment WHERE paymentID = {paymentID}) THEN 1 ELSE 0 END AS Value").FirstOrDefault();
+
+        Debug.WriteLine($"TelecomContext IsInvalidPaymentID({paymentID})");
+        int v = this.Database.SqlQuery<int>
+        ($"SELECT Count(1) as Value FROM Payment WHERE paymentID = {paymentID}").Single();
+        Debug.WriteLine($"   val{v}");
         return v == 0;
     }
     private bool IsInvalidbenefitID(int benefitID)
@@ -200,18 +203,20 @@ public class TelecomContext : DbContext
         return true;
     }
 
-    public async Task<double> Payment_wallet_cashback(String mobileNo, int paymentID, int benefitID) {
-        Debug.WriteLine("TelecomContext Payment_wallet_cashback()");
+    public async Task<decimal> Payment_wallet_cashback(String mobileNo, int paymentID, int benefitID) {
+        Debug.WriteLine($"TelecomContext Payment_wallet_cashback({mobileNo},{paymentID},{paymentID})");
         if (IsInvalidMobileNo(mobileNo))
         { return -1; }
         Debug.WriteLine("mobileNo exists for renewSubscription request");
         if (IsInvalidPaymentID(paymentID))
         { return -1; }
+        Debug.WriteLine("payment ID exists for renewSubscription request");
         if (IsInvalidbenefitID(benefitID))
         { return -1; }
+        Debug.WriteLine("benefit ID exists for renewSubscription request");
 
         await this.Database.ExecuteSqlInterpolatedAsync($"EXEC Payment_wallet_cashback @mobile_num = {mobileNo},@payment_id = {paymentID},@benefit_id = {benefitID}");
-        return 0.1 * await this.Database.ExecuteSqlInterpolatedAsync($"select  p.amount  from Payment where p.paymentID = {paymentID} and p.status = 'successful'");
+        return 0.1m * await this.Database.SqlQuery<decimal>($"select  p.amount AS Value  from Payment p where p.paymentID = {paymentID} and p.status = 'successful'").SingleAsync();
 
     }
 

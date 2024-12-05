@@ -1,13 +1,13 @@
-﻿@model double
+﻿@model decimal
 <head>
-        <link rel="stylesheet" href="~/css/CashbackPlanBenefit.css" asp-append-version="true" />
+        <link rel="stylesheet" href="~/css/CashbackPaymentBenefit.css" asp-append-version="true" />
 </head>
 <body>
 <form asp-controller ="account" asp-action="CashbackPaymentBenefit"method="POST">
 <div class="input-area">
   <h2>Enter the Plan ID to check remaining and extra balances</h2>
-  <input placeholder="plan ID e.g 1">
-  <input placeholder="benefit ID">
+  <input name = "paymentID" placeholder="payment ID e.g 1">
+  <input name = "benefitID" placeholder="benefit ID">
   
   <button> Check Cashback </button>
 </div>

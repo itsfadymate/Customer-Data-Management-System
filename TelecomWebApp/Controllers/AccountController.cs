@@ -79,18 +79,34 @@ public class AccountController : Controller
     }
     public ActionResult CashbackPaymentBenefitView()//for cashback button
     {
+
         ViewData["hidenav"] = true;
-        Debug.WriteLine("AccountController CashbackPaymentView()");
-        return View("CashbackPaymentBenfitView");
+        Debug.WriteLine("AccountController CashbackPaymentBenefitView()");
+        return View("CashbackPaymentBenefitView");
     }
     
     public async Task<IActionResult> CashbackPaymentBenefit(int paymentID, int benefitID)
     {
+        Debug.WriteLine("AccountController CashbackPaymentBenefit()");
         ViewData["hidenav"] = true;
         String MobileNo = HttpContext.Session.GetString("MobileNo");
 
-        double val = await _telecomContext.Payment_wallet_cashback(MobileNo, paymentID, benefitID);
-        return View("CashbackPaymentBenefitView", val);
+        try
+        {
+            decimal val = await _telecomContext.Payment_wallet_cashback(MobileNo, paymentID, benefitID);
+            if (val < 0)
+            {
+                TempData["ErrorMessage"] = "invalid data entered";
+                return View("CashbackPaymentBenefitView");
+            }
+            TempData["SuccessfulMessage"] = "loaded successfully";
+            return View("CashbackPaymentBenefitView",val);
+        }catch (Exception e)
+        {
+            Debug.WriteLine(e.Message);
+            TempData["ErrorMessage"] = "Something is wrong with our system try again later";
+        }
+        return View("CashbackPaymentBenefitView");
     }
 
     public async Task<IActionResult> TopTenPaymentsView()
