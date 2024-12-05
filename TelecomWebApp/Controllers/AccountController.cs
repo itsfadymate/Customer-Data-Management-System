@@ -131,6 +131,7 @@ public class AccountController : Controller
         try
         {
             var payments = await _telecomContext.GetTopTenPayments(mobileNo);
+            Debug.WriteLine("   got payments");
             return View("TopTenPaymentsView", payments);
         }
         catch (Exception e)

@@ -3,7 +3,7 @@
     public class Payment
     {
         public int paymentID { get; set; }
-        public double amount { get; set; }
+        public decimal amount { get; set; }
             
         public DateTime date_of_payment { get; set; }
         public string payment_method { get; set; }
