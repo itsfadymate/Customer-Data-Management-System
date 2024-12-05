@@ -69,6 +69,7 @@ public class TelecomContext : DbContext
     public DbSet<SMSOffer> SMSOffers { get; set; }
     public DbSet<Payment> payments { get; set; }
     public DbSet<Benefit> benefits { get; set; }
+    public DbSet<TelecomWebApp.Models.shop> shop { get; set; }
 
     private bool IsInvalidMobileNo(string mobileNo)
     {
@@ -249,11 +250,7 @@ public class TelecomContext : DbContext
             .ToListAsync();
     }
 
-    
-
-
-
-
+   
     public bool login(String mobileNo, string password)
     {
         
@@ -299,7 +296,12 @@ public class TelecomContext : DbContext
         return await this.payments.FromSql<Payment>($"EXEC Top_Successful_Payments @mobile_num = {mobileNo}").ToListAsync();
     }
 
-    public DbSet<TelecomWebApp.Models.shop> shop { get; set; }
+    public async Task RedeemVoucher(String MobileNo,int VoucherID)
+    {
+        Debug.WriteLine("TelecomContext RedemVoucher()");
+        await this.Database.ExecuteSqlInterpolatedAsync($"EXEC dbo.Redeem_voucher_points @mobile_num = {MobileNo}, @voucher_id = {VoucherID}");
+    }
+    
 
 
 

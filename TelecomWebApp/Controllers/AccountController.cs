@@ -8,13 +8,13 @@ using TelecomWebApp.Models;
 public class AccountController : Controller
 {
 
-	private TelecomContext _telecomContext;
-	public AccountController(TelecomContext dbContext)
-	{
-		_telecomContext = dbContext;
+    private TelecomContext _telecomContext;
+    public AccountController(TelecomContext dbContext)
+    {
+        _telecomContext = dbContext;
     }
 
-	public async Task<IActionResult> Index()
+    public async Task<IActionResult> Index()
     {
         Debug.WriteLine("Account Index()");
         int unresolvedCount = 0;
@@ -23,10 +23,11 @@ public class AccountController : Controller
         ViewData["hidenav"] = true;
         try
         {
-             unresolvedCount = _telecomContext.GetUnresolvedTickets(MobileNo);
-             HighestValueVoucherID = (await _telecomContext.GetHighestValueVoucher(MobileNo))?.voucherID ?? default;
+            unresolvedCount = _telecomContext.GetUnresolvedTickets(MobileNo);
+            HighestValueVoucherID = (await _telecomContext.GetHighestValueVoucher(MobileNo))?.voucherID ?? default;
         }
-        catch (Exception ex) {
+        catch (Exception ex)
+        {
             //Debug.WriteLine(ex.Message);
             Debug.WriteLine("------------------------- couldn't read from the database unresolvedCount & highestVoucherID");
         }
@@ -43,13 +44,14 @@ public class AccountController : Controller
     {
         ViewData["hidenav"] = true;
         Debug.WriteLine("AccountController ViewLast5MonthsServicePlans()");
-        String mobileNo = HttpContext.Session.GetString("MobileNo"); 
+        String mobileNo = HttpContext.Session.GetString("MobileNo");
         try
         {
             var spmodel = await _telecomContext.GetLast5MonthsServicePlans(mobileNo);
 
             return View("Last5MonthsServicePlansView", spmodel);
-        }catch (Exception e)
+        }
+        catch (Exception e)
         {
             Debug.WriteLine("   couldn't retrieve plans");
             Debug.WriteLine(e.Message);
@@ -64,15 +66,17 @@ public class AccountController : Controller
         Debug.WriteLine("AccountController RenewSubscriptionView()");
         return View("RenewSubscriptionView");
     }
-    public async Task<IActionResult> RenewSubscription(String mobileNo, decimal amount,int plan_id, String payment_method ) {
+    public async Task<IActionResult> RenewSubscription(String mobileNo, decimal amount, int plan_id, String payment_method)
+    {
         Debug.WriteLine("Account RenewSubscription()");
         ViewData["hidenav"] = true;
         bool success = true;
         try
         {
             success = await _telecomContext.RenewSubscription(mobileNo, amount, payment_method, plan_id);
-            
-        }catch (Exception e)
+
+        }
+        catch (Exception e)
         {
             Debug.WriteLine(e.Message);
             TempData["ErrorMessage"] = "couldn't renew subscription try again later";
@@ -93,7 +97,7 @@ public class AccountController : Controller
         Debug.WriteLine("AccountController CashbackPaymentBenefitView()");
         return View("CashbackPaymentBenefitView");
     }
-    
+
     public async Task<IActionResult> CashbackPaymentBenefit(int paymentID, int benefitID)
     {
         Debug.WriteLine("AccountController CashbackPaymentBenefit()");
@@ -109,8 +113,9 @@ public class AccountController : Controller
                 return View("CashbackPaymentBenefitView");
             }
             TempData["SuccessMessage"] = "loaded successfully";
-            return View("CashbackPaymentBenefitView",val);
-        }catch (Exception e)
+            return View("CashbackPaymentBenefitView", val);
+        }
+        catch (Exception e)
         {
             Debug.WriteLine(e.Message);
             TempData["ErrorMessage"] = "Something is wrong with our system try again later";
@@ -137,8 +142,9 @@ public class AccountController : Controller
     }
 
 
- 
-    public IActionResult CheckDueAmountsView() {
+
+    public IActionResult CheckDueAmountsView()
+    {
         ViewData["hidenav"] = true;
         ViewData["hidenav"] = true;
         return View("CheckDueAmountsView");
@@ -148,7 +154,7 @@ public class AccountController : Controller
         String mobileNo = HttpContext.Session.GetString("MobileNo");
         ViewData["hidenav"] = true;
         Debug.WriteLine("AccountController CheckDueAmounts() ");
-        
+
         int dbRemaining = 0;
         int dbExtra = 0;
 
@@ -157,7 +163,8 @@ public class AccountController : Controller
             dbExtra = _telecomContext.GetExtraPlanAmount(mobileNo, PlanName);
             dbRemaining = _telecomContext.GetRemainingPlanAmount(mobileNo, PlanName);
             Debug.WriteLine($"ExtraAMounts:{dbExtra} RemainingAmounts:{dbRemaining} ");
-        }catch (Exception e)
+        }
+        catch (Exception e)
         {
             TempData["ErrorMessage"] = "Invalid plan name";
             Debug.WriteLine(e.Message);
@@ -180,10 +187,10 @@ public class AccountController : Controller
 
     public IActionResult ConsumptionForm()
     {
-        return View(); 
+        return View();
     }
 
-  
+
 
 
     public async Task<IActionResult> UsageCurrMonth()
@@ -191,7 +198,7 @@ public class AccountController : Controller
         ViewData["hidenav"] = true;
         String mobileNo = HttpContext.Session.GetString("MobileNo");
         var usage = await _telecomContext.GetUsagePlanCurrentMonthAsync(mobileNo);
-        return View("UsageCurrMonth", usage); 
+        return View("UsageCurrMonth", usage);
     }
 
 
@@ -201,14 +208,14 @@ public class AccountController : Controller
         ViewData["hidenav"] = true;
         String MobileNo = HttpContext.Session.GetString("MobileNo");
         var notSubbed = await _telecomContext.GetServicePlansNotSubbed(MobileNo);
-        return View("NotSubbed", notSubbed); 
+        return View("NotSubbed", notSubbed);
     }
 
     [HttpPost]
     public IActionResult CashbackTransactionsForm(int nationalId)
     {
 
-        return View("CashbackTransactions", nationalId); 
+        return View("CashbackTransactions", nationalId);
     }
 
     public async Task<IActionResult> CashbackTransactions()
@@ -218,5 +225,27 @@ public class AccountController : Controller
         var cashbackTransactions = await _telecomContext.GetCashbackTransactions(MobileNo);
         return View("CashbackTransactions", cashbackTransactions);
     }
- 
+    public IActionResult RedeemVoucherView()
+    {
+        Debug.WriteLine("Account RedeemVoucherView()");
+        ViewData["hidenav"] = true;
+        return View("RedeemVoucherView");
+    }
+    public async Task<IActionResult> RedeemVoucher(int VoucherID)
+    {
+        Debug.WriteLine("Account RedeemVoucher()");
+        ViewData["hidenav"] = true;
+        String mobileNo = HttpContext.Session.GetString("MobileNo");
+        try
+        {
+            await _telecomContext.RedeemVoucher(mobileNo, VoucherID);
+            TempData["SuccessMessage"] = "Redeemed successfully";
+        }
+        catch (Exception ex)
+        {
+            TempData["ErrorMessage"] = "couldn't redeem Voucher";
+        }
+        return View("RedeemVoucherView");
+    }
+
 }
