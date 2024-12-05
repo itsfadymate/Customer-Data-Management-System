@@ -1,31 +1,40 @@
-﻿@model IEnumerable<Benefit>
-    <head>
-        <link rel="stylesheet" href="~/css/TopTenPayments.css" asp-append-version="true" />
-    </head>
-    <body>
-        <div class="table-container">
-            <div class="table-header">
-                <div class="table-cell">ID</div>
-                <div class="table-cell">date</div>
-                <div class="table-cell">status</div>
-                <div class="table-cell">Mobile Number</div>
-                <div class="table-cell">description</div>
-            </div>
-            @if (Model != null)
-            {
-                @foreach (var benefit in Model)
+﻿
+@model BenefitListViewModel
+<head>
+    <title>Guc telco Stores</title>
+    <link rel="stylesheet" href="~/css/AllShops.css" asp-append-version="true" />
+</head>
+<body>
+    <div class="shop-container">
+        
+
+        <h2>All active Benefits</h2>
+        <div class="big-list">
+        @for (int i=0;i<Model.Benefits.Count;i+=3){
+            <div class="store-list">
+                    @for (int j = i; j < i + 3 && j < Model.Benefits.Count; j++)
                 {
-                    <div class="table-row">
-                        <div class="table-cell">@benefit.benefitID</div>
-                        <div class="table-cell">@benefit.validity_date</div>
-                        <div class="table-cell">@benefit.status</div>
-                         <div class="table-cell">@benefit.mobileNo</div>
-                        <div class="table-cell">@benefit.description</div>
+                    var ben = Model.Benefits[j];
+                    <div class="store-item">
+                        <img src="https://via.placeholder.com/300" alt="store" class="store-image">
+                        <div class="store-info">
+                                <h3>ID: @ben.benefitID</h3>
+                                <p>mobile num: @ben.mobileNo</p>
+                                <p>valid till: @ben.validity_date</p>
+                                <p>@ben.status</p>
+                                <p>@ben.description</p>
+                        </div>
                     </div>
                 }
-
-            }
-
+            </div>
+        }
+            
         </div>
-    </body>
+       
+           
+            
+        </div>
+    </div>
+</body>
+
 

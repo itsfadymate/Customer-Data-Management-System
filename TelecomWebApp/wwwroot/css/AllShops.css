@@ -14,7 +14,7 @@ body {
 }
 
 header {
-    background-color: #E60000;
+    background-color: #007bff;
     padding: 30px 20px;
     color: white;
     text-align: center;
@@ -73,7 +73,7 @@ h2 {
 
     .store-info h3 {
         font-size: 1.6em;
-        color: #E60000; /* Vodafone Red */
+        color: #007bff;
         margin-bottom: 10px;
     }
 

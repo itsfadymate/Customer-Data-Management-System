@@ -1,12 +1,10 @@
 ﻿@model StoreListViewModel
 <head>
-    <title>Vodafone Stores</title>
+    <title>Guc telco Stores</title>
     <link rel="stylesheet" href="~/css/AllShops.css" asp-append-version="true" />
 </head>
 <body>
-    <header>
-            <h1>Find a Store</h1>
-       </header>
+    
     <div class="shop-container">
         
 
@@ -18,7 +16,7 @@
                 {
                     var shop = Model.Shops[j];
                     <div class="store-item">
-                        <img src="https://via.placeholder.com/300" alt="Vodafone Store" class="store-image">
+                        <img src="https://via.placeholder.com/300" alt="Store" class="store-image">
                         <div class="store-info">
                             <h3>@shop.name</h3>
                             <p>@shop.shopID</p>

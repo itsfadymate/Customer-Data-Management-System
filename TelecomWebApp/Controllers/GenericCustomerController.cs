@@ -44,8 +44,12 @@ public class GenericCustomerController : Controller
         
         try
         {
-            var benefits = await _telecomContext.GetAllActiveBenefits();
-            return View("AllActiveBenefitsView", benefits);
+            List<Benefit> benefits = await _telecomContext.GetAllActiveBenefits();
+            BenefitListViewModel benefitList = new BenefitListViewModel
+            {
+                Benefits = benefits
+            };
+            return View("AllActiveBenefitsView", benefitList);
         }
         catch (Exception e)
         {
@@ -72,7 +76,6 @@ public class GenericCustomerController : Controller
 
     public async Task<IActionResult> ViewAllShops()
     {
-        ViewData["hidenav"] = true;
         try
         {
             List<shop> shopsList = await _telecomContext.GetAllShops();
