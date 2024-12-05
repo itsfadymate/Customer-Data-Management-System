@@ -56,8 +56,25 @@ public class AccountController : Controller
         return View("RenewSubscriptionView");
     }
     public async Task<IActionResult> RenewSubscription(String mobileNo, decimal amount,int plan_id, String payment_method ) {
+        Debug.WriteLine("Account RenewSubscription()");
         ViewData["hidenav"] = true;
-        bool success = await _telecomContext.RenewSubscription(mobileNo, amount, payment_method, plan_id);
+        bool success = true;
+        try
+        {
+            success = await _telecomContext.RenewSubscription(mobileNo, amount, payment_method, plan_id);
+            
+        }catch (Exception e)
+        {
+            Debug.WriteLine(e.Message);
+            TempData["ErrorMessage"] = "couldn't renew subscription try again later";
+            return RedirectToAction("RenewSubscriptionView", "Account");
+        }
+        if (!success)
+        {
+            TempData["ErrorMessage"] = "Invalid data entered";
+            return RedirectToAction("RenewSubscriptionView", "Account");
+        }
+        TempData["SuccessMessage"] = "Payment made successfully";
         return RedirectToAction("Index", "Account");
     }
     public ActionResult CashbackPaymentBenefitView()//for cashback button
@@ -160,7 +177,6 @@ public class AccountController : Controller
         return View("CashbackTransactions", nationalId); 
     }
 
-    //test
     public async Task<IActionResult> CashbackTransactions()
     {
         ViewData["hidenav"] = true;

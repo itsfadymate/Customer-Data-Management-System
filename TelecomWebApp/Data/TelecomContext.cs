@@ -2,6 +2,7 @@
 using Microsoft.Data.SqlClient;
 using System.Diagnostics;
 using TelecomWebApp.Models;
+using System.Text.RegularExpressions;
 using Newtonsoft.Json.Linq;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.AspNetCore.Mvc;
@@ -71,32 +72,39 @@ public class TelecomContext : DbContext
 
     private bool IsInvalidMobileNo(string mobileNo)
     {
-        int v = this.Database.SqlQuery<int>($"SELECT CASE WHEN EXISTS (SELECT 1 FROM Customer_Account WHERE MobileNo = {mobileNo}) THEN 1 ELSE 0 END AS MobileExists").FirstOrDefault();
+        Debug.WriteLine("TelecomContext IsInvalidMobileNo()");
+        int v = this.Database.SqlQuery<int>($"SELECT CASE WHEN EXISTS (SELECT 1 FROM Customer_Account WHERE MobileNo = {mobileNo}) THEN 1 ELSE 0 END AS Value").FirstOrDefault();
         return v == 0;
     }
     private bool IsInvalidPlanID(int  Plan_ID)
     {
-        int v = this.Database.SqlQuery<int>($"SELECT CASE WHEN EXISTS (SELECT 1 FROM Service_Plan WHERE planID = {Plan_ID}) THEN 1 ELSE 0 END AS MobileExists").FirstOrDefault();
+        Debug.WriteLine("TelecomContext IsInvalidPlanID()");
+        int v = this.Database.SqlQuery<int>($"SELECT CASE WHEN EXISTS (SELECT 1 FROM Service_Plan WHERE planID = {Plan_ID}) THEN 1 ELSE 0 END AS Value").FirstOrDefault();
         return v == 0;
     }
 
     private bool IsInvalidPaymentMethod(string payment_method)
     {
-        return !payment_method.Trim().ToLower().Equals("cash") || !payment_method.Trim().ToLower().Equals("credit");
+        Debug.WriteLine($"TelecomContext IsInvalidPaymentMethod({payment_method})");
+        Debug.WriteLine(payment_method.Trim().ToLower());
+        return payment_method.Trim().ToLower() != "cash" && payment_method.Trim().ToLower() != "credit";
     }
 
     private bool IsInvalidPaymentID(int paymentID)
     {
-        int v = this.Database.SqlQuery<int>($"SELECT CASE WHEN EXISTS (SELECT 1 FROM Payment WHERE paymentID = {paymentID}) THEN 1 ELSE 0 END AS planIDExists").FirstOrDefault();
+        Debug.WriteLine("TelecomContext IsInvalidPaymentID()");
+        int v = this.Database.SqlQuery<int>($"SELECT CASE WHEN EXISTS (SELECT 1 FROM Payment WHERE paymentID = {paymentID}) THEN 1 ELSE 0 END AS Value").FirstOrDefault();
         return v == 0;
     }
-    private bool isInvalidbenefitID(int benefitID)
+    private bool IsInvalidbenefitID(int benefitID)
     {
-        int v = this.Database.SqlQuery<int>($"SELECT CASE WHEN EXISTS (SELECT 1 FROM Benefits WHERE benefitID = {benefitID}) THEN 1 ELSE 0 END AS benefitIDExists").FirstOrDefault();
+        Debug.WriteLine("TelecomContext IsInvalidbenefitID()");
+        int v = this.Database.SqlQuery<int>($"SELECT CASE WHEN EXISTS (SELECT 1 FROM Benefits WHERE benefitID = {benefitID}) THEN 1 ELSE 0 END AS Value").FirstOrDefault();
         return v == 0;
     }
     private int GetNationalIDfromMobileNo(string mobileNo)
     {
+        Debug.WriteLine("TelecomContext GetNationalIDfromMobileNo()");
         var nationalID = this.values.FromSqlInterpolated<Value>($"SELECT top 1 cp.nationalID AS Value FROM CUSTOMER_ACCOUNT cp WHERE cp.mobileNo = {mobileNo} ")
             .FirstOrDefault().value;
 
@@ -164,20 +172,26 @@ public class TelecomContext : DbContext
     }
     public async Task<bool> RenewSubscription(String mobileNo, decimal amount, String payment_method, int plan_id) {
 
-
+        
         Debug.WriteLine("TelecomContext RenewSubscription()");
 
         if (this.IsInvalidMobileNo(mobileNo)) 
             return false; 
         Debug.WriteLine("mobileNo exists for renewSubscription request" );
 
-
+        
         if (this.IsInvalidPlanID(plan_id))
            return false; 
         Debug.WriteLine("planId exists for renewSubscription request");
 
-        if (this.IsInvalidPaymentMethod(payment_method))
+        if (amount == 0) 
             return false;
+
+        if (this.IsInvalidPaymentMethod(payment_method))
+        {
+            Debug.WriteLine($"invalid payment method: {payment_method}");
+            return false;
+        }
         Debug.WriteLine("valid payment method");
 
 
@@ -193,7 +207,7 @@ public class TelecomContext : DbContext
         Debug.WriteLine("mobileNo exists for renewSubscription request");
         if (IsInvalidPaymentID(paymentID))
         { return -1; }
-        if (isInvalidbenefitID(benefitID))
+        if (IsInvalidbenefitID(benefitID))
         { return -1; }
 
         await this.Database.ExecuteSqlInterpolatedAsync($"EXEC Payment_wallet_cashback @mobile_num = {mobileNo},@payment_id = {paymentID},@benefit_id = {benefitID}");
