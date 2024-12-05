@@ -1,0 +1,85 @@
+﻿
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f8f8f8;
+
+
+    color: #333;
+    line-height: 1.6;
+}
+
+.shop-container {
+    width: 85%;
+    margin: 0 auto;
+}
+
+header {
+    background-color: #E60000;
+    padding: 30px 20px;
+    color: white;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    font-size: 3em;
+    font-weight: bold;
+}
+
+h2 {
+    font-size: 2.2em;
+    margin-top: 40px;
+    text-align: center;
+    color: #333;
+}
+
+.big-list{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+}
+
+.store-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+.store-item {
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+    .store-item:hover {
+        transform: scale(1.05);
+    }
+
+.store-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.store-info {
+    padding: 20px;
+}
+
+    .store-info h3 {
+        font-size: 1.6em;
+        color: #E60000; /* Vodafone Red */
+        margin-bottom: 10px;
+    }
+
+    .store-info p {
+        font-size: 1em;
+        color: #555;
+        margin-bottom: 10px;
+    }
+

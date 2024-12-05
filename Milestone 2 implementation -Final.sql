@@ -316,6 +316,9 @@ GO
 CREATE VIEW [allShops] AS
 select * from shop 
 GO
+/*
+SELECT * FROM allshops
+*/
 
 -----------------------------------------------------------------------------------------------------------------------------
 --////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1147,6 +1150,10 @@ VALUES
 INSERT INTO Shop 
 VALUES
 ('Tech Shop', 'Electronics'),
+('Telco', 'stuff'),
+('Another Shop', 'Electronics'),
+('yo Shop', 'toys'),
+('christmas Shop', 'cafe'),
 ('Supermart', 'Groceries');
 
 -- Physical Shop Data

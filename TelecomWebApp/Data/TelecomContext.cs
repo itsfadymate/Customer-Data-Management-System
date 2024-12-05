@@ -69,7 +69,7 @@ public class TelecomContext : DbContext
     public DbSet<SMSOffer> SMSOffers { get; set; }
     public DbSet<Payment> payments { get; set; }
     public DbSet<Benefit> benefits { get; set; }
-    public DbSet<TelecomWebApp.Models.shop> shop { get; set; }
+    public DbSet<shop> Shops { get; set; }
 
     private bool IsInvalidMobileNo(string mobileNo)
     {
@@ -322,5 +322,11 @@ public class TelecomContext : DbContext
         
         await this.Database.ExecuteSqlInterpolatedAsync($"EXEC dbo.Initiate_balance_payment @mobile_num = {mobileNo}, @amount = {paymentAmount}, @payment_method = {paymentMethod}");
         return true;
+    }
+
+    public async Task<List<shop>> GetAllShops()
+    {
+        Debug.WriteLine("telecom GetAllActiveBenefits()");
+        return await this.Shops.FromSqlRaw("SELECT * FROM allShops").ToListAsync();
     }
 }

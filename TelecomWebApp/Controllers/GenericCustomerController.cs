@@ -70,4 +70,26 @@ public class GenericCustomerController : Controller
         return View("ServicePlan", new List<Service_plan>()); 
     }
 
+    public async Task<IActionResult> ViewAllShops()
+    {
+        ViewData["hidenav"] = true;
+        try
+        {
+            List<shop> shopsList = await _telecomContext.GetAllShops();
+            StoreListViewModel shops = new StoreListViewModel()
+            {
+                Shops = shopsList
+            };
+            return View("AllShopsView", shops);
+        }
+        catch (Exception e)
+        {
+            Debug.WriteLine(e.Message);
+            TempData["ErrorMessage"] = "Could not retrieve shops.";
+        }
+
+        return View("AllShopsView");
+
+    }
+
 }
