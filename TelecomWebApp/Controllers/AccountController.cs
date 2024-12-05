@@ -147,7 +147,6 @@ public class AccountController : Controller
     public IActionResult CheckDueAmountsView()
     {
         ViewData["hidenav"] = true;
-        ViewData["hidenav"] = true;
         return View("CheckDueAmountsView");
     }
     public IActionResult CheckDueAmounts(String PlanName)
@@ -248,5 +247,12 @@ public class AccountController : Controller
         }
         return View("RedeemVoucherView");
     }
+
+    public IActionResult RechargeBalanceView() {
+        ViewData["hidenav"] = true;
+        Debug.WriteLine("Account RechargeBalanceView()");
+        return View("RechargeBalanceView");
+    }
+    
 
 }
