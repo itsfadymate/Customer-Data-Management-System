@@ -126,7 +126,7 @@ public class TelecomContext : DbContext
     {
         Debug.WriteLine("TelecomContext GetRemainingPlanAmount()");
         var result = this.Database.SqlQuery<int>(
-            $"SELECT dbo.Remaining_plan_amount({mobileNo}, {planName})").FirstOrDefault();
+            $"SELECT dbo.Remaining_plan_amount({mobileNo}, {planName}) As Value").FirstOrDefault();
 
         return result;
     }
@@ -135,7 +135,7 @@ public class TelecomContext : DbContext
     {
         Debug.WriteLine("TelecomContext GetExtraPlanAmount()");
         var result = this.Database
-            .SqlQuery<int>($"SELECT dbo.Extra_plan_amount({mobileNo}, {planName})")
+            .SqlQuery<int>($"SELECT dbo.Extra_plan_amount({mobileNo}, {planName}) AS Value")
             .FirstOrDefault();
 
         return result;

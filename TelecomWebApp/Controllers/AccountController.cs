@@ -163,6 +163,7 @@ public class AccountController : Controller
             dbExtra = _telecomContext.GetExtraPlanAmount(mobileNo, PlanName);
             dbRemaining = _telecomContext.GetRemainingPlanAmount(mobileNo, PlanName);
             Debug.WriteLine($"ExtraAMounts:{dbExtra} RemainingAmounts:{dbRemaining} ");
+            TempData["SuccessMessage"] = "Retrieved successfully";
         }
         catch (Exception e)
         {

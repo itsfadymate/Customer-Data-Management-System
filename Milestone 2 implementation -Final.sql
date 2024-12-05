@@ -1180,3 +1180,5 @@ VALUES
 ('09876543210', 'Slow internet speed', 2, 'In Progress');
 
 
+SELECT * FROM Service_plan
+
