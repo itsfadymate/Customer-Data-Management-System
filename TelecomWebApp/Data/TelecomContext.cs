@@ -95,6 +95,13 @@ public class TelecomContext : DbContext
         int v = this.Database.SqlQuery<int>($"SELECT CASE WHEN EXISTS (SELECT 1 FROM Benefits WHERE benefitID = {benefitID}) THEN 1 ELSE 0 END AS benefitIDExists").FirstOrDefault();
         return v == 0;
     }
+    private int GetNationalIDfromMobileNo(string mobileNo)
+    {
+        var nationalID = this.values.FromSqlInterpolated<Value>($"SELECT top 1 cp.nationalID AS Value FROM CUSTOMER_ACCOUNT cp WHERE cp.mobileNo = {mobileNo} ")
+            .FirstOrDefault().value;
+
+        return nationalID;
+    }
     public async Task<List<UsageCurrMonth>> GetUsagePlanCurrentMonthAsync(string mobileNo)
     {
         Debug.WriteLine("TelecomContext GetUsagePlanCurrentMonthAsync()");
@@ -135,8 +142,7 @@ public class TelecomContext : DbContext
     public int GetUnresolvedTickets(String mobileNo)
     {
         Debug.WriteLine("TelecomContext GetUnresolvedTickets()");
-        int nationalID = this.values.FromSqlInterpolated<Value>($"SELECT top 1 cp.nationalID AS Value FROM CUSTOMER_ACCOUNT cp WHERE cp.mobileNo = {mobileNo} ")
-            .FirstOrDefault().value;
+        int nationalID = this.GetNationalIDfromMobileNo(mobileNo);
           Debug.WriteLine($"nationalID in GetUnresolvedTickets: {nationalID} " );
         var result = this.Database.SqlQuery<int>($"EXEC [Ticket_Account_Customer] @NID = {nationalID}").ToList();
         Debug.WriteLine($"no of unresolved tickets: {result} ");
@@ -216,21 +222,15 @@ public class TelecomContext : DbContext
             .ToListAsync();
     }
 
-    public async Task<List<CashbackTransactions>> GetCashbackTransactions(int nationalID)
+    public async Task<List<CashbackTransactions>> GetCashbackTransactions(String mobileNo)
     {
+        int nationalID = this.GetNationalIDfromMobileNo(mobileNo);
         return await CashbackTransactions
             .FromSqlInterpolated($"SELECT * FROM dbo.Cashback_Wallet_Customer({nationalID})")
             .ToListAsync();
     }
 
-    public int GetNationalIDfromMobileNo(string mobileNo)
-    {
-        var nationalID = this.Database
-            .SqlQuery<int>($"SELECT nationalID FROM customer_account WHERE mobileNo = {mobileNo}")
-            .FirstOrDefault();
-
-        return nationalID;
-    }
+    
 
 
 

@@ -161,13 +161,11 @@ public class AccountController : Controller
     }
 
 
-    public IActionResult CashbackTransactions()
+    public async Task<IActionResult> CashbackTransactions()
     {
         ViewData["hidenav"] = true;
-        int nationalID=0;
         String MobileNo = HttpContext.Session.GetString("MobileNo");
-        nationalID = _telecomContext.GetNationalIDfromMobileNo(MobileNo);
-        var cashbackTransactions = _telecomContext.GetCashbackTransactions(nationalID);
+        var cashbackTransactions = await _telecomContext.GetCashbackTransactions(MobileNo);
         return View("CashbackTransactions", cashbackTransactions);
     }
  
