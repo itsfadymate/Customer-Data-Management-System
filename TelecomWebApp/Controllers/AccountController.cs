@@ -253,6 +253,31 @@ public class AccountController : Controller
         Debug.WriteLine("Account RechargeBalanceView()");
         return View("RechargeBalanceView");
     }
-    
+    public async Task<IActionResult> RechargeBalance(decimal paymentAmount, String paymentMethod)
+    {
+
+        ViewData["hidenav"] = true;
+        String MobileNo = HttpContext.Session.GetString("MobileNo");
+        Debug.WriteLine("Account RechargeBalance()");
+        try {
+           bool success= await _telecomContext.RechargeBalance(MobileNo, paymentAmount, paymentMethod);
+            if (success)
+            {
+                TempData["SuccessMessage"] = $"Recharged successfully for number: {MobileNo}";
+            }
+            else
+            {
+                TempData["ErrorMessage"] = "Incorrect data enetered";
+            }
+        }
+        catch ( Exception e)
+        {
+            Debug.WriteLine("couldn't recharge balance for input account");
+            Debug.WriteLine(e.Message);
+            TempData["ErrorMessage"] = "couldn't recharge, try again later";
+        }
+        return View("RechargeBalanceView");
+
+    }
 
 }

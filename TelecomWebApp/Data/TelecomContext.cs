@@ -301,8 +301,26 @@ public class TelecomContext : DbContext
         Debug.WriteLine("TelecomContext RedemVoucher()");
         await this.Database.ExecuteSqlInterpolatedAsync($"EXEC dbo.Redeem_voucher_points @mobile_num = {MobileNo}, @voucher_id = {VoucherID}");
     }
-    
 
+    public async Task<bool> RechargeBalance(string mobileNo, decimal paymentAmount, string paymentMethod)
+    {
+        Debug.WriteLine("TelecomContext RechargeBalance()");
+        if (this.IsInvalidMobileNo(mobileNo))
+            return false;
+        Debug.WriteLine("mobileNo exists for renewSubscription request");
 
+        if (paymentAmount == 0)
+            return false;
 
+        if (this.IsInvalidPaymentMethod(paymentMethod))
+        {
+            Debug.WriteLine($"invalid payment method: {paymentMethod}");
+            return false;
+        }
+        Debug.WriteLine("valid payment method");
+
+        
+        await this.Database.ExecuteSqlInterpolatedAsync($"EXEC dbo.Initiate_balance_payment @mobile_num = {mobileNo}, @amount = {paymentAmount}, @payment_method = {paymentMethod}");
+        return true;
+    }
 }
