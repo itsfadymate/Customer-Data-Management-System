@@ -1,43 +1,40 @@
 ﻿@model IEnumerable<Service_plan>
 
-<!DOCTYPE html>
-<html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Subscribed Plans</title>
+    <link rel="stylesheet" href="~/css/TopTenPayments.css" asp-append-version="true" />
 </head>
 <body>
-    <h1>Subscribed Plans in the Last 5 Months</h1>
-
-    @if (Model != null && Model.Any())
-    {
-        <table border="1">
-            <thead>
-                <tr>
-                    <th>Plan ID</th>
-                    <th>Plan Name</th>
-                    <th>Description</th>
-                    <th>Price</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var plan in Model)
-                {
-                    <tr>
-                        <td>@plan.planID</td>
-                        <td>@plan.name</td>
-                        <td>@plan.description</td>
-                        <td>@plan.price</td>
-                    </tr>
-                }
-            </tbody>
-        </table>
+    <div class="table-header">
+        <h1 style="margin: 0;color:#fff">Subscribed Plans in the Last 5 Months</h1>
+    </div>
+    
+        <div class="table-container">
+            <div class="table-header">
+                <div class="table-cell">Plan ID</div>
+                <div class="table-cell">Plan Name</div>
+                <div class="table-cell">Description</div>
+                <div class="table-cell">Price</div>
+            </div>
+        @if (Model != null && Model.Any())
+        {
+            @foreach (var plan in Model)
+            {
+                <div class="table-row">
+                    <div class="table-cell">@plan.planID</div>
+                    <div class="table-cell">@plan.name</div>
+                    <div class="table-cell">@plan.description</div>
+                    <div class="table-cell">@plan.price</div>
+                </div>
+            }
     }
     else
     {
         <p>No plans found for this mobile number in the last 5 months.</p>
     }
+    </div>
 </body>
 </html>
-

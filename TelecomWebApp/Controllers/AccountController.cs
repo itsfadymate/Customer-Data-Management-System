@@ -44,9 +44,18 @@ public class AccountController : Controller
         ViewData["hidenav"] = true;
         Debug.WriteLine("AccountController ViewLast5MonthsServicePlans()");
         String mobileNo = HttpContext.Session.GetString("MobileNo"); 
-        var spmodel = await _telecomContext.GetLast5MonthsServicePlans(mobileNo);
+        try
+        {
+            var spmodel = await _telecomContext.GetLast5MonthsServicePlans(mobileNo);
 
-        return View("Last5MonthsServicePlansView", spmodel);
+            return View("Last5MonthsServicePlansView", spmodel);
+        }catch (Exception e)
+        {
+            Debug.WriteLine("   couldn't retrieve plans");
+            Debug.WriteLine(e.Message);
+            TempData["ErrorMessage"] = "some problem happened with our server, try again later";
+            return View("Last5MonthsServicePlansView");
+        }
     }
 
     public ActionResult RenewSubscriptionView()//for renew button

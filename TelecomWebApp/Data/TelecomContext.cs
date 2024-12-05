@@ -162,8 +162,8 @@ public class TelecomContext : DbContext
 
     public async Task<List<Service_plan>> GetLast5MonthsServicePlans(String mobileNo)
     {
-        Debug.WriteLine("TelecomContext GetLast5MonthsServicePlans()");
-        var sp = await ServicePlans.FromSqlInterpolated($"SELECT * FROM Subscribed_plans_5_Months({mobileNo})").ToListAsync();
+        Debug.WriteLine($"TelecomContext GetLast5MonthsServicePlans({mobileNo})");
+        List<Service_plan> sp = await ServicePlans.FromSqlInterpolated($"SELECT * FROM Subscribed_plans_5_Months({mobileNo})").ToListAsync();
         foreach (var plan in sp)
         {
             Debug.WriteLine($"  PlanID: {plan.planID}, Name: {plan.name}, Price: {plan.price}, " +
