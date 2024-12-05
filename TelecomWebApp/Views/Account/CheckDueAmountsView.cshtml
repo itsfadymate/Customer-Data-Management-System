@@ -3,10 +3,11 @@
     <link rel="stylesheet" href="~/css/CheckDueAmounts.css" asp-append-version="true" />
 </head>
 <body>
+<div class="square-container">
 <form asp-controller="Account" asp-action="CheckDueAmounts" method="POST">
 <div class="input-area">
   <h2>Check remaining and extra balances for a plan </h2>
-  <input placeholder="plan Name e.g 1">
+  <input placeholder="plan Name e.g Basic Plan">
   
   <button> Check Amounts </button>
 </div>
@@ -22,5 +23,6 @@
           </div>
        }
     </div>
+</div>
 </div>
 </body>
