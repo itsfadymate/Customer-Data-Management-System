@@ -160,7 +160,7 @@ public class AccountController : Controller
         return View("CashbackTransactions", nationalId); 
     }
 
-
+    //test
     public async Task<IActionResult> CashbackTransactions()
     {
         ViewData["hidenav"] = true;
