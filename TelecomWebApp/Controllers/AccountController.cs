@@ -99,7 +99,7 @@ public class AccountController : Controller
                 TempData["ErrorMessage"] = "invalid data entered";
                 return View("CashbackPaymentBenefitView");
             }
-            TempData["SuccessfulMessage"] = "loaded successfully";
+            TempData["SuccessMessage"] = "loaded successfully";
             return View("CashbackPaymentBenefitView",val);
         }catch (Exception e)
         {
