@@ -5,9 +5,9 @@
 <body>
 <form asp-controller ="account" asp-action="CashbackPaymentBenefit"method="POST">
 <div class="input-area">
-  <h2>Enter the Plan ID to check remaining and extra balances</h2>
-  <input name = "paymentID" placeholder="payment ID e.g 1">
-  <input name = "benefitID" placeholder="benefit ID">
+  <h2>Enter the paymentID and Benefit ID to check the cashback for</h2>
+  <input type="number" name = "paymentID" placeholder="payment ID e.g 1">
+  <input type="number" name = "benefitID" placeholder="benefit ID">
   
   <button> Check Cashback </button>
 </div>

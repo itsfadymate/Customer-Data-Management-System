@@ -187,6 +187,7 @@ public class AccountController : Controller
 
     public IActionResult ConsumptionForm()
     {
+        ViewData["hidenav"] = true;
         return View();
     }
 

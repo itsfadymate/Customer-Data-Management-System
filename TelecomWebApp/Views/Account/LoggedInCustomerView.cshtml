@@ -79,10 +79,13 @@
         </div>
         <div class="service-bar">
             <div class="service-content">
-                <h3>CashBack transactions</h3>
-                <p>View all Cash backs to your wallet</p>
+                <h3>CashBack Amounts</h3>
+                <p>
+                    Get the amount of cashback that will be returned on the wallet of the customer of the
+                    input mobile number from a certain payment transaction of a specified benefit.
+                </p>
             </div>
-            <form  asp-controller="Account" asp-action="CashbackTransactions" method="POST">
+            <form asp-controller="Account" asp-action="CashbackPaymentBenefitView" method="POST">
                 <button class="check-status-btn">View</button>
             </form>
         </div>
@@ -103,7 +106,7 @@
                 <h3><a asp-controller="Account" asp-action="ConsumptionForm">Check plan consumptions</a></h3>
             </div>
             <div class="service-card">
-                <h3><a asp-controller="Account" asp-action="CashbackPaymentBenefitView">Cashback Amounts</a></h3>
+                <h3><a asp-controller="Account" asp-action="CashbackTransactions">Cashback Transactions</a></h3>
             </div>
             <div class="service-card">
                 <h3><a asp-controller="Account" asp-action="TopTenPaymentsView">Top successful payments</a></h3>

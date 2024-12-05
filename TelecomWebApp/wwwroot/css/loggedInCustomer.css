@@ -91,6 +91,16 @@ body {
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }
 
+    .service-card a {
+        text-decoration: none;
+        color: inherit;
+    }
+a:hover, a:focus, a:visited {
+    text-decoration: none;
+    color: inherit; 
+}
+
+
 
 
 .service-list {
@@ -162,3 +172,5 @@ body {
     background-color: #d12127;
     color: #fff;
 }
+
+
