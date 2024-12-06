@@ -465,7 +465,7 @@ CREATE PROCEDURE [Account_Payment_Points]
 @mobile_num char(11)
 
 AS
-select count(p.paymentID) as 'transactions', sum(pb.pointsAmount) as 'points' from Payment P
+select count(p.paymentID) as 'transactions', isnull(sum(pb.pointsAmount),0) as 'points' from Payment P
 inner join Points_group pb 
 on p.paymentID = pb.paymentId
 where P.mobileNo = @mobile_num and (year(current_timestamp) - year(p.date_of_payment)=1 ) 
@@ -1178,7 +1178,3 @@ INSERT INTO Technical_Support_Ticket (mobileNo, Issue_description, priority_leve
 VALUES
 ('01234567890', 'Network issues', 1, 'Open'),
 ('09876543210', 'Slow internet speed', 2, 'In Progress');
-
-
-SELECT * FROM Service_plan
-

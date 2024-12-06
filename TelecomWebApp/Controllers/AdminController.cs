@@ -125,6 +125,7 @@ namespace TelecomWebApp.Controllers
         [HttpPost]
         public async Task<IActionResult> AccountPaymentPoints(string mobileNo)
         {
+            Debug.WriteLine("MOBILE NUMBER VALUE FOR PAYMENTS: " + mobileNo);
             var result = await _context.PaymentPointsResults.FromSqlInterpolated($"EXEC Account_Payment_Points @mobile_num = {mobileNo}")
                 .ToListAsync();
             ViewBag.transactions = result.First().transactions;
