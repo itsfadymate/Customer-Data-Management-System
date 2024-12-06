@@ -199,8 +199,17 @@ public class AccountController : Controller
     {
         ViewData["hidenav"] = true;
         String mobileNo = HttpContext.Session.GetString("MobileNo");
-        var usage = await _telecomContext.GetUsagePlanCurrentMonthAsync(mobileNo);
-        return View("UsageCurrMonth", usage);
+        try
+        {
+           var usage = await _telecomContext.GetUsagePlanCurrentMonthAsync(mobileNo);
+            TempData["SuccessMessage"] = "display successfully";
+            return View("UsageCurrMonth", usage);
+        }
+        catch(Exception e)
+        {
+            TempData["ErrorMessage"] = "couldn't display usage";
+        }
+        return View("UsageCurrMonth");
     }
 
 

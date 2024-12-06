@@ -9,30 +9,27 @@
     <title>All Service Plans</title>
 </head>
 <body>
-    <div>
-        <table>
-            <tr>
-                <th>Plan ID</th>
-                <th>SMS</th>
-                <th>Minutes</th>
-                <th>Data</th>
-                <th>Name</th>
-                <th>Price</th>
-                <th>Description</th>
-            </tr>
+    <div class="container">
+        <div class="row">
             @foreach (var u in Model)
             {
-                <tr>
-                    <td>@u.planID</td>
-                    <td>@u.SMS_offered</td>
-                    <td>@u.minutes_offered</td>
-                    <td>@u.data_offered</td>
-                    <td>@u.name</td>
-                    <td>@u.price</td>
-                    <td>@u.description</td>
-                </tr>
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <strong>Plan ID: @u.planID</strong>
+                        </div>
+                        <div class="card-body">
+                            <p><strong>SMS:</strong> @u.SMS_offered</p>
+                            <p><strong>Minutes:</strong> @u.minutes_offered </p>
+                            <p><strong>Data:</strong> @u.data_offered</p>
+                            <p><strong>Name:</strong> @u.name</p>
+                            <p><strong>Price:</strong> @u.price</p>
+                            <p><strong>Description:</strong> @u.description</p>
+                        </div>
+                    </div>
+                </div>
             }
-        </table>
+        </div>
     </div>
 </body>
 </html>
