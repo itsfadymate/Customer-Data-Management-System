@@ -2,10 +2,10 @@
 {
     public class SMSOffer
     {
-        public int offerID { get; set; }             
-        public string offer_description { get; set; } 
-        public DateTime validity_date { get; set; }   
-        public string status { get; set; }            
-        public string mobileNo { get; set; }         
+        public int offerID { get; set; }
+        public int benefitID { get; set; }
+        public int internet_offered { get; set; }
+        public int SMS_offered { get; set; }
+        public int minutes_offered { get; set; }        
     }
 }
