@@ -100,6 +100,15 @@ public class TelecomContext : DbContext
         Debug.WriteLine($"   val{v}");
         return v == 0;
     }
+    private bool IsInvalidVoucher(int voucherID)
+    {
+
+        Debug.WriteLine($"TelecomContext IsInvalidVoucherID({voucherID})");
+        int v = this.Database.SqlQuery<int>
+        ($"SELECT Count(1) as Value FROM Voucher WHERE voucherID = {voucherID}").Single();
+        Debug.WriteLine($"   val{v}");
+        return v == 0;
+    }
     private bool IsInvalidbenefitID(int benefitID)
     {
         Debug.WriteLine("TelecomContext IsInvalidbenefitID()");
@@ -299,6 +308,7 @@ public class TelecomContext : DbContext
     public async Task RedeemVoucher(String MobileNo,int VoucherID)
     {
         Debug.WriteLine("TelecomContext RedemVoucher()");
+        if (IsInvalidVoucher(VoucherID)) throw new Exception();
         await this.Database.ExecuteSqlInterpolatedAsync($"EXEC dbo.Redeem_voucher_points @mobile_num = {MobileNo}, @voucher_id = {VoucherID}");
     }
 
@@ -309,7 +319,7 @@ public class TelecomContext : DbContext
             return false;
         Debug.WriteLine("mobileNo exists for renewSubscription request");
 
-        if (paymentAmount == 0)
+        if (paymentAmount <= 0)
             return false;
 
         if (this.IsInvalidPaymentMethod(paymentMethod))
