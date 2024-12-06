@@ -105,11 +105,16 @@ namespace TelecomWebApp.Controllers
         [HttpPost]
         public async Task<IActionResult> IsWalletLinked(string mobileNo)
         {
-            var linked = await _context.Database.ExecuteSqlRawAsync(
-                "SELECT dbo.Wallet_MobileNo(@mobileNum)",
-                new SqlParameter("@mobileNum", mobileNo)
-                );
-            ViewBag.IsLinked = linked == 1;
+            bool linked = false;
+            try
+            {
+                linked = _context.Database.SqlQuery<bool>($"SELECT dbo.Wallet_MobileNo({mobileNo}) as Value").FirstOrDefault();
+                Debug.WriteLine("WALLET LINK CHECK NUMBER" + mobileNo);
+            } catch (Exception e)
+            {
+                TempData["ErrorMessage"] = "Invalid Data entered";
+            }
+            ViewBag.IsLinked = linked;
             return View();
         }
         [HttpGet]
