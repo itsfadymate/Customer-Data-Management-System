@@ -1,10 +1,14 @@
 ﻿@model IEnumerable<TelecomWebApp.Models.CustomerAccountsByPlanDate>
 
 <h1>Customer Accounts Subscribed to Plan on Given Date</h1>
+<link rel="stylesheet" href="~/css/AdminFirstHalf.css" />
 
-@if (!Model.Any())
+
+@if (Model == null || !Model.Any())
 {
-    <p>No records found for the given inputs.</p>
+    <div class="no-records">
+        <p>No records were found for the provided criteria.</p>
+    </div>
 }
 else
 {
