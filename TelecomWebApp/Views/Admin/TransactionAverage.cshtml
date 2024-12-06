@@ -6,7 +6,7 @@
 
 <form method="post" action="/Admin/TransactionAverage">
     <label for="walletId">Wallet ID:</label>
-    <input type="number" id="walletId" name="walletId" required />
+    <input type="number" id="walletID" name="walletID" required />
 
     <label for="startDate">Start Date:</label>
     <input type="date" id="startDate" name="startDate" required />
@@ -19,5 +19,5 @@
 
 @if (ViewBag.TransactionAverage != null)
 {
-        <h3>Average Transaction Amount: $@ViewBag.TransactionAverage</h3>
+        <h3>Average Transaction Average Amount: $@ViewBag.TransactionAverage</h3>
 }
