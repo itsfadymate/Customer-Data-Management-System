@@ -144,3 +144,20 @@ VALUES (1, '01234567890', 'Network issue', 1, 'Resolved'),
        (6, '04455667788', 'Unable to recharge', 3, 'In progress'),
        (7, '05566778899', 'Service disruption', 1, 'Resolved');
 SET IDENTITY_INSERT Technical_Support_Ticket OFF;
+SET IDENTITY_INSERT Points_Group ON;
+INSERT INTO Points_Group (pointID, benefitID, pointsAmount, PaymentID)
+VALUES 
+    (1, 1, 50, 1),
+    (2, 2, 75, 2),
+    (3, 3, 30, 3),
+    (4, 4, 60, 4),
+    (5, 5, 40, 5),
+    (6, 6, 55, 6),
+    (7, 7, 90, 7);
+SET IDENTITY_INSERT Points_Group OFF;
+
+EXEC Account_Payment_Points @mobile_num = '01234567890'
+EXEC Account_Payment_Points @mobile_num = '01234567890'
+
+select * from Payment
+select * from Points_group

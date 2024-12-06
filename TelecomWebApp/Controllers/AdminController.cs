@@ -3,6 +3,7 @@ using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using System.Numerics;
 using TelecomWebApp.Models;
+using System.Diagnostics;
 
 namespace TelecomWebApp.Controllers 
 {
@@ -64,12 +65,15 @@ namespace TelecomWebApp.Controllers
         [HttpPost]
         public async Task<IActionResult> CashbackFunction(int walletID, int planID)
         {
-            var cashbackAmount = await _context.Database.ExecuteSqlRawAsync(
-                "SELECT dbo.Wallet_Cashback_Amount(@walletID, @planID)",
-                new SqlParameter("@walletID", walletID),
-                new SqlParameter("@planID", planID)
-            );
-
+            int cashbackAmount = -1;
+            try{
+                cashbackAmount = _context.Database.SqlQuery<int>($"SELECT dbo.Wallet_Cashback_Amount({walletID},{planID}) as Value").FirstOrDefault();
+                TempData["SuccessMessage"] = "Data Fetched";
+        } catch (Exception e)
+            {
+                TempData["ErrorMessage"] = "Invalid Data Entered";
+            }
+            
             ViewBag.CashbackAmount = cashbackAmount;
             return View();
         }
@@ -114,18 +118,10 @@ namespace TelecomWebApp.Controllers
         [HttpPost]
         public async Task<IActionResult> AccountPaymentPoints(string mobileNo)
         {
-            var mobileNumPar = new SqlParameter("@mobile_num", mobileNo ?? (object)DBNull.Value);
-
-            // Execute the stored procedure
-            var res = (await _context.PaymentPointsResults
-                .FromSqlRaw("EXEC Account_Payment_Points @mobile_num", new[] { mobileNumPar })
-                .ToListAsync())
-                .FirstOrDefault();
-
-            // Handle null values in the result
-            ViewBag.NumberOfTransactions = res?.transactions ?? 0; // Default to 0 if null
-            ViewBag.TotalEarnedPoints = res?.points ?? 0;         // Default to 0 if null
-
+            var result = await _context.PaymentPointsResults.FromSqlInterpolated($"EXEC Account_Payment_Points @mobile_num = {mobileNo}")
+                .ToListAsync();
+            ViewBag.transactions = result.First().transactions;
+            ViewBag.points = result.First().points;
             return View();
         }
         [HttpGet]
