@@ -1,10 +1,14 @@
 ﻿@model IEnumerable<TelecomWebApp.Models.SMSOffer>
 
 <h1>SMS Offers for Account</h1>
+<link rel="stylesheet" href="~/css/AdminFirstHalf.css" />
 
-@if (!Model.Any())
+
+@if (Model == null || !Model.Any())
 {
-    <p>No SMS offers found for the given Mobile Number.</p>
+    <div class="no-records">
+        <p>No records were found for the provided criteria.</p>
+    </div>
 }
 else
 {
