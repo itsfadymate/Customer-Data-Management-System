@@ -5,30 +5,6 @@ body {
     line-height: 1.6;
 }
 
-.hero-section {
-    background-color: #fff;
-    padding: 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.hero-content {
-    max-width: 60%;
-}
-
-.hero-text h1 {
-    font-size: 2rem;
-    color: #333;
-    margin-bottom: 10px;
-}
-
-.hero-text p {
-    font-size: 1rem;
-    color: #555;
-}
-
 .view-more-btn {
     background-color: #d12127;
     color: #fff;
