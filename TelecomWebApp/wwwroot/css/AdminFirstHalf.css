@@ -1,0 +1,146 @@
+﻿/* General Styling */
+body {
+    font-family: 'Roboto', sans-serif; /* Modern font */
+    background-color: #eef2f7; /* Light blue-gray background */
+    color: #333;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 85%;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Header Styling */
+header {
+    background: linear-gradient(135deg, #007bff, #0056b3); /* Gradient effect */
+    padding: 30px 20px;
+    color: white;
+    text-align: center;
+    border-radius: 15px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+    header h1 {
+        font-size: 2.8rem;
+        margin: 0;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+
+/* Section Titles */
+h1, h2 {
+    text-align: center;
+    color: #0056b3; /* Dark blue */
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+h1 {
+    font-size: 2.4rem;
+}
+
+h2 {
+    font-size: 1.8rem;
+    color: #003f7f;
+}
+
+/* Table Styling */
+.table {
+    width: 100%;
+    border-spacing: 0; /* Collapsed borders with custom spacing */
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+    margin: 20px 0;
+    font-size: 1rem;
+    background: #ffffff; /* White table background */
+}
+
+    .table thead {
+        background: linear-gradient(135deg, #007bff, #0056b3); /* Gradient header */
+        color: white;
+        text-transform: uppercase;
+    }
+
+    .table th,
+    .table td {
+        padding: 12px 15px;
+        text-align: left;
+        border: 1px solid #ddd; /* Soft border */
+    }
+
+    .table tbody tr {
+        transition: transform 0.2s ease, background-color 0.2s ease;
+    }
+
+        .table tbody tr:nth-child(even) {
+            background-color: #f1f8ff; /* Alternating light blue rows */
+        }
+
+        .table tbody tr:hover {
+            background-color: #e6f3ff; /* Slightly darker blue on hover */
+            transform: scale(1.02); /* Subtle scaling effect */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+        }
+
+    .table th {
+        border: none; /* Clean header row */
+    }
+
+/* Badge Styling */
+.badge {
+    display: inline-block;
+    padding: 6px 10px;
+    border-radius: 5px;
+    font-size: 0.85rem;
+    font-weight: bold;
+    color: white;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+    .badge.active {
+        background-color: #28a745; /* Green */
+    }
+
+    .badge.onhold {
+        background-color: #ffc107; /* Yellow */
+    }
+
+/* Footer Styling */
+footer {
+    background: linear-gradient(135deg, #0056b3, #007bff); /* Gradient footer */
+    color: white;
+    text-align: center;
+    padding: 15px 0;
+    margin-top: 20px;
+    border-radius: 10px 10px 0 0;
+}
+
+/* Links and Buttons */
+a {
+    color: #007bff;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+    a:hover {
+        color: #0056b3;
+        text-decoration: underline;
+    }
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .table th,
+    .table td {
+        font-size: 0.85rem;
+        padding: 10px;
+    }
+
+    h1, h2 {
+        font-size: 1.6rem;
+    }
+}
