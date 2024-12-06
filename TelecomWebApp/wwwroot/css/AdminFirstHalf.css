@@ -1,7 +1,7 @@
 ﻿/* General Styling */
 body {
     font-family: 'Roboto', sans-serif; /* Modern font */
-    background-color: #eef4fb; /* Light blue background */
+    background: linear-gradient(135deg, #eef4fb, #c9e7ff); /* Soft gradient for a fresh look */
     color: #333;
     line-height: 1.6;
     margin: 0;
@@ -35,8 +35,8 @@ header {
 h1, h2 {
     text-align: center;
     color: #0056b3; /* Dark blue */
-    margin-top: 20px;
-    margin-bottom: 20px;
+    margin-top: 60px; /* Increased space to push titles down */
+    margin-bottom: 30px; /* Added bottom margin */
 }
 
 h1 {
@@ -55,7 +55,7 @@ h2 {
     border-radius: 15px;
     overflow: hidden;
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
-    margin: 20px 0;
+    margin-top: 40px; /* Added margin to space it further from title */
     font-size: 1rem;
     background: #ffffff; /* White table background */
 }
@@ -84,11 +84,11 @@ h2 {
     }
 
     .table tbody tr {
-        transition: transform 0.2s ease, background-color 0.2s ease;
+        transition: transform 0.3s ease, background-color 0.3s ease;
     }
 
         .table tbody tr:hover {
-            background-color: #e4f2ff; /* Subtle blue highlight on hover */
+            background-color: #cce2ff; /* Lighter blue on hover */
             transform: translateY(-2px); /* Slight "lift" effect */
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
         }
@@ -202,6 +202,7 @@ footer {
         font-size: 0.9rem;
     }
 }
+
 .no-records {
     background-color: #f9fcff; /* Soft blue background */
     border: 1px solid #ddd; /* Subtle border */
