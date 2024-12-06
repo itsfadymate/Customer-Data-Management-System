@@ -155,9 +155,14 @@ VALUES
     (6, 6, 55, 6),
     (7, 7, 90, 7);
 SET IDENTITY_INSERT Points_Group OFF;
-
-EXEC Account_Payment_Points @mobile_num = '01234567890'
-EXEC Account_Payment_Points @mobile_num = '01234567890'
-
-select * from Payment
-select * from Points_group
+INSERT INTO Physical_Shop (shopID, address, working_hours)
+VALUES 
+    (1, '123 Elm Street', '9 AM - 9 PM'),
+    (3, '789 Pine Street', '8 AM - 10 PM'),
+    (4, '404 Spruce Road', '10 AM - 8 PM'),
+    (7, '567 Maple Drive', '11 AM - 7 PM');
+INSERT INTO E_Shop (shopID, URL, rating)
+VALUES 
+    (2, 'https://fashionhub.com', 4),
+    (5, 'https://bookhaven.com', 5),
+    (6, 'https://musicworld.com', 3);

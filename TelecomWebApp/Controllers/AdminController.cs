@@ -86,12 +86,14 @@ namespace TelecomWebApp.Controllers
         [HttpPost]
         public async Task<IActionResult> TransactionAverage(int walletID, DateTime startDate, DateTime endDate)
         {
-            var average = await _context.Database.ExecuteSqlRawAsync(
-                "SELECT dbo.Wallet_Transfer_Amount(@walletID, @start_date, @end_date)",
-                new SqlParameter("@walletID", walletID),
-                new SqlParameter("@start_date",startDate),
-                new SqlParameter("@end_date", endDate)
-            );
+            int average = 0;
+            try
+            { 
+                average = _context.Database.SqlQuery<int>($"SELECT dbo.Wallet_Transfer_Amount({walletID},{startDate},{endDate}) as Value").FirstOrDefault();
+            } catch(Exception e)
+            {
+                TempData["ErrorMessage"] = "Invalid Data entered";
+            }           
             ViewBag.TransactionAverage = average;
             return View();
         }
