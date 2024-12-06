@@ -181,7 +181,13 @@ public class AccountController : Controller
     [HttpPost]
     public async Task<IActionResult> ConsumptionForm(string plan_name, DateTime start_date, DateTime end_date)
     {
+        if (_telecomContext.IsInvalidPlanName(plan_name))
+        {
+            TempData["ErrorMessage"] = "Invalid plan name";
+            return View("ConsumptionForm");
+        }
         ViewData["hidenav"] = true;
+        TempData["SuccessMessage"] ="operation successful";
         var usage = await _telecomContext.GetConsumption(plan_name, start_date, end_date);
         return View("Consumption", usage);
     }

@@ -115,6 +115,13 @@ public class TelecomContext : DbContext
         int v = this.Database.SqlQuery<int>($"SELECT CASE WHEN EXISTS (SELECT 1 FROM Benefits WHERE benefitID = {benefitID}) THEN 1 ELSE 0 END AS Value").FirstOrDefault();
         return v == 0;
     }
+
+    public bool IsInvalidPlanName(string plan_name)
+    {
+        Debug.WriteLine("TelecomContext IsInvalidPlanName()");
+        int v = this.Database.SqlQuery<int>($"SELECT CASE WHEN EXISTS (SELECT 1 FROM Service_Plan WHERE name = {plan_name}) THEN 1 ELSE 0 END AS Value").FirstOrDefault();
+        return v == 0;
+    }
     private int GetNationalIDfromMobileNo(string mobileNo)
     {
         Debug.WriteLine("TelecomContext GetNationalIDfromMobileNo()");
